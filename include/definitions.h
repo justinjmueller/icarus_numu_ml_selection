@@ -12,6 +12,17 @@
 #include "sbnana/CAFAna/Core/Var.h"
 #include "sbnana/CAFAna/Core/Cut.h"
 
+/**
+ * Preprocessor wrapper for looping over reco interactions. The SpillMultiVar
+ * accepts a vector as a result of some function running over the top-level
+ * StandardRecord. This wrapper broadcasts a function across all interactions
+ * within the reco interaction.
+ * @param NAME of the resulting SpillMultiVar.
+ * @param VAR function to broadcast over the interactions.
+ * @param SEL function to select interactions.
+ * @return a vector with the result of VAR called on each interaction passing
+ * the cut SEL.
+*/
 #define VARDLP_RECO(NAME,VAR,SEL)                             \
     const SpillMultiVar NAME([](const caf::SRSpillProxy* sr)  \
     {                                                         \
@@ -24,6 +35,17 @@
         return var;                                           \
     })
 
+/**
+ * Preprocessor wrapper for looping over true interactions. The SpillMultiVar
+ * accepts a vector as a result of some function running over the top-level
+ * StandardRecord. This wrapper broadcasts a function across all interactions
+ * within the true interaction.
+ * @param NAME of the resulting SpillMultiVar.
+ * @param VAR function to broadcast over the interactions.
+ * @param SEL function to select interactions.
+ * @return a vector with the result of VAR called on each interaction passing
+ * the cut SEL.
+*/
 #define VARDLP_TRUE(NAME,VAR,SEL)                             \
     const SpillMultiVar NAME([](const caf::SRSpillProxy* sr)  \
     {                                                         \
@@ -36,6 +58,19 @@
         return var;                                           \
     })
 
+/**
+ * Preprocessor wrapper for looping over true interactions and broadcasting a
+ * SpillMultiVar over the matched (truth->reco) interaction. The SpillMultiVar
+ * accepts a vector as a result of some function running over the top-level
+ * StandardRecord.
+ * @param NAME of the resulting SpillMultiVar.
+ * @param VAR function to broadcast over the reco interactions.
+ * @param CAT function that defines the truth category.
+ * @param SEL function to select reco interactions.
+ * @return a vector with the result of VAR called on each reco interaction
+ * matched passing SEL that is matched to by the true interaction passing
+ * category cut CAT.
+*/
 #define VARDLP_TTP(NAME,VAR,CAT,SEL)                                     \
     const SpillMultiVar NAME([](const caf::SRSpillProxy* sr)             \
     {                                                                    \
