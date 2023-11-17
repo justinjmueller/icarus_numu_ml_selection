@@ -1,0 +1,57 @@
+# Ignore files with no extension
+*
+!*.*
+!*/
+
+# Prerequisites
+*.d
+
+# Other things
+*.pyc
+*.root
+
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+*.pcm
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
+
+# Fortran module files
+*.mod
+*.smod
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.lib
+
+# Executables
+*.exe
+*.out
+*.app
+
+# CMake stuff
+*/CMakeFiles/*
+*/Makefiles/*
+*.cmake
+*/CMakeCache.txt
+*/Makefile
+*.plist
+
+*.*~
+build/*
+csv/*
+.DS_Store
+.vscode/*
+*.dSYM
