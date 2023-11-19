@@ -8,9 +8,8 @@
 
 #include <vector>
 
+#include "sbnana/CAFAna/Core/MultiVar.h"
 #include "sbnanaobj/StandardRecord/Proxy/SRProxy.h"
-#include "sbnana/CAFAna/Core/Var.h"
-#include "sbnana/CAFAna/Core/Cut.h"
 
 /**
  * Preprocessor wrapper for looping over reco interactions. The SpillMultiVar
