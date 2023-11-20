@@ -12,6 +12,7 @@
 
 #include "TFile.h"
 #include "TH1D.h"
+#include "TH2D.h"
 
 /**
  * Container class for CAFAna Spectrum objects. Allows for easier
@@ -35,16 +36,32 @@ struct SpecContainer
       output_file(out_name, "recreate") { }
     
     /**
-     * Adds a new CAFAna Spectrum object to the container.
+     * Adds a new CAFAna Spectrum (1D) object to the container.
      * @param n is the name of the spectrum.
      * @param b is the Binning of the spectrum.
      * @param v is the variable defining the spectrum
      * @return none.
     */
-    void add_spectrum(const char * n, const ana::Binning b, const ana::SpillMultiVar v)
+    void add_spectrum1d(const char * n, const ana::Binning b, const ana::SpillMultiVar v)
     {
         names.push_back(n);
         spectra.push_back(new ana::Spectrum(n, b, loader, v, ana::kNoSpillCut));
+    }
+
+    /**
+     * Adds a new CAFAna Spectrum (2D) object to the container.
+     * @param n is the name of the spectrum.
+     * @param b0 is the first set of Binnings.
+     * @param b1 is the second set of Binnings.
+     * @param v0 is the first variable.
+     * @param v1 is the second variable.
+     * @return none.
+    */
+    void add_spectrum2d(const char * n, const ana::Binning b0, const ana::Binning b1,
+                        const ana::SpillMultiVar v0, const ana::SpillMultiVar v1)
+    {
+        names.push_back(n);
+        spectra.push_back(new ana::Spectrum(n, loader, b0, v0, b1, v1, ana::kNoSpillCut));
     }
 
     /**
@@ -55,7 +72,7 @@ struct SpecContainer
     {
         loader.Go();
         for(size_t i(0); i < spectra.size(); ++i)
-            output_file.WriteObject(spectra[i]->ToTH1(1), names[i]);
+            output_file.WriteObject(spectra[i]->ToTHX(1), names[i]);
         output_file.Close();
     }
 

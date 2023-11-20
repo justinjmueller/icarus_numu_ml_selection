@@ -40,6 +40,8 @@ namespace ana
 
     PVARDLP_RECO(kCSDA,vars::csda_ke,cuts::no_cut);
     PVARDLP_TRUE(kCSDATruth,vars::csda_ke,cuts::no_cut);
+    PVARDLP_TRUE(kPIDTruth,vars::pid,cuts::matched);
 
     PVAR_TTP(kPID_muon,vars::pid,cuts::muon,cuts::no_cut);
+    PVAR_TTP(kPID,vars::pid,cuts::no_cut,cuts::no_cut);
 }

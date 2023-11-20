@@ -20,30 +20,35 @@ void analysis()
 {
     SpecContainer spectra("/exp/icarus/app/users/mueller/sbn_ml_cafmaker/sbn_ml_cafmaker/build/bnb_nucosmics.flat.root", "spectra.root");
 
-    spectra.add_spectrum("sCountParticles", Binning::Simple(20, 0, 20), kCountParticles);
-    spectra.add_spectrum("sCountPrimaries", Binning::Simple(20, 0, 20), kCountPrimaries);
-    spectra.add_spectrum("sCountParticlesTruth", Binning::Simple(20, 0, 20), kCountParticlesTruth);
-    spectra.add_spectrum("sCountPrimariesTruth", Binning::Simple(20, 0, 20), kCountPrimariesTruth);
+    spectra.add_spectrum1d("sCountParticles", Binning::Simple(20, 0, 20), kCountParticles);
+    spectra.add_spectrum1d("sCountPrimaries", Binning::Simple(20, 0, 20), kCountPrimaries);
+    spectra.add_spectrum1d("sCountParticlesTruth", Binning::Simple(20, 0, 20), kCountParticlesTruth);
+    spectra.add_spectrum1d("sCountPrimariesTruth", Binning::Simple(20, 0, 20), kCountPrimariesTruth);
 
-    spectra.add_spectrum("sCount_1mu1p_NoCut", Binning::Simple(1, 0, 2), kCount_1mu1p_NoCut);
-    spectra.add_spectrum("sCount_1mu1p_FVCut", Binning::Simple(1, 0, 2), kCount_1mu1p_FVCut);
-    spectra.add_spectrum("sCount_1mu1p_FVConCut", Binning::Simple(1, 0, 2), kCount_1mu1p_FVConCut);
-    spectra.add_spectrum("sCount_1mu1p_FVConTopCut", Binning::Simple(1, 0, 2), kCount_1mu1p_FVConTopCut);
-    spectra.add_spectrum("sCount_1mu1p_AllCut", Binning::Simple(1, 0, 2), kCount_1mu1p_AllCut);
+    spectra.add_spectrum1d("sCount_1mu1p_NoCut", Binning::Simple(1, 0, 2), kCount_1mu1p_NoCut);
+    spectra.add_spectrum1d("sCount_1mu1p_FVCut", Binning::Simple(1, 0, 2), kCount_1mu1p_FVCut);
+    spectra.add_spectrum1d("sCount_1mu1p_FVConCut", Binning::Simple(1, 0, 2), kCount_1mu1p_FVConCut);
+    spectra.add_spectrum1d("sCount_1mu1p_FVConTopCut", Binning::Simple(1, 0, 2), kCount_1mu1p_FVConTopCut);
+    spectra.add_spectrum1d("sCount_1mu1p_AllCut", Binning::Simple(1, 0, 2), kCount_1mu1p_AllCut);
 
-    spectra.add_spectrum("sCount_OtherNu_NoCut", Binning::Simple(1, 0, 2), kCount_OtherNu_NoCut);
-    spectra.add_spectrum("sCount_OtherNu_FVCut", Binning::Simple(1, 0, 2), kCount_OtherNu_FVCut);
-    spectra.add_spectrum("sCount_OtherNu_FVConCut", Binning::Simple(1, 0, 2), kCount_OtherNu_FVConCut);
-    spectra.add_spectrum("sCount_OtherNu_FVConTopCut", Binning::Simple(1, 0, 2), kCount_OtherNu_FVConTopCut);
-    spectra.add_spectrum("sCount_OtherNu_AllCut", Binning::Simple(1, 0, 2), kCount_OtherNu_AllCut);
+    spectra.add_spectrum1d("sCount_OtherNu_NoCut", Binning::Simple(1, 0, 2), kCount_OtherNu_NoCut);
+    spectra.add_spectrum1d("sCount_OtherNu_FVCut", Binning::Simple(1, 0, 2), kCount_OtherNu_FVCut);
+    spectra.add_spectrum1d("sCount_OtherNu_FVConCut", Binning::Simple(1, 0, 2), kCount_OtherNu_FVConCut);
+    spectra.add_spectrum1d("sCount_OtherNu_FVConTopCut", Binning::Simple(1, 0, 2), kCount_OtherNu_FVConTopCut);
+    spectra.add_spectrum1d("sCount_OtherNu_AllCut", Binning::Simple(1, 0, 2), kCount_OtherNu_AllCut);
 
-    spectra.add_spectrum("sCount_Cosmic_NoCut", Binning::Simple(1, 0, 2), kCount_Cosmic_NoCut);
-    spectra.add_spectrum("sCount_Cosmic_FVCut", Binning::Simple(1, 0, 2), kCount_Cosmic_FVCut);
-    spectra.add_spectrum("sCount_Cosmic_FVConCut", Binning::Simple(1, 0, 2), kCount_Cosmic_FVConCut);
-    spectra.add_spectrum("sCount_Cosmic_FVConTopCut", Binning::Simple(1, 0, 2), kCount_Cosmic_FVConTopCut);
-    spectra.add_spectrum("sCount_Cosmic_AllCut", Binning::Simple(1, 0, 2), kCount_Cosmic_AllCut);
+    spectra.add_spectrum1d("sCount_Cosmic_NoCut", Binning::Simple(1, 0, 2), kCount_Cosmic_NoCut);
+    spectra.add_spectrum1d("sCount_Cosmic_FVCut", Binning::Simple(1, 0, 2), kCount_Cosmic_FVCut);
+    spectra.add_spectrum1d("sCount_Cosmic_FVConCut", Binning::Simple(1, 0, 2), kCount_Cosmic_FVConCut);
+    spectra.add_spectrum1d("sCount_Cosmic_FVConTopCut", Binning::Simple(1, 0, 2), kCount_Cosmic_FVConTopCut);
+    spectra.add_spectrum1d("sCount_Cosmic_AllCut", Binning::Simple(1, 0, 2), kCount_Cosmic_AllCut);
 
-    spectra.add_spectrum("sPID_muon", Binning::Simple(5, 0, 5), kPID_muon);
+    spectra.add_spectrum1d("sCSDA", Binning::Simple(50, 0, 2500), kCSDA);
+    spectra.add_spectrum1d("sCSDATruth", Binning::Simple(50, 0, 2500), kCSDATruth);
+
+    spectra.add_spectrum1d("sPID_muon", Binning::Simple(5, 0, 5), kPID_muon);
+
+    spectra.add_spectrum2d("sPID_confusion", Binning::Simple(5,0,5), Binning::Simple(5,0,5), kPIDTruth, kPID);
 
     spectra.run();
 }

@@ -150,6 +150,15 @@ namespace cuts
         bool cosmic(const T & interaction) { return !interaction.is_neutrino; }
 
     /**
+     * Apply a cut on whether a match exists.
+     * @tparam T the object type (true or reco, interaction or particle).
+     * @param obj the object to select on.
+     * @return true if the object is matched.
+    */
+    template<class T>
+        bool matched(const T & obj) { return obj.match.size() > 0; }
+
+    /**
      * Define true muon particle classification
      * @tparam T the type of particle (true or reco)
      * @param particle to select on.
