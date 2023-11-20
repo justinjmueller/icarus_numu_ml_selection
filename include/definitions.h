@@ -93,24 +93,24 @@
  * passing SEL that is matched to by the true particle passing category
  * cut CAT.
 */
-#define PVAR_TTP(NAME,VAR,CAT,SEL)                                                   \
-    const SpillMultiVar NAME([](const caf::SRSpillProxy* sr)                         \
-    {                                                                                \
-        std::vector<double> var;                                                     \
-        std::map<caf::Proxy<int64_t>, const caf::Proxy<caf::SRParticleDLP> *> reco_particles;          \
-        for(auto const& i : sr->dlp)                                                 \
-        {                                                                            \
-            for(auto const& p : i.particles)                                         \
-                reco_particles.insert(std::make_pair(p.id, &p));            \
-        }                                                                            \
-        for(auto const& i : sr->dlp_true)                                            \
-        {                                                                            \
-            for(auto const& p : i.particles)                                         \
-            {                                                                        \
-                if(CAT(p) && p.match.size() > 0 && SEL(*reco_particles[p.match[0]])) \
-                    var.push_back(VAR(*reco_particles[p.match[0]]));                 \
-            }                                                                        \
-        }                                                                            \
-        return var;                                                                  \
+#define PVAR_TTP(NAME,VAR,CAT,SEL)                                                            \
+    const SpillMultiVar NAME([](const caf::SRSpillProxy* sr)                                  \
+    {                                                                                         \
+        std::vector<double> var;                                                              \
+        std::map<caf::Proxy<int64_t>, const caf::Proxy<caf::SRParticleDLP> *> reco_particles; \
+        for(auto const& i : sr->dlp)                                                          \
+        {                                                                                     \
+            for(auto const& p : i.particles)                                                  \
+                reco_particles.insert(std::make_pair(p.id, &p));                              \
+        }                                                                                     \
+        for(auto const& i : sr->dlp_true)                                                     \
+        {                                                                                     \
+            for(auto const& p : i.particles)                                                  \
+            {                                                                                 \
+                if(CAT(p) && p.match.size() > 0 && SEL(*reco_particles[p.match[0]]))          \
+                    var.push_back(VAR(*reco_particles[p.match[0]]));                          \
+            }                                                                                 \
+        }                                                                                     \
+        return var;                                                                           \
     })
 #endif
