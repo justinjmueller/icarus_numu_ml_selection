@@ -44,6 +44,15 @@ namespace vars
     */
     template<class T>
         double pid(const T & particle) { return particle.pid; }
+
+    /**
+     * Variable for particle csda_ke.
+     * @tparam T the type of particle (true or reco).
+     * @param particle to apply the variable on.
+     * @return the csda_ke of the particle.
+    */
+    template<class T>
+        double csda_ke(const T & particle) { return particle.csda_ke; }
 }
 
 #endif

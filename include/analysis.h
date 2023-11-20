@@ -38,5 +38,8 @@ namespace ana
     VARDLP_TTP(kCount_OtherNu_AllCut,vars::count,cuts::other_nu,cuts::all_cut);
     VARDLP_TTP(kCount_Cosmic_AllCut,vars::count,cuts::cosmic,cuts::all_cut);
 
+    PVARDLP_RECO(kCSDA,vars::csda_ke,cuts::no_cut);
+    PVARDLP_TRUE(kCSDATruth,vars::csda_ke,cuts::no_cut);
+
     PVAR_TTP(kPID_muon,vars::pid,cuts::muon,cuts::no_cut);
 }

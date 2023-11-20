@@ -84,7 +84,62 @@
     })
 
 /**
- * Preprocessor wrapper for looping
+ * Preprocessor wrapper for looping over reco particles. The SpillMultiVar
+ * accepts a vector as a result of some function running over the top-level
+ * StandardRecord. This wrapper broadcasts a function across all particles
+ * within the reco interactions.
+ * @param NAME of the resulting SpillMultiVar.
+ * @param VAR function to broadcast over the particles.
+ * @param SEL function to select particles.
+ * @return a vector with the result of VAR called on each particle passing
+ * the cut SEL.
+*/
+#define PVARDLP_RECO(NAME,VAR,SEL)                            \
+    const SpillMultiVar NAME([](const caf::SRSpillProxy* sr)  \
+    {                                                         \
+        std::vector<double> var;                              \
+        for(auto const& i : sr->dlp)                          \
+        {                                                     \
+            for(auto const& p : i.particles)                  \
+            {                                                 \
+                if(SEL(p))                                    \
+                    var.push_back(VAR(p));                    \
+            }                                                 \
+        }                                                     \
+        return var;                                           \
+    })
+
+/**
+ * Preprocessor wrapper for looping over true particles. The SpillMultiVar
+ * accepts a vector as a result of some function running over the top-level
+ * StandardRecord. This wrapper broadcasts a function across all particles
+ * within the true interactions.
+ * @param NAME of the resulting SpillMultiVar.
+ * @param VAR function to broadcast over the particles.
+ * @param SEL function to select particles.
+ * @return a vector with the result of VAR called on each particle passing
+ * the cut SEL.
+*/
+#define PVARDLP_TRUE(NAME,VAR,SEL)                            \
+    const SpillMultiVar NAME([](const caf::SRSpillProxy* sr)  \
+    {                                                         \
+        std::vector<double> var;                              \
+        for(auto const& i : sr->dlp_true)                     \
+        {                                                     \
+            for(auto const& p : i.particles)                  \
+            {                                                 \
+                if(SEL(p))                                    \
+                    var.push_back(VAR(p));                    \
+            }                                                 \
+        }                                                     \
+        return var;                                           \
+    })
+
+/**
+ * Preprocessor wrapper for looping over true particles and broadcasting a
+ * SpillMultiVar over the matched (truth->reco) particle. The SpillMultiVar
+ * accepts a vector as a result of some function running over the top-level
+ * StandardRecord.
  * @param NAME of the resulting SpillMultiVar.
  * @param VAR function to broadcast over the reco particles.
  * @param CAT function that defines the truth category.
