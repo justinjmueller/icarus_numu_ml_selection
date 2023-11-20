@@ -20,11 +20,17 @@ void analysis()
 {
     SpecContainer spectra("/exp/icarus/app/users/mueller/sbn_ml_cafmaker/sbn_ml_cafmaker/build/bnb_nucosmics.flat.root", "spectra.root");
 
+    /**
+     * Spectra (1D) for interactions.
+    */
     spectra.add_spectrum1d("sCountParticles", Binning::Simple(20, 0, 20), kCountParticles);
     spectra.add_spectrum1d("sCountPrimaries", Binning::Simple(20, 0, 20), kCountPrimaries);
     spectra.add_spectrum1d("sCountParticlesTruth", Binning::Simple(20, 0, 20), kCountParticlesTruth);
     spectra.add_spectrum1d("sCountPrimariesTruth", Binning::Simple(20, 0, 20), kCountPrimariesTruth);
 
+    /**
+     * Spectra (1D) for counting selection statistics by category.
+    */
     spectra.add_spectrum1d("sCount_1mu1p_NoCut", Binning::Simple(1, 0, 2), kCount_1mu1p_NoCut);
     spectra.add_spectrum1d("sCount_1mu1p_FVCut", Binning::Simple(1, 0, 2), kCount_1mu1p_FVCut);
     spectra.add_spectrum1d("sCount_1mu1p_FVConCut", Binning::Simple(1, 0, 2), kCount_1mu1p_FVConCut);
@@ -43,11 +49,20 @@ void analysis()
     spectra.add_spectrum1d("sCount_Cosmic_FVConTopCut", Binning::Simple(1, 0, 2), kCount_Cosmic_FVConTopCut);
     spectra.add_spectrum1d("sCount_Cosmic_AllCut", Binning::Simple(1, 0, 2), kCount_Cosmic_AllCut);
 
+    /**
+     * Spectra (1D) for particles.
+    */
     spectra.add_spectrum1d("sCSDA", Binning::Simple(50, 0, 2500), kCSDA);
     spectra.add_spectrum1d("sCSDATruth", Binning::Simple(50, 0, 2500), kCSDATruth);
 
+    /**
+     * Spectra (1D) for matched (truth-to-predicted) particles.
+    */
     spectra.add_spectrum1d("sPID_muon", Binning::Simple(5, 0, 5), kPID_muon);
 
+    /**
+     * Spectra (2D) for matched (truth-to-predicted) particles.
+    */
     spectra.add_spectrum2d("sPID_confusion", Binning::Simple(5,0,5), Binning::Simple(5,0,5), kPIDTruth, kPID);
 
     spectra.run();
