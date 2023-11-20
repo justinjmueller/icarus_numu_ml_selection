@@ -43,13 +43,13 @@ namespace cuts
         }
 
     /**
-     * Apply no cut (all interactions passed).
-     * @tparam T the type of interaction (true or reco).
-     * @param interaction to select on.
+     * Apply no cut (all interactions/particles passed).
+     * @tparam T the type of object (true or reco, interaction or particle).
+     * @param interaction/particle to select on.
      * @return true (always).
      */
     template<class T>
-        bool no_cut(const T & interaction) { return true; }
+        bool no_cut(const T & obj) { return true; }
 
     /**
      * Apply a fiducial volume cut. Interaction vertex must be within 25 cm of
@@ -148,5 +148,14 @@ namespace cuts
      */
     template<class T>
         bool cosmic(const T & interaction) { return !interaction.is_neutrino; }
+
+    /**
+     * Define true muon particle classification
+     * @tparam T the type of particle (true or reco)
+     * @param particle to select on.
+     * @return true if the particle is a muon.
+    */
+    template<class T>
+        bool muon(const T & particle) { return particle.pid == 2; }
 }
 #endif

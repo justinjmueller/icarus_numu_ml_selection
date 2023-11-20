@@ -43,5 +43,7 @@ void analysis()
     spectra.add_spectrum("sCount_Cosmic_FVConTopCut", Binning::Simple(1, 0, 2), kCount_Cosmic_FVConTopCut);
     spectra.add_spectrum("sCount_Cosmic_AllCut", Binning::Simple(1, 0, 2), kCount_Cosmic_AllCut);
 
+    spectra.add_spectrum("sPID_muon", Binning::Simple(5, 0, 5), kPID_muon);
+
     spectra.run();
 }

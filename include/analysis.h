@@ -8,6 +8,8 @@
 #include "cuts.h"
 #include "variables.h"
 
+using namespace ana;
+
 namespace ana
 {
     VARDLP_RECO(kCountParticles,vars::count_particles,cuts::no_cut);
@@ -35,4 +37,6 @@ namespace ana
     VARDLP_TTP(kCount_1mu1p_AllCut,vars::count,cuts::signal_1mu1p,cuts::all_cut);
     VARDLP_TTP(kCount_OtherNu_AllCut,vars::count,cuts::other_nu,cuts::all_cut);
     VARDLP_TTP(kCount_Cosmic_AllCut,vars::count,cuts::cosmic,cuts::all_cut);
+
+    PVAR_TTP(kPID_muon,vars::pid,cuts::muon,cuts::no_cut);
 }
