@@ -29,7 +29,7 @@ void analysis()
     spectra.add_spectrum1d("sCountPrimariesTruth", Binning::Simple(20, 0, 20), kCountPrimariesTruth);
 
     /**
-     * Spectra (1D) for counting selection statistics by category.
+     * Spectra (1D) for counting selection statistics by category (efficiency).
     */
     spectra.add_spectrum1d("sCount_1mu1p_NoCut", Binning::Simple(1, 0, 2), kCount_1mu1p_NoCut);
     spectra.add_spectrum1d("sCount_1mu1p_FVCut", Binning::Simple(1, 0, 2), kCount_1mu1p_FVCut);
@@ -48,6 +48,27 @@ void analysis()
     spectra.add_spectrum1d("sCount_Cosmic_FVConCut", Binning::Simple(1, 0, 2), kCount_Cosmic_FVConCut);
     spectra.add_spectrum1d("sCount_Cosmic_FVConTopCut", Binning::Simple(1, 0, 2), kCount_Cosmic_FVConTopCut);
     spectra.add_spectrum1d("sCount_Cosmic_AllCut", Binning::Simple(1, 0, 2), kCount_Cosmic_AllCut);
+
+    /**
+     * Spectra (1D) for counting selection statistics by category (purity).
+    */
+    spectra.add_spectrum1d("sCount_1mu1p_PTTNoCut", Binning::Simple(1, 0, 2), kCountPTT_1mu1p_NoCut);
+    spectra.add_spectrum1d("sCount_1mu1p_PTTFVCut", Binning::Simple(1, 0, 2), kCountPTT_1mu1p_FVCut);
+    spectra.add_spectrum1d("sCount_1mu1p_PTTFVConCut", Binning::Simple(1, 0, 2), kCountPTT_1mu1p_FVConCut);
+    spectra.add_spectrum1d("sCount_1mu1p_PTTFVConTopCut", Binning::Simple(1, 0, 2), kCountPTT_1mu1p_FVConTopCut);
+    spectra.add_spectrum1d("sCount_1mu1p_PTTAllCut", Binning::Simple(1, 0, 2), kCountPTT_1mu1p_AllCut);
+
+    spectra.add_spectrum1d("sCount_OtherNu_PTTNoCut", Binning::Simple(1, 0, 2), kCountPTT_OtherNu_NoCut);
+    spectra.add_spectrum1d("sCount_OtherNu_PTTFVCut", Binning::Simple(1, 0, 2), kCountPTT_OtherNu_FVCut);
+    spectra.add_spectrum1d("sCount_OtherNu_PTTFVConCut", Binning::Simple(1, 0, 2), kCountPTT_OtherNu_FVConCut);
+    spectra.add_spectrum1d("sCount_OtherNu_PTTFVConTopCut", Binning::Simple(1, 0, 2), kCountPTT_OtherNu_FVConTopCut);
+    spectra.add_spectrum1d("sCount_OtherNu_PTTAllCut", Binning::Simple(1, 0, 2), kCountPTT_OtherNu_AllCut);
+
+    spectra.add_spectrum1d("sCount_Cosmic_PTTNoCut", Binning::Simple(1, 0, 2), kCountPTT_Cosmic_NoCut);
+    spectra.add_spectrum1d("sCount_Cosmic_PTTFVCut", Binning::Simple(1, 0, 2), kCountPTT_Cosmic_FVCut);
+    spectra.add_spectrum1d("sCount_Cosmic_PTTFVConCut", Binning::Simple(1, 0, 2), kCountPTT_Cosmic_FVConCut);
+    spectra.add_spectrum1d("sCount_Cosmic_PTTFVConTopCut", Binning::Simple(1, 0, 2), kCountPTT_Cosmic_FVConTopCut);
+    spectra.add_spectrum1d("sCount_Cosmic_PTTAllCut", Binning::Simple(1, 0, 2), kCountPTT_Cosmic_AllCut);
 
     /**
      * Spectra (1D) for particles.

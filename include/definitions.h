@@ -84,6 +84,31 @@
     })
 
 /**
+ * Preprocessor wrapper for looping over reco interactions which match to
+ * truth interactions of the specified category and applying a SpillMultiVar.
+ * The SpillMultiVar accepts a vector as a result of some function running over
+ * the top-level StandardRecord.
+ * @param NAME of the resulting SpillMultiVar.
+ * @param VAR function to broadcast over the reco interactions.
+ * @param CAT function that defines the truth category.
+ * @param SEL function to select reco interactions.
+ * @return a vector with the result of VAR called on each reco interaction
+ * passing SEL that is matched to by the true interaction passing category
+ * cut CAT.
+*/
+#define VARDLP_PTT(NAME,VAR,CAT,SEL)                                          \
+    const SpillMultiVar NAME([](const caf::SRSpillProxy* sr)                  \
+    {                                                                         \
+        std::vector<double> var;                                              \
+        for(auto const& i : sr->dlp)                                          \
+        {                                                                     \
+            if(SEL(i) && i.match.size() > 0 && CAT(sr->dlp_true[i.match[0]])) \
+                var.push_back(VAR(i));                                        \
+        }                                                                     \
+        return var;                                                           \
+    })
+
+/**
  * Preprocessor wrapper for looping over reco particles. The SpillMultiVar
  * accepts a vector as a result of some function running over the top-level
  * StandardRecord. This wrapper broadcasts a function across all particles

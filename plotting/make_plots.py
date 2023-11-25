@@ -29,7 +29,15 @@ def main():
       clabels: [No Cut, Fiducial\nVolume, Containment, Topological, Flash Time]
       title: 1$\mu$1p Selection Statistics
       span: [-4,3]
-      save: plots/flow_1mu1p.png
+      save: plots/flow_1mu1p_efficiency.png
+    - type: flow
+      pops: [1mu1p, OtherNu, Cosmic]
+      labels: [1$\mu$1p, Other $\\nu$, Cosmic]
+      cuts: [PTTNoCut, PTTFVCut, PTTFVConCut, PTTFVConTopCut, PTTAllCut]
+      clabels: [No Cut, Fiducial\nVolume, Containment, Topological, Flash Time]
+      title: 1$\mu$1p Selection Statistics
+      span: [-4,3]
+      save: plots/flow_1mu1p_purity.png
     """
     cfg = yaml.safe_load(cfg)
 
