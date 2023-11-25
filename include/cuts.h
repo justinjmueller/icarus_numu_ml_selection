@@ -28,9 +28,10 @@ namespace cuts
                 if(p.is_primary)
                 {
                     double energy(p.csda_ke);
-                    if constexpr (std::is_same_v<T, caf::SRInteractionTruthDLPProxy>) energy = p.energy_deposit;
+                    if constexpr (std::is_same_v<T, caf::SRInteractionTruthDLPProxy>)
+                        energy = p.energy_deposit;
                     if((p.pid < 4 && energy > 25) || (p.pid == 4 && energy > 50))
-                    ++counts[p.pid];
+                        ++counts[p.pid];
                 }
             }
             std::stringstream ss;
