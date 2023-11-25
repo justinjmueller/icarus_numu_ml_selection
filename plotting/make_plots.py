@@ -23,6 +23,7 @@ def main():
       entries: [Photon, Electron, Muon, Pion, Proton]
       save: plots/pid_confusion.png
     - type: flow
+      direction: ttp
       pops: [1mu1p, OtherNu, Cosmic]
       labels: [1$\mu$1p, Other $\\nu$, Cosmic]
       cuts: [NoCut, FVCut, FVConCut, FVConTopCut, AllCut]
@@ -31,9 +32,10 @@ def main():
       span: [-4,3]
       save: plots/flow_1mu1p_efficiency.png
     - type: flow
+      direction: ptt
       pops: [1mu1p, OtherNu, Cosmic]
       labels: [1$\mu$1p, Other $\\nu$, Cosmic]
-      cuts: [PTTNoCut, PTTFVCut, PTTFVConCut, PTTFVConTopCut, PTTAllCut]
+      cuts: [NoCut, FVCut, FVConCut, FVConTopCut, AllCut]
       clabels: [No Cut, Fiducial\nVolume, Containment, Topological, Flash Time]
       title: 1$\mu$1p Selection Statistics
       span: [-4,3]
