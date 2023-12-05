@@ -19,6 +19,21 @@ namespace vars
         double count(const T & obj) { return 1.0; }
 
     /**
+     * Variable for enumerating interaction categories.
+     * @tparam T the type of interaction (true or reco).
+     * @param interaction to apply the variable on.
+     * @return the enumerated category of the interaction.
+    */
+    template<class T>
+        double category(const T & interaction)
+        {
+            double cat(2);
+            if(cuts::signal_1mu1p(interaction)) cat = 0;
+            else if(cuts::other_nu(interaction)) cat = 1;
+            return cat;
+        }
+
+    /**
      * Variable for counting particles in interactions.
      * @tparam T the type of interaction (true or reco).
      * @param interaction to apply the variable on.
