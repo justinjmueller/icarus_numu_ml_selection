@@ -258,7 +258,7 @@
     VARDLP_RCAT(kCategoryPTT_FVCut,vars::category,cuts::fiducial_cut);                               \
     VARDLP_RCAT(kCategoryPTT_FVConCut,vars::category,cuts::fiducial_containment_cut);                \
     VARDLP_RCAT(kCategoryPTT_FVConTopCut,vars::category,cuts::fiducial_containment_topological_cut); \
-    VARDLP_RCAT(kCategoryPTT_AllCut,vars::category,cuts::all_cut);                                   \
+    VARDLP_RCAT(kCategoryPTT_AllCut,vars::category,cuts::all_cut);
 
 /**
  * Preprocessor macro for broadcasting a variable across true interactions
@@ -271,7 +271,8 @@
     VARDLP_TCAT(NAME ## _FVCut,vars::VAR,cuts::fiducial_cut);                                        \
     VARDLP_TCAT(NAME ## _FVConCut,vars::VAR,cuts::fiducial_containment_cut);                         \
     VARDLP_TCAT(NAME ## _FVConTopCut,vars::VAR,cuts::fiducial_containment_topological_cut);          \
-    VARDLP_TCAT(NAME ## _AllCut,vars::VAR,cuts::all_cut);                                            \
+    VARDLP_TCAT(NAME ## _AllCut,vars::VAR,cuts::all_cut);
+
 /**
  * Preprocessor macro for broadcasting a variable across reco interactions
  * with categorical information for all cuts.
@@ -283,6 +284,6 @@
     VARDLP_RCAT(NAME ## _FVCut,vars::VAR,cuts::fiducial_cut);                                        \
     VARDLP_RCAT(NAME ## _FVConCut,vars::VAR,cuts::fiducial_containment_cut);                         \
     VARDLP_RCAT(NAME ## _FVConTopCut,vars::VAR,cuts::fiducial_containment_topological_cut);          \
-    VARDLP_RCAT(NAME ## _AllCut,vars::VAR,cuts::all_cut);                                            \
+    VARDLP_RCAT(NAME ## _AllCut,vars::VAR,cuts::all_cut);
 
 #endif
