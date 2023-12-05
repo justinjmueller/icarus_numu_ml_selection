@@ -24,7 +24,7 @@ def main():
       save: plots/pid_confusion.png
     - type: flow
       direction: ttp
-      pops: [1mu1p, OtherNu, Cosmic]
+      pops: [0, 1, 2]
       labels: [1$\mu$1p, Other $\\nu$, Cosmic]
       cuts: [NoCut, FVCut, FVConCut, FVConTopCut, AllCut]
       clabels: [No Cut, Fiducial\nVolume, Containment, Topological, Flash Time]
@@ -33,7 +33,7 @@ def main():
       save: plots/flow_1mu1p_efficiency.png
     - type: flow
       direction: ptt
-      pops: [1mu1p, OtherNu, Cosmic]
+      pops: [0, 1, 2]
       labels: [1$\mu$1p, Other $\\nu$, Cosmic]
       cuts: [NoCut, FVCut, FVConCut, FVConTopCut, AllCut]
       clabels: [No Cut, Fiducial\nVolume, Containment, Topological, Flash Time]

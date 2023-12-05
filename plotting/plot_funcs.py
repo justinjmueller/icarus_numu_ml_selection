@@ -64,10 +64,10 @@ def plot_flow(rf, desc):
     npops = len(desc.pops)
     bar_size = 1.0 / (npops+1)
     ylocs = np.arange(len(desc.cuts)) * (bar_size * (npops + 1))
+    counts = np.array([load_histograms(rf, f'sCount{desc.direction.upper()}_{c}')[0] for c in desc.cuts])[::-1,:,0]
     for pi, pop in enumerate(desc.pops):
-        count = [load_histograms(rf, [f'sCount{desc.direction.upper()}_{pop}_{c}',])[0][0][0] for c in desc.cuts][::-1]
-        ax.barh(ylocs + (pi + npops * -0.5)*bar_size, count, align='edge', height=bar_size, label=desc.labels[pi])
-        for ci, c in enumerate(count):
+        ax.barh(ylocs + (pi + npops * -0.5)*bar_size, counts[:,pop], align='edge', height=bar_size, label=desc.labels[pi])
+        for ci, c in enumerate(counts[:,pop]):
             plt.text(1.2*10**desc.span[0], ci - (1.0-pi)*bar_size, f'{c:.2}', color='white', va="center", fontsize=18, weight='bold')
 
     ax.set(yticks=ylocs, yticklabels=desc.clabels[::-1], ylim=[0 - bar_size, len(desc.cuts)])
