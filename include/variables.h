@@ -52,6 +52,24 @@ namespace vars
         double count_primaries(const T & interaction) { return interaction.num_primaries; }
     
     /**
+     * Variable for total visible energy of interaction
+     * @tparam T the type of interaction (true or reco).
+     * @param interaction to apply the variable on.
+     * @return the total visible energy of the interaction.
+    */
+    template<class T>
+        double visible_energy(const T & interaction)
+        {
+            double energy(0);
+            for(const auto & p : interaction.particles)
+            {
+                if(p.is_primary)
+                    energy += p.csda_ke;
+            }
+            return energy;
+        }
+
+    /**
      * Variable for particle PID.
      * @tparam T the type of particle (true or reco).
      * @param particle to apply the variable on.

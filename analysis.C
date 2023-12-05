@@ -38,6 +38,15 @@ void analysis()
     spectra.add_spectrum2d("sCountTTP_AllCut", Binning::Simple(10, 0, 10), Binning::Simple(1, 0, 2), kCategoryTTP_AllCut, kCountTTP_AllCut);
 
     /**
+     * Spectra (2D) for visible energy.
+    */
+    spectra.add_spectrum2d("sVisibleEnergyTTP_NoCut", Binning::Simple(10, 0, 10), Binning::Simple(10, 0, 2500), kCategoryTTP_NoCut, kVisibleEnergyTTP_NoCut);
+    spectra.add_spectrum2d("sVisibleEnergyTTP_FVCut", Binning::Simple(10, 0, 10), Binning::Simple(10, 0, 2500), kCategoryTTP_FVCut, kVisibleEnergyTTP_FVCut);
+    spectra.add_spectrum2d("sVisibleEnergyTTP_FVConCut", Binning::Simple(10, 0, 10), Binning::Simple(10, 0, 2500), kCategoryTTP_FVConCut, kVisibleEnergyTTP_FVConCut);
+    spectra.add_spectrum2d("sVisibleEnergyTTP_FVConTopCut", Binning::Simple(10, 0, 10), Binning::Simple(10, 0, 2500), kCategoryTTP_FVConTopCut, kVisibleEnergyTTP_FVConTopCut);
+    spectra.add_spectrum2d("sVisibleEnergyTTP_AllCut", Binning::Simple(10, 0, 10), Binning::Simple(10, 0, 2500), kCategoryTTP_AllCut, kVisibleEnergyTTP_AllCut);
+
+    /**
      * Spectra (2D) for counting selection statistics by interaction categorization (purity).
     */
     spectra.add_spectrum2d("sCountPTT_NoCut", Binning::Simple(10, 0, 10), Binning::Simple(1, 0, 2), kCategoryPTT_NoCut, kCountPTT_NoCut);

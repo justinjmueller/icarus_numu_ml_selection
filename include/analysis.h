@@ -18,8 +18,10 @@ namespace ana
     VARDLP_TRUE(kCountParticlesTruth,vars::count_particles,cuts::no_cut);
     VARDLP_TRUE(kCountPrimariesTruth,vars::count_primaries,cuts::no_cut);
 
+    DEFINECAT();
     TCATVAR(kCountTTP,count);
     RCATVAR(kCountPTT,count);
+    TCATVAR(kVisibleEnergyTTP,visible_energy)
 
     PVARDLP_RECO(kCSDA,vars::csda_ke,cuts::no_cut);
     PVARDLP_TRUE(kCSDATruth,vars::csda_ke,cuts::no_cut);
