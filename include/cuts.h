@@ -14,6 +14,15 @@
 namespace cuts
 {
     /**
+     * Apply a cut on whether a match exists.
+     * @tparam T the object type (true or reco, interaction or particle).
+     * @param obj the object to select on.
+     * @return true if the object is matched.
+    */
+    template<class T>
+        bool matched(const T & obj) { return obj.match.size() > 0; }
+
+    /**
      * Find the topology of the interaction with cuts applied to each particle.
      * @tparam T the type of interaction (true or reco).
      * @param interaction to find the topology of.
@@ -124,23 +133,14 @@ namespace cuts
         bool all_cut(const T & interaction) { return topological_cut<T>(interaction) && fiducial_cut<T>(interaction) && flash_cut<T>(interaction) && containment_cut<T>(interaction); }
 
     /**
-     * Define the true 1mu1p interaction classification.
+     * Defined the true neutrino interaction classification.
      * @tparam T the type of interaction (true or reco).
      * @param interaction to select on.
-     * @return true if the interaction is a 1mu1p neutrino interaction.
-     */
+     * @return true if the interaction is a neutrino interaction.
+    */
     template<class T>
-        bool signal_1mu1p(const T & interaction) { return topology<T>(interaction) == "0ph0e1mu0pi1p" && interaction.is_neutrino; }
+        bool neutrino(const T & interaction) { return interaction.is_neutrino; }
 
-    /**
-     * Define the true "other neutrino" interaction classification.
-     * @tparam T the type of interaction (true or reco).
-     * @param interaction to select on.
-     * @return true if the interaction is an "other neutrino" interaction.
-     */
-    template<class T>
-        bool other_nu(const T & interaction) { return topology<T>(interaction) != "0ph0e1mu0pi1p" && interaction.is_neutrino; }
-    
     /**
      * Define the true cosmic interaction classification.
      * @tparam T the type of interaction (true or reco).
@@ -151,13 +151,40 @@ namespace cuts
         bool cosmic(const T & interaction) { return !interaction.is_neutrino; }
 
     /**
-     * Apply a cut on whether a match exists.
-     * @tparam T the object type (true or reco, interaction or particle).
-     * @param obj the object to select on.
-     * @return true if the object is matched.
+     * Defined the true neutrino interaction classification.
+     * @tparam T the type of interaction (true or reco).
+     * @param interaction to select on.
+     * @return true if the interaction is a neutrino interaction.
     */
     template<class T>
-        bool matched(const T & obj) { return obj.match.size() > 0; }
+        bool matched_neutrino(const T & interaction) { return interaction.match.size() > 0 && neutrino(interaction); }
+
+    /**
+     * Defined the true neutrino interaction classification.
+     * @tparam T the type of interaction (true or reco).
+     * @param interaction to select on.
+     * @return true if the interaction is a neutrino interaction.
+    */
+    template<class T>
+        bool matched_cosmic(const T & interaction) { return interaction.match.size() > 0 && cosmic(interaction); }
+
+    /**
+     * Define the true 1mu1p interaction classification.
+     * @tparam T the type of interaction (true or reco).
+     * @param interaction to select on.
+     * @return true if the interaction is a 1mu1p neutrino interaction.
+     */
+    template<class T>
+        bool signal_1mu1p(const T & interaction) { return topology<T>(interaction) == "0ph0e1mu0pi1p" && neutrino(interaction); }
+
+    /**
+     * Define the true "other neutrino" interaction classification.
+     * @tparam T the type of interaction (true or reco).
+     * @param interaction to select on.
+     * @return true if the interaction is an "other neutrino" interaction.
+     */
+    template<class T>
+        bool other_nu(const T & interaction) { return topology<T>(interaction) != "0ph0e1mu0pi1p" && neutrino(interaction); }
 
     /**
      * Define true muon particle classification

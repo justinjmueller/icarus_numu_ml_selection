@@ -67,6 +67,12 @@ void analysis()
     spectra.add_spectrum2d("sPrimary_confusion", Binning::Simple(2,0,2), Binning::Simple(2,0,2), kPrimaryTruth, kPrimary);
     spectra.add_spectrum2d("sPID_confusion", Binning::Simple(5,0,5), Binning::Simple(5,0,5), kPIDTruth, kPID);
     spectra.add_spectrum2d("sPrimaryPID_confusion", Binning::Simple(10,0,10), Binning::Simple(10,0,10), kPrimaryPIDTruth, kPrimaryPID);
+    spectra.add_spectrum2d("sPrimary_Neutrino_confusion", Binning::Simple(2,0,2), Binning::Simple(2,0,2), kPrimaryTruth_Neutrino, kPrimary_Neutrino);
+    spectra.add_spectrum2d("sPID_Neutrino_confusion", Binning::Simple(5,0,5), Binning::Simple(5,0,5), kPIDTruth_Neutrino, kPID_Neutrino);
+    spectra.add_spectrum2d("sPrimaryPID_Neutrino_confusion", Binning::Simple(10,0,10), Binning::Simple(10,0,10), kPrimaryPIDTruth_Neutrino, kPrimaryPID_Neutrino);
+    spectra.add_spectrum2d("sPrimary_Cosmic_confusion", Binning::Simple(2,0,2), Binning::Simple(2,0,2), kPrimaryTruth_Cosmic, kPrimary_Cosmic);
+    spectra.add_spectrum2d("sPID_Cosmic_confusion", Binning::Simple(5,0,5), Binning::Simple(5,0,5), kPIDTruth_Cosmic, kPID_Cosmic);
+    spectra.add_spectrum2d("sPrimaryPID_Cosmic_confusion", Binning::Simple(10,0,10), Binning::Simple(10,0,10), kPrimaryPIDTruth_Cosmic, kPrimaryPID_Cosmic);
 
     spectra.run();
 }
