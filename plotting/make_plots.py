@@ -14,6 +14,15 @@ def main():
       plot_kwargs:
         histtype: barstacked
     - type: confusion
+      name: primary
+      var: sPrimary_confusion
+      xlabel: True Particle Category
+      ylabel: Reconstructed Particle Category
+      clabel: Primary Efficiency
+      title: Particle Primary/Non-primary Confusion
+      entries: [Non-primary, Primary]
+      save: plots/primary_confusion.png
+    - type: confusion
       name: pid
       var: sPID_confusion
       xlabel: True Particle Type
@@ -22,6 +31,69 @@ def main():
       title: Particle PID Confusion
       entries: [Photon, Electron, Muon, Pion, Proton]
       save: plots/pid_confusion.png
+    - type: confusion
+      name: primary_pid
+      var: sPrimaryPID_confusion
+      xlabel: True Particle Type
+      ylabel: Reconstructed Particle Type
+      clabel: Efficiency
+      title: Particle Primary+PID Confusion
+      entries: [Non-primary\nPhoton, Non-primary\nElectrom,Non-primary\nMuon,Non-primary\nPion,Non-primary\nProton,Primary\nPhoton,Primary\nElectron,Primary\nMuon,Primary\nPion,Primary\nProton]
+      save: plots/primary_pid_confusion.png
+    - type: confusion
+      name: primary_neutrino
+      var: sPrimary_Neutrino_confusion
+      xlabel: True Particle Category
+      ylabel: Reconstructed Particle Category
+      clabel: Primary Efficiency
+      title: Particle Primary/Non-primary Confusion (Neutrinos)
+      entries: [Non-primary, Primary]
+      save: plots/primary_neutrino_confusion.png
+    - type: confusion
+      name: pid
+      var: sPID_neutrino_confusion
+      xlabel: True Particle Type
+      ylabel: Reconstructed Particle Type
+      clabel: PID Efficiency
+      title: Particle PID Confusion (Neutrinos)
+      entries: [Photon, Electron, Muon, Pion, Proton]
+      save: plots/pid_neutrino_confusion.png
+    - type: confusion
+      name: primary_pid_neutrino
+      var: sPrimaryPID_Neutrino_confusion
+      xlabel: True Particle Type
+      ylabel: Reconstructed Particle Type
+      clabel: Efficiency
+      title: Particle Primary+PID Confusion (Neutrinos)
+      entries: [Non-primary\nPhoton, Non-primary\nElectrom,Non-primary\nMuon,Non-primary\nPion,Non-primary\nProton,Primary\nPhoton,Primary\nElectron,Primary\nMuon,Primary\nPion,Primary\nProton]
+      save: plots/primary_pid_neutrino_confusion.png
+    - type: confusion
+      name: primary_cosmic
+      var: sPrimary_Cosmic_confusion
+      xlabel: True Particle Category
+      ylabel: Reconstructed Particle Category
+      clabel: Primary Efficiency
+      title: Particle Primary/Non-primary Confusion (Cosmics)
+      entries: [Non-primary, Primary]
+      save: plots/primary_cosmic_confusion.png
+    - type: confusion
+      name: pid_cosmic
+      var: sPID_Cosmic_confusion
+      xlabel: True Particle Type
+      ylabel: Reconstructed Particle Type
+      clabel: PID Efficiency
+      title: Particle PID Confusion (Cosmics)
+      entries: [Photon, Electron, Muon, Pion, Proton]
+      save: plots/pid_cosmic_confusion.png
+    - type: confusion
+      name: primary_pid_cosmic
+      var: sPrimaryPID_Cosmic_confusion
+      xlabel: True Particle Type
+      ylabel: Reconstructed Particle Type
+      clabel: Efficiency
+      title: Particle Primary+PID Confusion (Cosmics)
+      entries: [Non-primary\nPhoton, Non-primary\nElectrom,Non-primary\nMuon,Non-primary\nPion,Non-primary\nProton,Primary\nPhoton,Primary\nElectron,Primary\nMuon,Primary\nPion,Primary\nProton]
+      save: plots/primary_pid_cosmic_confusion.png
     - type: flow
       direction: ttp
       pops: [0, 1, 2]
