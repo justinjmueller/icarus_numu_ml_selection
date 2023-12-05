@@ -21,7 +21,8 @@ namespace ana
     DEFINECAT();
     TCATVAR(kCountTTP,count);
     RCATVAR(kCountPTT,count);
-    TCATVAR(kVisibleEnergyTTP,visible_energy)
+    TCATVAR(kVisibleEnergyTTP,visible_energy);
+    RCATVAR(kFlashTime,flash_time);
 
     PVARDLP_RECO(kCSDA,vars::csda_ke,cuts::no_cut);
     PVARDLP_TRUE(kCSDATruth,vars::csda_ke,cuts::no_cut);

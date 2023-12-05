@@ -47,6 +47,20 @@ void analysis()
     spectra.add_spectrum2d("sVisibleEnergyTTP_AllCut", Binning::Simple(10, 0, 10), Binning::Simple(10, 0, 2500), kCategoryTTP_AllCut, kVisibleEnergyTTP_AllCut);
 
     /**
+     * Spectra (2D) for flash time.
+    */
+    spectra.add_spectrum2d("sFlashTime_NoCut", Binning::Simple(10, 0, 10), Binning::Simple(100, -1000, 1000), kCategoryPTT_NoCut, kFlashTime_NoCut);
+    spectra.add_spectrum2d("sFlashTime_FVCut", Binning::Simple(10, 0, 10), Binning::Simple(100, -1000, 1000), kCategoryPTT_FVCut, kFlashTime_FVCut);
+    spectra.add_spectrum2d("sFlashTime_FVConCut", Binning::Simple(10, 0, 10), Binning::Simple(100, -1000, 1000), kCategoryPTT_FVConCut, kFlashTime_FVConCut);
+    spectra.add_spectrum2d("sFlashTime_FVConTopCut", Binning::Simple(10, 0, 10), Binning::Simple(100, -1000, 1000), kCategoryPTT_FVConTopCut, kFlashTime_FVConTopCut);
+    spectra.add_spectrum2d("sFlashTime_AllCut", Binning::Simple(10, 0, 10), Binning::Simple(100, -1000, 1000), kCategoryPTT_AllCut, kFlashTime_AllCut);
+    spectra.add_spectrum2d("sFlashTime_Zoomed_NoCut", Binning::Simple(10, 0, 10), Binning::Simple(100, -5, 5), kCategoryPTT_NoCut, kFlashTime_NoCut);
+    spectra.add_spectrum2d("sFlashTime_Zoomed_FVCut", Binning::Simple(10, 0, 10), Binning::Simple(100, -5, 5), kCategoryPTT_FVCut, kFlashTime_FVCut);
+    spectra.add_spectrum2d("sFlashTime_Zoomed_FVConCut", Binning::Simple(10, 0, 10), Binning::Simple(100, -5, 5), kCategoryPTT_FVConCut, kFlashTime_FVConCut);
+    spectra.add_spectrum2d("sFlashTime_Zoomed_FVConTopCut", Binning::Simple(10, 0, 10), Binning::Simple(100, -5, 5), kCategoryPTT_FVConTopCut, kFlashTime_FVConTopCut);
+    spectra.add_spectrum2d("sFlashTime_Zoomed_AllCut", Binning::Simple(10, 0, 10), Binning::Simple(100, -5, 5), kCategoryPTT_AllCut, kFlashTime_AllCut);
+
+    /**
      * Spectra (2D) for counting selection statistics by interaction categorization (purity).
     */
     spectra.add_spectrum2d("sCountPTT_NoCut", Binning::Simple(10, 0, 10), Binning::Simple(1, 0, 2), kCategoryPTT_NoCut, kCountPTT_NoCut);

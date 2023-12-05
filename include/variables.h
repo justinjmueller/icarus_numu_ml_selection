@@ -52,7 +52,7 @@ namespace vars
         double count_primaries(const T & interaction) { return interaction.num_primaries; }
     
     /**
-     * Variable for total visible energy of interaction
+     * Variable for total visible energy of interaction.
      * @tparam T the type of interaction (true or reco).
      * @param interaction to apply the variable on.
      * @return the total visible energy of the interaction.
@@ -68,6 +68,15 @@ namespace vars
             }
             return energy;
         }
+    
+    /**
+     * Variable for matched interaction flash time.
+     * @tparam T the type of interaction (true or reco).
+     * @param interaction to apply the variable on.
+     * @return the matched flash time of the interaction.
+    */
+    template<class T>
+        double flash_time(const T & interaction) { return interaction.flash_time; }
 
     /**
      * Variable for particle primary categorizations.
