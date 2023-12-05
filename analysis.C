@@ -29,46 +29,22 @@ void analysis()
     spectra.add_spectrum1d("sCountPrimariesTruth", Binning::Simple(20, 0, 20), kCountPrimariesTruth);
 
     /**
-     * Spectra (1D) for counting selection statistics by category (efficiency).
+     * Spectra (2D) for counting selection statistics by interaction categorization (efficiency).
     */
-    spectra.add_spectrum1d("sCountTTP_1mu1p_NoCut", Binning::Simple(1, 0, 2), kCountTTP_1mu1p_NoCut);
-    spectra.add_spectrum1d("sCountTTP_1mu1p_FVCut", Binning::Simple(1, 0, 2), kCountTTP_1mu1p_FVCut);
-    spectra.add_spectrum1d("sCountTTP_1mu1p_FVConCut", Binning::Simple(1, 0, 2), kCountTTP_1mu1p_FVConCut);
-    spectra.add_spectrum1d("sCountTTP_1mu1p_FVConTopCut", Binning::Simple(1, 0, 2), kCountTTP_1mu1p_FVConTopCut);
-    spectra.add_spectrum1d("sCountTTP_1mu1p_AllCut", Binning::Simple(1, 0, 2), kCountTTP_1mu1p_AllCut);
-
-    spectra.add_spectrum1d("sCountTTP_OtherNu_NoCut", Binning::Simple(1, 0, 2), kCountTTP_OtherNu_NoCut);
-    spectra.add_spectrum1d("sCountTTP_OtherNu_FVCut", Binning::Simple(1, 0, 2), kCountTTP_OtherNu_FVCut);
-    spectra.add_spectrum1d("sCountTTP_OtherNu_FVConCut", Binning::Simple(1, 0, 2), kCountTTP_OtherNu_FVConCut);
-    spectra.add_spectrum1d("sCountTTP_OtherNu_FVConTopCut", Binning::Simple(1, 0, 2), kCountTTP_OtherNu_FVConTopCut);
-    spectra.add_spectrum1d("sCountTTP_OtherNu_AllCut", Binning::Simple(1, 0, 2), kCountTTP_OtherNu_AllCut);
-
-    spectra.add_spectrum1d("sCountTTP_Cosmic_NoCut", Binning::Simple(1, 0, 2), kCountTTP_Cosmic_NoCut);
-    spectra.add_spectrum1d("sCountTTP_Cosmic_FVCut", Binning::Simple(1, 0, 2), kCountTTP_Cosmic_FVCut);
-    spectra.add_spectrum1d("sCountTTP_Cosmic_FVConCut", Binning::Simple(1, 0, 2), kCountTTP_Cosmic_FVConCut);
-    spectra.add_spectrum1d("sCountTTP_Cosmic_FVConTopCut", Binning::Simple(1, 0, 2), kCountTTP_Cosmic_FVConTopCut);
-    spectra.add_spectrum1d("sCountTTP_Cosmic_AllCut", Binning::Simple(1, 0, 2), kCountTTP_Cosmic_AllCut);
+    spectra.add_spectrum2d("sCountTTP_NoCut", Binning::Simple(10, 0, 10), Binning::Simple(1, 0, 2), kCategoryTTP_NoCut, kCountTTP_NoCut);
+    spectra.add_spectrum2d("sCountTTP_FVCut", Binning::Simple(10, 0, 10), Binning::Simple(1, 0, 2), kCategoryTTP_FVCut, kCountTTP_FVCut);
+    spectra.add_spectrum2d("sCountTTP_FVConCut", Binning::Simple(10, 0, 10), Binning::Simple(1, 0, 2), kCategoryTTP_FVConCut, kCountTTP_FVConCut);
+    spectra.add_spectrum2d("sCountTTP_FVConTopCut", Binning::Simple(10, 0, 10), Binning::Simple(1, 0, 2), kCategoryTTP_FVConTopCut, kCountTTP_FVConTopCut);
+    spectra.add_spectrum2d("sCountTTP_AllCut", Binning::Simple(10, 0, 10), Binning::Simple(1, 0, 2), kCategoryTTP_AllCut, kCountTTP_AllCut);
 
     /**
-     * Spectra (1D) for counting selection statistics by category (purity).
+     * Spectra (2D) for counting selection statistics by interaction categorization (purity).
     */
-    spectra.add_spectrum1d("sCountPTT_1mu1p_NoCut", Binning::Simple(1, 0, 2), kCountPTT_1mu1p_NoCut);
-    spectra.add_spectrum1d("sCountPTT_1mu1p_FVCut", Binning::Simple(1, 0, 2), kCountPTT_1mu1p_FVCut);
-    spectra.add_spectrum1d("sCountPTT_1mu1p_FVConCut", Binning::Simple(1, 0, 2), kCountPTT_1mu1p_FVConCut);
-    spectra.add_spectrum1d("sCountPTT_1mu1p_FVConTopCut", Binning::Simple(1, 0, 2), kCountPTT_1mu1p_FVConTopCut);
-    spectra.add_spectrum1d("sCountPTT_1mu1p_AllCut", Binning::Simple(1, 0, 2), kCountPTT_1mu1p_AllCut);
-
-    spectra.add_spectrum1d("sCountPTT_OtherNu_NoCut", Binning::Simple(1, 0, 2), kCountPTT_OtherNu_NoCut);
-    spectra.add_spectrum1d("sCountPTT_OtherNu_FVCut", Binning::Simple(1, 0, 2), kCountPTT_OtherNu_FVCut);
-    spectra.add_spectrum1d("sCountPTT_OtherNu_FVConCut", Binning::Simple(1, 0, 2), kCountPTT_OtherNu_FVConCut);
-    spectra.add_spectrum1d("sCountPTT_OtherNu_FVConTopCut", Binning::Simple(1, 0, 2), kCountPTT_OtherNu_FVConTopCut);
-    spectra.add_spectrum1d("sCountPTT_OtherNu_AllCut", Binning::Simple(1, 0, 2), kCountPTT_OtherNu_AllCut);
-
-    spectra.add_spectrum1d("sCountPTT_Cosmic_NoCut", Binning::Simple(1, 0, 2), kCountPTT_Cosmic_NoCut);
-    spectra.add_spectrum1d("sCountPTT_Cosmic_FVCut", Binning::Simple(1, 0, 2), kCountPTT_Cosmic_FVCut);
-    spectra.add_spectrum1d("sCountPTT_Cosmic_FVConCut", Binning::Simple(1, 0, 2), kCountPTT_Cosmic_FVConCut);
-    spectra.add_spectrum1d("sCountPTT_Cosmic_FVConTopCut", Binning::Simple(1, 0, 2), kCountPTT_Cosmic_FVConTopCut);
-    spectra.add_spectrum1d("sCountPTT_Cosmic_AllCut", Binning::Simple(1, 0, 2), kCountPTT_Cosmic_AllCut);
+    spectra.add_spectrum2d("sCountPTT_NoCut", Binning::Simple(10, 0, 10), Binning::Simple(1, 0, 2), kCategoryPTT_NoCut, kCountPTT_NoCut);
+    spectra.add_spectrum2d("sCountPTT_FVCut", Binning::Simple(10, 0, 10), Binning::Simple(1, 0, 2), kCategoryPTT_FVCut, kCountPTT_FVCut);
+    spectra.add_spectrum2d("sCountPTT_FVConCut", Binning::Simple(10, 0, 10), Binning::Simple(1, 0, 2), kCategoryPTT_FVConCut, kCountPTT_FVConCut);
+    spectra.add_spectrum2d("sCountPTT_FVConTopCut", Binning::Simple(10, 0, 10), Binning::Simple(1, 0, 2), kCategoryPTT_FVConTopCut, kCountPTT_FVConTopCut);
+    spectra.add_spectrum2d("sCountPTT_AllCut", Binning::Simple(10, 0, 10), Binning::Simple(1, 0, 2), kCategoryPTT_AllCut, kCountPTT_AllCut);
 
     /**
      * Spectra (1D) for particles.

@@ -193,4 +193,92 @@
         }                                                                                     \
         return var;                                                                           \
     })
+
+/**
+ * Preprocessor wrapper for looping over true interactions which match to a
+ * specified category of reco interaction and broadcasting a variable on the
+ * true interaction. The SpillMultiVar accepts a vector as a result of some
+ * function running over the top-level StandardRecord.
+ * @param NAME of the SpillMultiVar.
+ * @param VAR function to broadcast over the true interactions.
+ * @param SEL function to select reco interactions.
+ * @return a vector containing the results of VAR called on each true
+ * interaction which is matched to a reco interaction of the specified category.
+*/
+#define VARDLP_TCAT(NAME,VAR,SEL)                              \
+    const SpillMultiVar NAME([](const caf::SRSpillProxy* sr)   \
+    {                                                          \
+        std::vector<double> var;                               \
+        for(auto const& i : sr->dlp_true)                      \
+        {                                                      \
+            if(i.match.size() > 0 && SEL(sr->dlp[i.match[0]])) \
+                var.push_back(VAR(i));                         \
+        }                                                      \
+        return var;                                            \
+    })
+
+/**
+ * Preprocessor wrapper for looping over reco interactions which match to a
+ * true interaction and broadcasting a variable on the reco or true interaction
+ * (reco if not categorical). The SpillMultiVar accepts a vector as a result of
+ * some function running over the top-level StandardRecord.
+ * @param NAME of the SpillMultiVar.
+ * @param VAR function to broadcast over the reco/true interactions.
+ * @param SEL function to select reco interactions.
+ * @return a vector containing the results of VAR called on each reco/true
+ * interaction meeting the above requirements.
+*/
+#define VARDLP_RCAT(NAME,VAR,SEL)                                 \
+    const SpillMultiVar NAME([](const caf::SRSpillProxy* sr)      \
+    {                                                             \
+        std::vector<double> var;                                  \
+        for(auto const& i : sr->dlp)                              \
+        {                                                         \
+            if(SEL(i) && i.match.size() > 0)                      \
+            {                                                     \
+                if(#VAR == "vars::category")                      \
+                    var.push_back(VAR(sr->dlp_true[i.match[0]])); \
+                else                                              \
+                    var.push_back(VAR(i));                        \
+            }                                                     \
+        }                                                         \
+        return var;                                               \
+    })
+
+/**
+ * Preprocessor macro for broadcasting a variable across true interactions
+ * with categorical information for all cuts.
+ * @param NAME (base) to assign to the variable.
+ * @param VAR to broadcast.
+*/
+#define TCATVAR(NAME,VAR)                                                                            \
+    VARDLP_TCAT(NAME ## _NoCut,vars::VAR,cuts::no_cut);                                              \
+    VARDLP_TCAT(kCategoryTTP_NoCut,vars::category,cuts::no_cut);                                     \
+    VARDLP_TCAT(NAME ## _FVCut,vars::VAR,cuts::fiducial_cut);                                        \
+    VARDLP_TCAT(kCategoryTTP_FVCut,vars::category,cuts::fiducial_cut);                               \
+    VARDLP_TCAT(NAME ## _FVConCut,vars::VAR,cuts::fiducial_containment_cut);                         \
+    VARDLP_TCAT(kCategoryTTP_FVConCut,vars::category,cuts::fiducial_containment_cut);                \
+    VARDLP_TCAT(NAME ## _FVConTopCut,vars::VAR,cuts::fiducial_containment_topological_cut);          \
+    VARDLP_TCAT(kCategoryTTP_FVConTopCut,vars::category,cuts::fiducial_containment_topological_cut); \
+    VARDLP_TCAT(NAME ## _AllCut,vars::VAR,cuts::all_cut);                                            \
+    VARDLP_TCAT(kCategoryTTP_AllCut,vars::category,cuts::all_cut);                                   \
+
+/**
+ * Preprocessor macro for broadcasting a variable across reco interactions
+ * with categorical information for all cuts.
+ * @param NAME (base) to assign to the variable.
+ * @param VAR to broadcast.
+*/
+#define RCATVAR(NAME,VAR)                                                                            \
+    VARDLP_RCAT(NAME ## _NoCut,vars::VAR,cuts::no_cut);                                              \
+    VARDLP_RCAT(kCategoryPTT_NoCut,vars::category,cuts::no_cut);                                     \
+    VARDLP_RCAT(NAME ## _FVCut,vars::VAR,cuts::fiducial_cut);                                        \
+    VARDLP_RCAT(kCategoryPTT_FVCut,vars::category,cuts::fiducial_cut);                               \
+    VARDLP_RCAT(NAME ## _FVConCut,vars::VAR,cuts::fiducial_containment_cut);                         \
+    VARDLP_RCAT(kCategoryPTT_FVConCut,vars::category,cuts::fiducial_containment_cut);                \
+    VARDLP_RCAT(NAME ## _FVConTopCut,vars::VAR,cuts::fiducial_containment_topological_cut);          \
+    VARDLP_RCAT(kCategoryPTT_FVConTopCut,vars::category,cuts::fiducial_containment_topological_cut); \
+    VARDLP_RCAT(NAME ## _AllCut,vars::VAR,cuts::all_cut);                                            \
+    VARDLP_RCAT(kCategoryPTT_AllCut,vars::category,cuts::all_cut);                                   \
+
 #endif
