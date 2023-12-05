@@ -70,6 +70,15 @@ namespace vars
         }
 
     /**
+     * Variable for particle primary categorizations.
+     * @tparam T the type of particle (true or reco).
+     * @param particle to apply the variable on.
+     * @return the primary/non-primary designation of the particle.
+    */
+    template<class T>
+        double primary(const T & particle) { return particle.is_primary ? 1 : 0; }
+
+    /**
      * Variable for particle PID.
      * @tparam T the type of particle (true or reco).
      * @param particle to apply the variable on.
@@ -77,6 +86,15 @@ namespace vars
     */
     template<class T>
         double pid(const T & particle) { return particle.pid; }
+
+    /**
+     * Variable for particle PID + primary.
+     * @tparam T the type of particle (true or reco).
+     * @param particle to apply the variable on.
+     * @return the PID+primary information for the particle.
+    */
+    template<class T>
+        double primary_pid(const T & particle) { return particle.pid + (particle.is_primary ? 0 : 5); }
 
     /**
      * Variable for particle csda_ke.

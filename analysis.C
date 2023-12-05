@@ -62,14 +62,11 @@ void analysis()
     spectra.add_spectrum1d("sCSDATruth", Binning::Simple(50, 0, 2500), kCSDATruth);
 
     /**
-     * Spectra (1D) for matched (truth-to-predicted) particles.
-    */
-    spectra.add_spectrum1d("sPID_muon", Binning::Simple(5, 0, 5), kPID_muon);
-
-    /**
      * Spectra (2D) for matched (truth-to-predicted) particles.
     */
+    spectra.add_spectrum2d("sPrimary_confusion", Binning::Simple(2,0,2), Binning::Simple(2,0,2), kPrimaryTruth, kPrimary);
     spectra.add_spectrum2d("sPID_confusion", Binning::Simple(5,0,5), Binning::Simple(5,0,5), kPIDTruth, kPID);
+    spectra.add_spectrum2d("sPrimaryPID_confusion", Binning::Simple(10,0,10), Binning::Simple(10,0,10), kPrimaryPIDTruth, kPrimaryPID);
 
     spectra.run();
 }
