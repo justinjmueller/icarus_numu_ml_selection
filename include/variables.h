@@ -6,6 +6,8 @@
 #ifndef VARIABLES_H
 #define VARIABLES_H
 
+#include <algorithm>
+
 namespace vars
 {
 
@@ -113,6 +115,15 @@ namespace vars
     */
     template<class T>
         double csda_ke(const T & particle) { return particle.csda_ke; }
+
+    /**
+     * Variable for the particles lowest x-coordinate.
+     * @tparam T the type of particle (true or reco)
+     * @param particle to apply the variable on.
+     * @return the lowest x-coordinate of the particle start/end points.
+    */
+    template<class T>
+        double lowx(const T & particle) { return std::min(particle.start_point[0], particle.end_point[0]); }
 }
 
 #endif

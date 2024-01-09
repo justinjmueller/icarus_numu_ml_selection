@@ -25,26 +25,30 @@ namespace ana
     RCATVAR(kFlashTime,flash_time);
 
     PVARDLP_RECO(kCSDA,vars::csda_ke,cuts::no_cut);
-    PVARDLP_TRUE(kCSDATruth,vars::csda_ke,cuts::no_cut);
+    PVARDLP_TRUE(kCSDATruth,vars::csda_ke,cuts::no_cut,cuts::no_cut);
     
-    PVARDLP_TRUE(kPrimaryTruth,vars::primary,cuts::matched);
-    PVARDLP_TRUE(kPIDTruth,vars::pid,cuts::matched);
-    PVARDLP_TRUE(kPrimaryPIDTruth,vars::primary_pid,cuts::matched);
-    PVAR_TTP(kPrimary,vars::primary,cuts::no_cut,cuts::no_cut);
-    PVAR_TTP(kPID,vars::pid,cuts::no_cut,cuts::no_cut);
-    PVAR_TTP(kPrimaryPID,vars::primary_pid,cuts::no_cut,cuts::no_cut);
+    PVARDLP_TRUE(kPrimaryTruth,vars::primary,cuts::no_cut,cuts::matched);
+    PVARDLP_TRUE(kPIDTruth,vars::pid,cuts::no_cut,cuts::matched);
+    PVARDLP_TRUE(kPrimaryPIDTruth,vars::primary_pid,cuts::no_cut,cuts::matched);
+    PVAR_TTP(kPrimary,vars::primary,cuts::no_cut,cuts::no_cut,cuts::no_cut);
+    PVAR_TTP(kPID,vars::pid,cuts::no_cut,cuts::no_cut,cuts::no_cut);
+    PVAR_TTP(kPrimaryPID,vars::primary_pid,cuts::no_cut,cuts::no_cut,cuts::no_cut);
 
-    PVARDLP_TRUE(kPrimaryTruth_Neutrino,vars::primary,cuts::matched_neutrino);
-    PVARDLP_TRUE(kPIDTruth_Neutrino,vars::pid,cuts::matched_neutrino);
-    PVARDLP_TRUE(kPrimaryPIDTruth_Neutrino,vars::primary_pid,cuts::matched_neutrino);
-    PVAR_TTP(kPrimary_Neutrino,vars::primary,cuts::neutrino,cuts::no_cut);
-    PVAR_TTP(kPID_Neutrino,vars::pid,cuts::neutrino,cuts::no_cut);
-    PVAR_TTP(kPrimaryPID_Neutrino,vars::primary_pid,cuts::neutrino,cuts::no_cut);
+    PVARDLP_TRUE(kPrimaryTruth_Neutrino,vars::primary,cuts::neutrino,cuts::matched);
+    PVARDLP_TRUE(kPIDTruth_Neutrino,vars::pid,cuts::neutrino,cuts::matched);
+    PVARDLP_TRUE(kPrimaryPIDTruth_Neutrino,vars::primary_pid,cuts::neutrino,cuts::matched);
+    // "Primary ID for reco particles in interactions passing the neutrino cut"
+    PVAR_TTP(kPrimary_Neutrino,vars::primary,cuts::neutrino,cuts::no_cut,cuts::no_cut);
+    PVAR_TTP(kPID_Neutrino,vars::pid,cuts::neutrino,cuts::no_cut,cuts::no_cut);
+    PVAR_TTP(kPrimaryPID_Neutrino,vars::primary_pid,cuts::neutrino,cuts::no_cut,cuts::no_cut);
 
-    PVARDLP_TRUE(kPrimaryTruth_Neutrino,vars::primary,cuts::matched_cosmic);
-    PVARDLP_TRUE(kPIDTruth_Neutrino,vars::pid,cuts::matched_cosmic);
-    PVARDLP_TRUE(kPrimaryPIDTruth_Neutrino,vars::primary_pid,cuts::matched_cosmic);
-    PVAR_TTP(kPrimary_Neutrino,vars::primary,cuts::cosmic,cuts::no_cut);
-    PVAR_TTP(kPID_Neutrino,vars::pid,cuts::cosmic,cuts::no_cut);
-    PVAR_TTP(kPrimaryPID_Neutrino,vars::primary_pid,cuts::cosmic,cuts::no_cut);
+    PVARDLP_TRUE(kPrimaryTruth_Cosmic,vars::primary,cuts::cosmic,cuts::matched);
+    PVARDLP_TRUE(kPIDTruth_Cosmic,vars::pid,cuts::cosmic,cuts::matched);
+    PVARDLP_TRUE(kPrimaryPIDTruth_Cosmic,vars::primary_pid,cuts::cosmic,cuts::matched);
+    PVAR_TTP(kPrimary_Cosmic,vars::primary,cuts::cosmic,cuts::no_cut,cuts::no_cut);
+    PVAR_TTP(kPID_Cosmic,vars::pid,cuts::cosmic,cuts::no_cut,cuts::no_cut);
+    PVAR_TTP(kPrimaryPID_Cosmic,vars::primary_pid,cuts::cosmic,cuts::no_cut,cuts::no_cut);
+
+    PVARDLP_TRUE(kLowX,vars::lowx,cuts::no_cut,cuts::matched);
+    PVAR_TTP(kLowXTruth,vars::lowx,cuts::no_cut,cuts::no_cut,cuts::no_cut);
 }
