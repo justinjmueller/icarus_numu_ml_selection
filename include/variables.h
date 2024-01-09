@@ -105,7 +105,7 @@ namespace vars
      * @return the PID+primary information for the particle.
     */
     template<class T>
-        double primary_pid(const T & particle) { return particle.pid + (particle.is_primary ? 0 : 5); }
+        double primary_pid(const T & particle) { return particle.pid + (particle.is_primary ? 5 : 0); }
 
     /**
      * Variable for particle csda_ke.
