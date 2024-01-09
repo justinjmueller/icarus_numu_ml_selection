@@ -55,3 +55,6 @@ csv/*
 .DS_Store
 .vscode/*
 *.dSYM
+
+# Python virtual environment
+.venv
