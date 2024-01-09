@@ -45,7 +45,7 @@ def main():
       ylabel: Reconstructed Particle Type
       clabel: Efficiency
       title: Particle Primary+PID Confusion
-      entries: [S Photon,S Electron,S Muon,S Pion,S Proton,P Photon,P Electron,P Muon,P Pion,P Proton]
+      entries: [sPhoton,sElectron,sMuon,sPion,sProton,pPhoton,pElectron,pMuon,pPion,pProton]
       save: plots/primary_pid_confusion.png
     - type: confusion
       name: primary_neutrino
@@ -72,7 +72,7 @@ def main():
       ylabel: Reconstructed Particle Type
       clabel: Efficiency
       title: Particle Primary+PID Confusion (Neutrinos)
-      entries: [nPhoton, nElectron, nMuon, nPion, nProton, pPhoton, pElectron, pMuon, pPion, pProton]
+      entries: [nPhoton,nElectron,nMuon,nPion,nProton,pPhoton,pElectron,pMuon,pPion,pProton]
       save: plots/primary_pid_neutrino_confusion.png
     - type: confusion
       name: primary_cosmic
@@ -99,7 +99,7 @@ def main():
       ylabel: Reconstructed Particle Type
       clabel: Efficiency
       title: Particle Primary+PID Confusion (Cosmics)
-      entries: [Non-primary\nPhoton, Non-primary\nElectron,Non-primary\nMuon,Non-primary\nPion,Non-primary\nProton,Primary\nPhoton,Primary\nElectron,Primary\nMuon,Primary\nPion,Primary\nProton]
+      entries: [nPhoton,nElectron,nMuon,nPion,nProton,pPhoton,pElectron,pMuon,pPion,pProton]
       save: plots/primary_pid_cosmic_confusion.png
     - type: flow
       direction: ttp
