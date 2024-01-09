@@ -95,7 +95,7 @@ def plot_confusion(rf, desc):
     -------
     None.
     """
-    figure = plt.figure(figsize=(8,6))
+    figure = plt.figure(figsize=(16,12))
     ax = figure.add_subplot()
 
     contents, xedges, yedges = load_histograms(rf, desc.var)
@@ -145,5 +145,33 @@ def plot_histogram_1d(rf, desc):
     ax.set_ylabel(desc.ylabel)
     ax.xaxis.set_major_locator(MaxNLocator(integer=True))
     ax.legend()
+    figure.suptitle(desc.title)
+    figure.savefig(desc.save)
+
+def plot_histogram_2d(rf, desc):
+    """
+    Plots a 2D histogram according to the plot description
+    using an input ROOT file.
+
+    Parameters
+    ----------
+    rf: ROOT file (uproot)
+        The opened uproot ROOT file that conains the histogram.
+    desc: PlotDescription
+        An instance of the PlotDescription class that describes the plot details.
+
+    Returns
+    -------
+    None.
+    """
+    figure = plt.figure(figsize=(8,6))
+    ax = figure.add_subplot()
+
+    contents, xedges, yedges = load_histograms(rf, desc.var)
+    x, y = np.meshgrid(xedges, yedges)
+    pc = ax.pcolormesh(x, y, contents, cmap='Blues', vmin=0, vmax=1.0)
+
+    ax.set_xlabel(desc.xlabel)
+    ax.set_ylabel(desc.ylabel)
     figure.suptitle(desc.title)
     figure.savefig(desc.save)

@@ -1,1 +1,1 @@
-from .plot_funcs import PlotDescription, plot_histogram_1d, plot_confusion, plot_flow
+from .plot_funcs import PlotDescription, plot_histogram_1d, plot_histogram_2d, plot_confusion, plot_flow

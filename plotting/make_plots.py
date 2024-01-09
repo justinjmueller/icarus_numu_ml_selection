@@ -1,6 +1,6 @@
 import yaml
 import uproot
-from plot_funcs import PlotDescription, plot_histogram_1d, plot_confusion, plot_flow
+from plot_funcs import PlotDescription, plot_histogram_1d, plot_histogram_2d, plot_confusion, plot_flow
 
 def main():
     cfg = """
@@ -13,6 +13,13 @@ def main():
       save: plots/count_particles.png
       plot_kwargs:
         histtype: barstacked
+    - type: hist2d
+      name: lowx
+      var: sLowX
+      xlabel: True Low X-Coordinate [cm]
+      ylabel: Reco Low X-Coordinate [cm]
+      title: Particle Lowest X-Coordinate
+      save: plots/lowx.png
     - type: confusion
       name: primary
       var: sPrimary_confusion
@@ -38,7 +45,7 @@ def main():
       ylabel: Reconstructed Particle Type
       clabel: Efficiency
       title: Particle Primary+PID Confusion
-      entries: [Non-primary\nPhoton, Non-primary\nElectrom,Non-primary\nMuon,Non-primary\nPion,Non-primary\nProton,Primary\nPhoton,Primary\nElectron,Primary\nMuon,Primary\nPion,Primary\nProton]
+      entries: [S Photon,S Electron,S Muon,S Pion,S Proton,P Photon,P Electron,P Muon,P Pion,P Proton]
       save: plots/primary_pid_confusion.png
     - type: confusion
       name: primary_neutrino
@@ -51,7 +58,7 @@ def main():
       save: plots/primary_neutrino_confusion.png
     - type: confusion
       name: pid
-      var: sPID_neutrino_confusion
+      var: sPID_Neutrino_confusion
       xlabel: True Particle Type
       ylabel: Reconstructed Particle Type
       clabel: PID Efficiency
@@ -65,7 +72,7 @@ def main():
       ylabel: Reconstructed Particle Type
       clabel: Efficiency
       title: Particle Primary+PID Confusion (Neutrinos)
-      entries: [Non-primary\nPhoton, Non-primary\nElectrom,Non-primary\nMuon,Non-primary\nPion,Non-primary\nProton,Primary\nPhoton,Primary\nElectron,Primary\nMuon,Primary\nPion,Primary\nProton]
+      entries: [nPhoton, nElectron, nMuon, nPion, nProton, pPhoton, pElectron, pMuon, pPion, pProton]
       save: plots/primary_pid_neutrino_confusion.png
     - type: confusion
       name: primary_cosmic
@@ -92,7 +99,7 @@ def main():
       ylabel: Reconstructed Particle Type
       clabel: Efficiency
       title: Particle Primary+PID Confusion (Cosmics)
-      entries: [Non-primary\nPhoton, Non-primary\nElectrom,Non-primary\nMuon,Non-primary\nPion,Non-primary\nProton,Primary\nPhoton,Primary\nElectron,Primary\nMuon,Primary\nPion,Primary\nProton]
+      entries: [Non-primary\nPhoton, Non-primary\nElectron,Non-primary\nMuon,Non-primary\nPion,Non-primary\nProton,Primary\nPhoton,Primary\nElectron,Primary\nMuon,Primary\nPion,Primary\nProton]
       save: plots/primary_pid_cosmic_confusion.png
     - type: flow
       direction: ttp
@@ -121,6 +128,8 @@ def main():
         desc = PlotDescription(h)
         if desc.type == 'hist1d':
             plot_histogram_1d(rf, desc)
+        elif desc.type == 'hist2d':
+            plot_histogram_2d(rf, desc)
         elif desc.type == 'confusion':
             plot_confusion(rf, desc)
         elif desc.type == 'flow':
