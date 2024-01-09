@@ -49,6 +49,8 @@ namespace ana
     PVAR_TTP(kPID_Cosmic,vars::pid,cuts::cosmic,cuts::no_cut,cuts::no_cut);
     PVAR_TTP(kPrimaryPID_Cosmic,vars::primary_pid,cuts::cosmic,cuts::no_cut,cuts::no_cut);
 
-    PVARDLP_TRUE(kLowX,vars::lowx,cuts::no_cut,cuts::matched);
-    PVAR_TTP(kLowXTruth,vars::lowx,cuts::no_cut,cuts::no_cut,cuts::no_cut);
+    // "Loop over true particles within true interactions and return X for all true particles with a reco particle match"
+    PVARDLP_TRUE(kLowXTruth,vars::lowx,cuts::no_cut,cuts::matched);
+    // "Loop over true particles within true interactions and return X for all reco particles that are matched to by true particles"
+    PVAR_TTP(kLowX,vars::lowx,cuts::no_cut,cuts::no_cut,cuts::no_cut);
 }
