@@ -95,7 +95,11 @@ def plot_confusion(rf, desc):
     -------
     None.
     """
-    figure = plt.figure(figsize=(16,12))
+    if hasattr(desc, 'figsize'):
+        fs = desc.figsize
+    else:
+        fs = (8,6)
+    figure = plt.figure(figsize=fs)
     ax = figure.add_subplot()
 
     contents, xedges, yedges = load_histograms(rf, desc.var)

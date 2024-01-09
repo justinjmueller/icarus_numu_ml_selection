@@ -40,6 +40,7 @@
   clabel: Efficiency
   title: Particle Primary+PID Confusion
   entries: [sPhoton,sElectron,sMuon,sPion,sProton,pPhoton,pElectron,pMuon,pPion,pProton]
+  figsize: [16,12]
   save: plots/primary_pid_confusion.png
 - name: primary_neutrino
   type: confusion
@@ -67,6 +68,7 @@
   clabel: Efficiency
   title: Particle Primary+PID Confusion (Neutrinos)
   entries: [sPhoton,sElectron,sMuon,sPion,sProton,pPhoton,pElectron,pMuon,pPion,pProton]
+  figsize: [16,12]
   save: plots/primary_pid_neutrino_confusion.png
 - name: primary_cosmic
   type: confusion
@@ -94,6 +96,7 @@
   clabel: Efficiency
   title: Particle Primary+PID Confusion (Cosmics)
   entries: [sPhoton,sElectron,sMuon,sPion,sProton,pPhoton,pElectron,pMuon,pPion,pProton]
+  figsize: [16,12]
   save: plots/primary_pid_cosmic_confusion.png
 - name: flow_1mu1p_efficiency
   type: flow
