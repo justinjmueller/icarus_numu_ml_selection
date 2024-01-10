@@ -3,3 +3,4 @@ pandas
 pyyaml
 uproot
 matplotlib
+h5py
