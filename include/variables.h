@@ -109,6 +109,7 @@ namespace vars
             {
                 if(p.is_primary)
                     energy += p.csda_ke;
+                if(p.pid == 2) energy += 105.658;
             }
             return energy;
         }
