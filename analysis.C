@@ -47,6 +47,7 @@ void analysis()
     spectra.add_spectrum2d("sVisibleEnergyTTP_FVConCut", Binning::Simple(10, 0, 10), Binning::Simple(10, 0, 2500), kCategoryTTP_FVConCut, kVisibleEnergyTTP_FVConCut);
     spectra.add_spectrum2d("sVisibleEnergyTTP_FVConTopCut", Binning::Simple(10, 0, 10), Binning::Simple(10, 0, 2500), kCategoryTTP_FVConTopCut, kVisibleEnergyTTP_FVConTopCut);
     spectra.add_spectrum2d("sVisibleEnergyTTP_AllCut", Binning::Simple(10, 0, 10), Binning::Simple(10, 0, 2500), kCategoryTTP_AllCut, kVisibleEnergyTTP_AllCut);
+    spectra.add_spectrum2d("sVisibleEnergyPTT_Topology_AllCut", Binning::Simple(10, 0, 10), Binning::Simple(20, 0, 3000), kCategoryTopologyPTT_AllCut, kVisibleEnergyPTT_AllCut);
 
     /**
      * Spectra (2D) for flash time.

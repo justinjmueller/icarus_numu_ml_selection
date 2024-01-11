@@ -26,6 +26,7 @@ namespace ana
     TCATVAR(kCountTTP,count);
     RCATVAR(kCountPTT,count);
     TCATVAR(kVisibleEnergyTTP,visible_energy);
+    RCATVAR(kVisibleEnergyPTT,visible_energy);
     RCATVAR(kFlashTime,flash_time);
     
     // Variables for confusion matrix.
