@@ -142,8 +142,16 @@ def plot_histogram_1d(rf, desc):
     figure = plt.figure(figsize=(8,6))
     ax = figure.add_subplot()
 
-    contents, edges, centers = load_histograms(rf, desc.var)
-    ax.hist(centers, weights=contents, range=(edges[0][0], edges[0][-1]), bins=edges[0], label=desc.var, **desc.plot_kwargs)
+    if isinstance(desc.var, list):
+        contents, edges, centers = load_histograms(rf, desc.var)
+        labels = desc.var
+    else:
+        contents, xedges, yedges = load_histograms(rf, desc.var)
+        contents = [contents[c,:] for c in desc.categories.keys()]
+        centers = [(yedges[1:] + yedges[:-1]) / 2.0 for c in contents]
+        edges = [yedges for c in contents]
+        labels = list(desc.categories.values())
+    ax.hist(centers, weights=contents, range=(edges[0][0], edges[0][-1]), bins=edges[0], label=labels, **desc.plot_kwargs)
     ax.set_xlim(edges[0][0], edges[0][-1])
     ax.set_xlabel(desc.xlabel)
     ax.set_ylabel(desc.ylabel)
