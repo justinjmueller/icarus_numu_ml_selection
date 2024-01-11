@@ -145,18 +145,24 @@ def plot_histogram_1d(rf, desc):
     if isinstance(desc.var, list):
         contents, edges, centers = load_histograms(rf, desc.var)
         labels = desc.var
+        cs = [f'C{i}' for i in range(len(contents))]
     else:
         contents, xedges, yedges = load_histograms(rf, desc.var)
-        contents = [contents[c,:] for c in desc.categories.keys()]
-        centers = [(yedges[1:] + yedges[:-1]) / 2.0 for c in contents]
-        edges = [yedges for c in contents]
-        labels = list(desc.categories.values())
-    ax.hist(centers, weights=contents, range=(edges[0][0], edges[0][-1]), bins=edges[0], label=labels, **desc.plot_kwargs)
+        contents = [contents[c,:] for c in desc.categories.keys()][::-1]
+        centers = [(yedges[1:] + yedges[:-1]) / 2.0 for c in contents][::-1]
+        edges = [yedges for c in contents][::-1]
+        labels = list(desc.categories.values())[::-1]
+        cs = [f'C{i}' for i in range(len(contents))][::-1]
+    ax.hist(centers, weights=contents, range=(edges[0][0], edges[0][-1]), bins=edges[0], label=labels, color=cs, **desc.plot_kwargs)
     ax.set_xlim(edges[0][0], edges[0][-1])
     ax.set_xlabel(desc.xlabel)
     ax.set_ylabel(desc.ylabel)
     ax.xaxis.set_major_locator(MaxNLocator(integer=True))
-    ax.legend()
+    if isinstance(desc.var, list):
+        ax.legend()
+    else:
+        h, l = ax.get_legend_handles_labels()
+        ax.legend(h[::-1], l[::-1])
     figure.suptitle(desc.title)
     figure.savefig(desc.save)
 
