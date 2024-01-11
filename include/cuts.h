@@ -23,6 +23,16 @@ namespace cuts
         bool matched(const T & obj) { return obj.match.size() > 0; }
 
     /**
+     * Apply a cut on the quality of the reconstruction using the overlap
+     * fraction as a discriminant.
+     * @tparam T the object type (true or reco, interaction or particle).
+     * @param obj the object to selection on.
+     * @return true if the object is well reconstructed.
+    */
+    template<class T>
+        bool wellreco(const T & obj) { return matched(obj) && obj.match[0] > 0.9; }
+
+    /**
      * Find the topology of the interaction with cuts applied to each particle.
      * @tparam T the type of interaction (true or reco).
      * @param interaction to find the topology of.
