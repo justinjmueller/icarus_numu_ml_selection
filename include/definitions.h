@@ -225,26 +225,21 @@
  * (reco if not categorical). The SpillMultiVar accepts a vector as a result of
  * some function running over the top-level StandardRecord.
  * @param NAME of the SpillMultiVar.
- * @param VAR function to broadcast over the reco/true interactions.
+ * @param VAR function to broadcast over the true interactions.
  * @param SEL function to select reco interactions.
- * @return a vector containing the results of VAR called on each reco/true
- * interaction meeting the above requirements.
+ * @return a vector containing the results of VAR called on each true
+ * interaction which is matched to by a reco interaction of the specified category.
 */
-#define VARDLP_RCAT(NAME,VAR,SEL)                                 \
-    const SpillMultiVar NAME([](const caf::SRSpillProxy* sr)      \
-    {                                                             \
-        std::vector<double> var;                                  \
-        for(auto const& i : sr->dlp)                              \
-        {                                                         \
-            if(SEL(i) && i.match.size() > 0)                      \
-            {                                                     \
-                if(#VAR == "vars::category")                      \
-                    var.push_back(VAR(sr->dlp_true[i.match[0]])); \
-                else                                              \
-                    var.push_back(VAR(i));                        \
-            }                                                     \
-        }                                                         \
-        return var;                                               \
+#define VARDLP_RCAT(NAME,VAR,SEL)                                                  \
+    const SpillMultiVar NAME([](const caf::SRSpillProxy* sr)                       \
+    {                                                                              \
+        std::vector<double> var;                                                   \
+        for(auto const& i : sr->dlp)                                               \
+        {                                                                          \
+            if(SEL(i) && i.match.size() > 0)                                       \
+                var.push_back(VAR(sr->dlp_true[i.match[0]]));                      \
+        }                                                                          \
+        return var;                                                                \
     })
 
 /**
@@ -260,7 +255,8 @@
     VARDLP_RCAT(kCategoryPTT_FVCut,vars::category,cuts::fiducial_cut);                               \
     VARDLP_RCAT(kCategoryPTT_FVConCut,vars::category,cuts::fiducial_containment_cut);                \
     VARDLP_RCAT(kCategoryPTT_FVConTopCut,vars::category,cuts::fiducial_containment_topological_cut); \
-    VARDLP_RCAT(kCategoryPTT_AllCut,vars::category,cuts::all_cut);
+    VARDLP_RCAT(kCategoryPTT_AllCut,vars::category,cuts::all_cut);                                   \
+    VARDLP_RCAT(kCategoryTopologyPTT_AllCut,vars::category_topology,cuts::all_cut)
 
 /**
  * Preprocessor macro for broadcasting a variable across true interactions
@@ -281,11 +277,11 @@
  * @param NAME (base) to assign to the variable.
  * @param VAR to broadcast.
 */
-#define RCATVAR(NAME,VAR)                                                                            \
-    VARDLP_RCAT(NAME ## _NoCut,vars::VAR,cuts::no_cut);                                              \
-    VARDLP_RCAT(NAME ## _FVCut,vars::VAR,cuts::fiducial_cut);                                        \
-    VARDLP_RCAT(NAME ## _FVConCut,vars::VAR,cuts::fiducial_containment_cut);                         \
-    VARDLP_RCAT(NAME ## _FVConTopCut,vars::VAR,cuts::fiducial_containment_topological_cut);          \
-    VARDLP_RCAT(NAME ## _AllCut,vars::VAR,cuts::all_cut);
+#define RCATVAR(NAME,VAR)                                                                               \
+    VARDLP_PTT(NAME ## _NoCut,vars::VAR,cuts::no_cut,cuts::no_cut);                                     \
+    VARDLP_PTT(NAME ## _FVCut,vars::VAR,cuts::no_cut,cuts::fiducial_cut);                               \
+    VARDLP_PTT(NAME ## _FVConCut,vars::VAR,cuts::no_cut,cuts::fiducial_containment_cut);                \
+    VARDLP_PTT(NAME ## _FVConTopCut,vars::VAR,cuts::no_cut,cuts::fiducial_containment_topological_cut); \
+    VARDLP_PTT(NAME ## _AllCut,vars::VAR,cuts::no_cut,cuts::all_cut);
 
 #endif

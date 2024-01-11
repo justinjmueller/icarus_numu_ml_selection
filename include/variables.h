@@ -21,7 +21,9 @@ namespace vars
         double count(const T & obj) { return 1.0; }
 
     /**
-     * Variable for enumerating interaction categories.
+     * Variable for enumerating interaction categories. This is a basic
+     * categorization using only signal, neutrino background, and cosmic
+     * background as the three categories.
      * @tparam T the type of interaction (true or reco).
      * @param interaction to apply the variable on.
      * @return the enumerated category of the interaction.
@@ -32,6 +34,46 @@ namespace vars
             double cat(2);
             if(cuts::signal_1mu1p(interaction)) cat = 0;
             else if(cuts::other_nu(interaction)) cat = 1;
+            return cat;
+        }
+
+    /**
+     * Variable for enumerating interaction categories. This classifies the
+     * interactions based on the visible final states.
+     * 0: 1mu1p, 1: 1mu0h, 2: 1muNp (N>1), 3: 1mu1p1pi, 4: nu_mu CC Other, 5: NC, 6: Cosmic
+     * @tparam T the type of interaction (true or reco).
+     * @param interaction to apply the variable on.
+     * @return the enumerated category of the interaction.
+    */
+    template<class T>
+        double category_topology(const T & interaction)
+        {
+            uint16_t cat(6);
+            if(interaction.is_neutrino)
+            {
+                uint32_t counts[5] = {};
+                for(auto &p : interaction.particles)
+                {
+                    if(p.is_primary)
+                    {
+                        double energy(p.csda_ke);
+                        if constexpr (std::is_same_v<T, caf::SRInteractionTruthDLPProxy>)
+                            energy = p.energy_deposit;
+                        if((p.pid < 4 && energy > 25) || (p.pid == 4 && energy > 50))
+                            ++counts[p.pid];
+                    }
+                }
+                if(counts[0] == 0 && counts[1] == 0 && counts[2] == 1)
+                {
+                    if(counts[3] == 0 && counts[4] == 1) cat = 0;
+                    else if(counts[3] == 0 && counts[4] == 0) cat = 1;
+                    else if(counts[3] == 0 && counts[4] > 1) cat = 2;
+                    else if(counts[3] == 1 && counts[4] == 1) cat = 3;
+                    else if(interaction.nu_current_type == 0) cat = 4;
+                }
+                else if(interaction.nu_current_type == 0) cat = 4;
+                else if(interaction.nu_current_type == 1) cat = 5;
+            }
             return cat;
         }
 
