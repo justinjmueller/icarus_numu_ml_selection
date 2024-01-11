@@ -98,6 +98,34 @@
   entries: [sPhoton,sElectron,sMuon,sPion,sProton,pPhoton,pElectron,pMuon,pPion,pProton]
   figsize: [16,12]
   save: primary_pid_cosmic_confusion.png
+- name: primary_wellreco
+  type: confusion
+  var: sPrimaryWellReco_confusion
+  xlabel: True Particle Category
+  ylabel: Reconstructed Particle Category
+  clabel: Primary Efficiency
+  title: Particle Primary/Non-primary Confusion
+  entries: [Non-primary, Primary]
+  save: primary_wellreco_confusion.png
+- name: pid_wellreco
+  type: confusion
+  var: sPIDWellReco_confusion
+  xlabel: True Particle Type
+  ylabel: Reconstructed Particle Type
+  clabel: PID Efficiency
+  title: Particle PID Confusion
+  entries: [Photon, Electron, Muon, Pion, Proton]
+  save: pid_wellreco_confusion.png
+- name: primary_pid_wellreco
+  type: confusion
+  var: sPrimaryPIDWellReco_confusion
+  xlabel: True Particle Type
+  ylabel: Reconstructed Particle Type
+  clabel: Efficiency
+  title: Particle Primary+PID Confusion
+  entries: [sPhoton,sElectron,sMuon,sPion,sProton,pPhoton,pElectron,pMuon,pPion,pProton]
+  figsize: [16,12]
+  save: primary_pid_wellreco_confusion.png
 - name: flow_1mu1p_efficiency
   type: flow
   direction: ttp

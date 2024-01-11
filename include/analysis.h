@@ -36,6 +36,14 @@ namespace ana
     PVAR_TTP(kPID,vars::pid,cuts::no_cut,cuts::no_cut,cuts::no_cut);
     PVAR_TTP(kPrimaryPID,vars::primary_pid,cuts::no_cut,cuts::no_cut,cuts::no_cut);
 
+    // Variables for confusion matrix (well-reconstructed).
+    PVARDLP_TRUE(kPrimaryWellRecoTruth,vars::primary,cuts::wellreco,cuts::matched);
+    PVARDLP_TRUE(kPIDWellRecoTruth,vars::pid,cuts::wellreco,cuts::matched);
+    PVARDLP_TRUE(kPrimaryPIDWellRecoTruth,vars::primary_pid,cuts::wellreco,cuts::matched);
+    PVAR_TTP(kPrimaryWellReco,vars::primary,cuts::wellreco,cuts::no_cut,cuts::no_cut);
+    PVAR_TTP(kPIDWellReco,vars::pid,cuts::wellreco,cuts::no_cut,cuts::no_cut);
+    PVAR_TTP(kPrimaryPIDWellReco,vars::primary_pid,cuts::wellreco,cuts::no_cut,cuts::no_cut);
+
     // Variables for neutrino-only confusion matrix.
     PVARDLP_TRUE(kPrimaryTruth_Neutrino,vars::primary,cuts::neutrino,cuts::matched);
     PVARDLP_TRUE(kPIDTruth_Neutrino,vars::pid,cuts::neutrino,cuts::matched);

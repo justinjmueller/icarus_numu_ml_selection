@@ -91,5 +91,9 @@ void analysis()
     spectra.add_spectrum2d("sPrimaryPID_Cosmic_confusion", Binning::Simple(10,0,10), Binning::Simple(10,0,10), kPrimaryPIDTruth_Cosmic, kPrimaryPID_Cosmic);
     spectra.add_spectrum2d("sLowX", Binning::Simple(100,-400,400), Binning::Simple(100,-400,400), kLowX, kLowXTruth);
 
+    spectra.add_spectrum2d("sPrimaryWellReco_confusion", Binning::Simple(2,0,2), Binning::Simple(2,0,2), kPrimaryWellRecoTruth, kPrimaryWellReco);
+    spectra.add_spectrum2d("sPIDWellReco_confusion", Binning::Simple(5,0,5), Binning::Simple(5,0,5), kPIDWellRecoTruth, kPIDWellReco);
+    spectra.add_spectrum2d("sPrimaryPIDWellReco_confusion", Binning::Simple(10,0,10), Binning::Simple(10,0,10), kPrimaryPIDWellRecoTruth, kPrimaryPIDWellReco);
+
     spectra.run();
 }
