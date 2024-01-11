@@ -18,7 +18,8 @@ using namespace ana;
 */
 void analysis()
 {
-    SpecContainer spectra("/exp/icarus/app/users/mueller/sbn_ml_cafmaker/sbn_ml_cafmaker/build/bnb_nucosmics.flat.root", "spectra.root");
+    SpecContainer spectra("/exp/icarus/data/users/mueller/mlcafs/bnb_nucosmics.flat.root", "spectra.root");
+    //SpecContainer spectra("/exp/icarus/data/users/mueller/mlcafs/mpv_mpr.flat.root", "spectra.root");
 
     /**
      * Spectra (1D) for interactions.
