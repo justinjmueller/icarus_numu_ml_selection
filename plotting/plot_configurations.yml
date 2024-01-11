@@ -4,7 +4,7 @@
   xlabel: Particles
   ylabel: Entries (Norm. Event)
   title: Interaction Multiplicity
-  save: plots/count_particles.png
+  save: count_particles.png
   plot_kwargs:
     histtype: barstacked
 - name: lowx
@@ -13,7 +13,7 @@
   xlabel: True Low X-Coordinate [cm]
   ylabel: Reco Low X-Coordinate [cm]
   title: Particle Lowest X-Coordinate
-  save: plots/lowx.png
+  save: lowx.png
 - name: primary
   type: confusion
   var: sPrimary_confusion
@@ -22,7 +22,7 @@
   clabel: Primary Efficiency
   title: Particle Primary/Non-primary Confusion
   entries: [Non-primary, Primary]
-  save: plots/primary_confusion.png
+  save: primary_confusion.png
 - name: pid
   type: confusion
   var: sPID_confusion
@@ -31,7 +31,7 @@
   clabel: PID Efficiency
   title: Particle PID Confusion
   entries: [Photon, Electron, Muon, Pion, Proton]
-  save: plots/pid_confusion.png
+  save: pid_confusion.png
 - name: primary_pid
   type: confusion
   var: sPrimaryPID_confusion
@@ -41,7 +41,7 @@
   title: Particle Primary+PID Confusion
   entries: [sPhoton,sElectron,sMuon,sPion,sProton,pPhoton,pElectron,pMuon,pPion,pProton]
   figsize: [16,12]
-  save: plots/primary_pid_confusion.png
+  save: primary_pid_confusion.png
 - name: primary_neutrino
   type: confusion
   var: sPrimary_Neutrino_confusion
@@ -50,7 +50,7 @@
   clabel: Primary Efficiency
   title: Particle Primary/Non-primary Confusion (Neutrinos)
   entries: [Non-primary, Primary]
-  save: plots/primary_neutrino_confusion.png
+  save: primary_neutrino_confusion.png
 - name: pid_neutrino
   type: confusion
   var: sPID_Neutrino_confusion
@@ -59,7 +59,7 @@
   clabel: PID Efficiency
   title: Particle PID Confusion (Neutrinos)
   entries: [Photon, Electron, Muon, Pion, Proton]
-  save: plots/pid_neutrino_confusion.png
+  save: pid_neutrino_confusion.png
 - name: primary_pid_neutrino
   type: confusion
   var: sPrimaryPID_Neutrino_confusion
@@ -69,7 +69,7 @@
   title: Particle Primary+PID Confusion (Neutrinos)
   entries: [sPhoton,sElectron,sMuon,sPion,sProton,pPhoton,pElectron,pMuon,pPion,pProton]
   figsize: [16,12]
-  save: plots/primary_pid_neutrino_confusion.png
+  save: primary_pid_neutrino_confusion.png
 - name: primary_cosmic
   type: confusion
   var: sPrimary_Cosmic_confusion
@@ -78,7 +78,7 @@
   clabel: Primary Efficiency
   title: Particle Primary/Non-primary Confusion (Cosmics)
   entries: [Non-primary, Primary]
-  save: plots/primary_cosmic_confusion.png
+  save: primary_cosmic_confusion.png
 - name: pid_cosmic
   type: confusion
   var: sPID_Cosmic_confusion
@@ -87,7 +87,7 @@
   clabel: PID Efficiency
   title: Particle PID Confusion (Cosmics)
   entries: [Photon, Electron, Muon, Pion, Proton]
-  save: plots/pid_cosmic_confusion.png
+  save: pid_cosmic_confusion.png
 - name: primary_pid_cosmic
   type: confusion
   var: sPrimaryPID_Cosmic_confusion
@@ -97,7 +97,7 @@
   title: Particle Primary+PID Confusion (Cosmics)
   entries: [sPhoton,sElectron,sMuon,sPion,sProton,pPhoton,pElectron,pMuon,pPion,pProton]
   figsize: [16,12]
-  save: plots/primary_pid_cosmic_confusion.png
+  save: primary_pid_cosmic_confusion.png
 - name: flow_1mu1p_efficiency
   type: flow
   direction: ttp
@@ -107,7 +107,7 @@
   clabels: ["No Cut", "Fiducial\nVolume", "Containment", "Topological", "Flash Time"]
   title: 1$\mu$1p Selection Statistics
   span: [-4,3]
-  save: plots/flow_1mu1p_efficiency.png
+  save: flow_1mu1p_efficiency.png
 - name: flow_1mu1p_purity
   type: flow
   direction: ptt
@@ -117,4 +117,4 @@
   clabels: ["No Cut", "Fiducial\nVolume", "Containment", "Topological", "Flash Time"]
   title: 1$\mu$1p Selection Statistics
   span: [-4,3]
-  save: plots/flow_1mu1p_purity.png
+  save: flow_1mu1p_purity.png
