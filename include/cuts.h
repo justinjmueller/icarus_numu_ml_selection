@@ -46,7 +46,7 @@ namespace cuts
             {
                 if(p.is_primary)
                 {
-                    double energy(p.csda_ke);
+                    double energy(p.pid > 1 ? p.csda_ke : p.calo_ke);
                     if constexpr (std::is_same_v<T, caf::SRInteractionTruthDLPProxy>)
                         energy = p.energy_deposit;
                     if(p.pid == 2 && energy > 143.425) // Muon greater than 50 cm.
