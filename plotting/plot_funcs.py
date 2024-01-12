@@ -74,7 +74,7 @@ def plot_flow(rf, desc):
     ax.set_xscale('log')
     ax.set_xlim(10**desc.span[0], 10**desc.span[1])
     ax.set_ylim(-0.5,4.5)
-    ax.set_xlabel('Interactions')
+    ax.set_xlabel(desc.xlabel)
     ax.legend()
     figure.suptitle(desc.title)
     figure.savefig(desc.save)
