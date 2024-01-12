@@ -25,15 +25,19 @@ struct SpecContainer
     std::vector<const char *> names;
     std::vector<ana::Spectrum*> spectra;
     TFile output_file;
+    float override_pot;
+    float target_pot;
 
     /**
      * Constructor for SpecContainer.
      * @param in_name is the name of the input CAF file.
      * @param out_name is the name of the output ROOT file.
     */
-    SpecContainer(const char * in_name, const char * out_name)
+    SpecContainer(const char * in_name, const char * out_name, float opot=-1, float tpot=-1)
     : loader(in_name),
-      output_file(out_name, "recreate") { }
+      output_file(out_name, "recreate"),
+      override_pot(opot),
+      target_pot(tpot) { }
     
     /**
      * Adds a new CAFAna Spectrum (1D) object to the container.
@@ -46,6 +50,7 @@ struct SpecContainer
     {
         names.push_back(n);
         spectra.push_back(new ana::Spectrum(n, b, loader, v, ana::kNoSpillCut));
+        if(override_pot != -1) spectra.back()->OverridePOT(override_pot);
     }
 
     /**
@@ -62,6 +67,7 @@ struct SpecContainer
     {
         names.push_back(n);
         spectra.push_back(new ana::Spectrum(n, loader, b0, v0, b1, v1, ana::kNoSpillCut));
+        if(override_pot != -1) spectra.back()->OverridePOT(override_pot);
     }
 
     /**
@@ -72,7 +78,7 @@ struct SpecContainer
     {
         loader.Go();
         for(size_t i(0); i < spectra.size(); ++i)
-            output_file.WriteObject(spectra[i]->ToTHX(1), names[i]);
+            output_file.WriteObject(spectra[i]->ToTHX(target_pot != -1 ? target_pot : 1), names[i]);
         output_file.Close();
     }
 
