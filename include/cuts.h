@@ -163,7 +163,7 @@ namespace cuts
         bool cosmic(const T & interaction) { return !interaction.is_neutrino; }
 
     /**
-     * Defined the true neutrino interaction classification.
+     * Define the true neutrino interaction classification.
      * @tparam T the type of interaction (true or reco).
      * @param interaction to select on.
      * @return true if the interaction is a neutrino interaction.
@@ -172,7 +172,7 @@ namespace cuts
         bool matched_neutrino(const T & interaction) { return interaction.match.size() > 0 && neutrino(interaction); }
 
     /**
-     * Defined the true neutrino interaction classification.
+     * Define the true neutrino interaction classification.
      * @tparam T the type of interaction (true or reco).
      * @param interaction to select on.
      * @return true if the interaction is a neutrino interaction.
