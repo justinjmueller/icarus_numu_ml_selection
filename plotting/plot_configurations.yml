@@ -2,7 +2,7 @@
   type: hist1d
   var: [sCountParticles, sCountPrimaries]
   xlabel: Particles
-  ylabel: Entries (Norm. Event)
+  ylabel: Entries / 2.5e20 POT
   title: Interaction Multiplicity
   save: count_particles.png
   plot_kwargs:
@@ -12,7 +12,7 @@
   var: sVisibleEnergyPTT_Topology_AllCut
   categories: {0: 1$\mu$1p, 1: 1$\mu$0h, 2: 1$\mu$Np, 3: 1$\mu$1$\pi$1p, 4: Other $\nu_\mu$ CC, 5: $\nu$ NC, 6: Cosmic}
   xlabel: Reconstructed Visible Energy [MeV]
-  ylabel: Entries (Norm. Event)
+  ylabel: Entries / 2.5e20 POT
   title: Selected 1$\mu$1p Candidates
   save: reco_energy_1mu1p.png
   plot_kwargs:
@@ -144,7 +144,8 @@
   cuts: [NoCut, FVCut, FVConCut, FVConTopCut, AllCut]
   clabels: ["No Cut", "Fiducial\nVolume", "Containment", "Topological", "Flash Time"]
   title: 1$\mu$1p Selection Statistics
-  span: [-4,3]
+  xlabel: Interactions / 2.5e20 POT
+  span: [1,9]
   save: flow_1mu1p_efficiency.png
 - name: flow_1mu1p_purity
   type: flow
@@ -154,5 +155,6 @@
   cuts: [NoCut, FVCut, FVConCut, FVConTopCut, AllCut]
   clabels: ["No Cut", "Fiducial\nVolume", "Containment", "Topological", "Flash Time"]
   title: 1$\mu$1p Selection Statistics
-  span: [-4,3]
+  xlabel: Interactions / 2.5e20 POT
+  span: [1,9]
   save: flow_1mu1p_purity.png
