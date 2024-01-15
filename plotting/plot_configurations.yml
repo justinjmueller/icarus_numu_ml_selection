@@ -126,6 +126,15 @@
   title: Particle PID Confusion
   entries: [Photon, Electron, Muon, Pion, Proton]
   save: pid_wellreco_confusion.png
+- name: pid_neutrino_wellreco
+  type: confusion
+  var: sPIDWellReco_Neutrino_confusion
+  xlabel: True Particle Type
+  ylabel: Reconstructed Particle Type
+  clabel: PID Efficiency
+  title: Particle PID Confusion
+  entries: [Photon, Electron, Muon, Pion, Proton]
+  save: pid_neutrino_wellreco_confusion.png
 - name: primary_pid_wellreco
   type: confusion
   var: sPrimaryPIDWellReco_confusion

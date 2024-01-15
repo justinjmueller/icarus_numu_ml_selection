@@ -172,6 +172,15 @@ namespace cuts
         bool matched_neutrino(const T & interaction) { return interaction.match.size() > 0 && neutrino(interaction); }
 
     /**
+     * Define the true neutrino interaction classification (well-reconstructed).
+     * @tparam T the type of interaction (true or reco).
+     * @param interaction to select on.
+     * @return true if the interaction is a well-reconstructed neutrino interaction.
+    */
+    template<class T>
+        bool wellreco_neutrino(const T & interaction) { return wellreco(interaction) && neutrino(interaction); }
+
+    /**
      * Define the true neutrino interaction classification.
      * @tparam T the type of interaction (true or reco).
      * @param interaction to select on.
