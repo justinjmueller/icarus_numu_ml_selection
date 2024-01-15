@@ -68,7 +68,7 @@ def plot_flow(rf, desc):
     for pi, pop in enumerate(desc.pops):
         ax.barh(ylocs + (pi + npops * -0.5)*bar_size, counts[:,pop], align='edge', height=bar_size, label=desc.labels[pi])
         for ci, c in enumerate(counts[:,pop]):
-            plt.text(1.2*10**desc.span[0], ci - (1.0-pi)*bar_size, f'{c:.2}', color='white', va="center", fontsize=18, weight='bold')
+            plt.text(1.2*10**desc.span[0], ci - (1.0-pi)*bar_size, f'{c:.02e}', color='white', va="center", fontsize=18, weight='bold')
 
     ax.set(yticks=ylocs, yticklabels=desc.clabels[::-1], ylim=[0 - bar_size, len(desc.cuts)])
     ax.set_xscale('log')
