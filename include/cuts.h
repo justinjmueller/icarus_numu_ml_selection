@@ -33,15 +33,16 @@ namespace cuts
         bool wellreco(const T & obj) { return matched(obj) && obj.match[0] > 0.9; }
 
     /**
-     * Find the topology of the interaction with cuts applied to each particle.
+     * Count the primaries of the interaction with cuts applied to each particle.
      * @tparam T the type of interaction (true or reco).
      * @param interaction to find the topology of.
-     * @return the topology of the interaction as a string (e.g 0ph0e1mu0pi1p).
+     * @return the count of primaries of each particle type within the
+     * interaction.
      */
     template<class T>
-        std::string topology(const T & interaction)
+        std::vector<uint32_t> count_primaries(const T & interaction)
         {
-            uint32_t counts[5] = {};
+            std::vector<uint32_t> counts(5, 0);
             for(auto &p : interaction.particles)
             {
                 if(p.is_primary)
@@ -55,6 +56,19 @@ namespace cuts
                         ++counts[p.pid];
                 }
             }
+            return counts;
+        }
+
+    /**
+     * Find the topology of the interaction with cuts applied to each particle.
+     * @tparam T the type of interaction (true or reco).
+     * @param interaction to find the topology of.
+     * @return the topology of the interaction as a string (e.g 0ph0e1mu0pi1p).
+     */
+    template<class T>
+        std::string topology(const T & interaction)
+        {
+            std::vector<uint32_t> counts(count_primaries(interaction));
             std::stringstream ss;
             ss  << counts[0] << "ph"
                 << counts[1] << "e"
