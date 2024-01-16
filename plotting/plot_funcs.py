@@ -172,8 +172,12 @@ def plot_histogram_1d(rf, desc):
     if isinstance(desc.var, list):
         ax.legend()
     else:
+        show_percentage = hasattr(desc, 'show_percentage') and desc.show_percentage
         h, l = ax.get_legend_handles_labels()
-        l = [f'{l} ({np.sum(contents[li]):.0f})'for li, l in enumerate(l)]
+        if show_percentage:
+            l = [f'{l} ({np.sum(contents[li]):.0f}, {np.sum(contents[li]) / np.sum(contents):.02%})'for li, l in enumerate(l)]
+        else:
+            l = [f'{l} ({np.sum(contents[li]):.0f})'for li, l in enumerate(l)]
         ax.legend(h[::-1], l[::-1])
     figure.suptitle(desc.title)
     figure.savefig(desc.save)

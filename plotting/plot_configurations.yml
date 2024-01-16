@@ -15,6 +15,7 @@
   ylabel: Entries / 2.5e20 POT
   title: Selected 1$\mu$1p Candidates
   save: reco_energy_1mu1p.png
+  show_percentage: yes
   plot_kwargs:
     histtype: barstacked
 - name: reco_energy_1muNp
@@ -26,6 +27,7 @@
   ylabel: Entries / 2.5e20 POT
   title: Selected 1$\mu$Np Candidates
   save: reco_energy_1muNp.png
+  show_percentage: yes
   plot_kwargs:
     histtype: barstacked
 - name: reco_energy_interaction_mode_1mu1p
@@ -36,6 +38,7 @@
   ylabel: Entries / 2.5e20 POT
   title: Selected 1$\mu$1p Candidates
   save: reco_energy_interaction_mode_1mu1p.png
+  show_percentage: yes
   plot_kwargs:
     histtype: barstacked
 - name: reco_energy_interaction_mode_1muNp
@@ -46,6 +49,7 @@
   ylabel: Entries / 2.5e20 POT
   title: Selected 1$\mu$Np Candidates
   save: reco_energy_interaction_mode_1muNp.png
+  show_percentage: yes
   plot_kwargs:
     histtype: barstacked
 - name: reco_flashtime_1mu1p
