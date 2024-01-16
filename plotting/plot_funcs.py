@@ -78,6 +78,7 @@ def plot_flow(rf, desc):
     ax.legend()
     figure.suptitle(desc.title)
     figure.savefig(desc.save)
+    plt.close(figure)
 
 def plot_confusion(rf, desc):
     """
@@ -120,6 +121,7 @@ def plot_confusion(rf, desc):
     ax.set_ylabel(desc.ylabel)
     figure.suptitle(desc.title)
     figure.savefig(desc.save)
+    plt.close(figure)
 
 def plot_histogram_1d(rf, desc):
     """
@@ -166,6 +168,7 @@ def plot_histogram_1d(rf, desc):
         ax.legend(h[::-1], l[::-1])
     figure.suptitle(desc.title)
     figure.savefig(desc.save)
+    plt.close(figure)
 
 def plot_histogram_2d(rf, desc):
     """
@@ -194,3 +197,4 @@ def plot_histogram_2d(rf, desc):
     ax.set_ylabel(desc.ylabel)
     figure.suptitle(desc.title)
     figure.savefig(desc.save)
+    plt.close(figure)
