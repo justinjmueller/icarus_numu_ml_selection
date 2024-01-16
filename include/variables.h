@@ -107,9 +107,13 @@ namespace vars
             double energy(0);
             for(const auto & p : interaction.particles)
             {
-                if(p.is_primary)
+                if(p.is_primary && p.pid < 2)
+                    energy += p.calo_ke;
+                else if(p.is_primary)
+                {
                     energy += p.csda_ke;
-                if(p.pid == 2) energy += 105.658;
+                    if(p.pid == 2) energy += 105.658;
+                }
             }
             return energy;
         }
