@@ -73,8 +73,15 @@ namespace ana
     PVARDLP_TRUE(kCSDATruth_muon,vars::energy_deposit,cuts::no_cut,cuts::matched_muon);
     PVAR_TTP(kCSDA_muon,vars::csda_ke,cuts::no_cut,cuts::muon,cuts::no_cut);
 
-    // Variables for 
+    // Variables for 2D bias plots.
+    VARDLP_BIAS(kEnergy_1mu1p_signal_bias,vars::visible_energy,vars::visible_energy,cuts::signal_1mu1p,cuts::all_1mu1p_cut);
+    VARDLP_BIAS(kEnergy_1mu1p_othernu_bias,vars::visible_energy,vars::visible_energy,cuts::other_nu_1mu1p,cuts::all_1mu1p_cut);
+    VARDLP_BIAS(kEnergy_1mu1p_cosmic_bias,vars::visible_energy,vars::visible_energy,cuts::cosmic,cuts::all_1mu1p_cut);
+    VARDLP_BIAS(kEnergy_1muNp_signal_bias,vars::visible_energy,vars::visible_energy,cuts::signal_1muNp,cuts::all_1muNp_cut);
+    VARDLP_BIAS(kEnergy_1muNp_othernu_bias,vars::visible_energy,vars::visible_energy,cuts::other_nu_1muNp,cuts::all_1muNp_cut);
+    VARDLP_BIAS(kEnergy_1muNp_cosmic_bias,vars::visible_energy,vars::visible_energy,cuts::cosmic,cuts::all_1muNp_cut);
 
+    // Variables for match validation.
     PVARDLP_TRUE(kLowXTruth,vars::lowx,cuts::no_cut,cuts::matched);
     PVAR_TTP(kLowX,vars::lowx,cuts::no_cut,cuts::no_cut,cuts::no_cut);
 }

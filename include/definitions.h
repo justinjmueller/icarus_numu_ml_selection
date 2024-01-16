@@ -84,6 +84,33 @@
     })
 
 /**
+ * Preprocessor wrapper for looping over true interactions and broadcasting a
+ * SpillMultiVar over the matched (truth->reco) interaction. The SpillMultiVar
+ * accepts a vector as a result of some function running over the top-level
+ * StandardRecord. This wrapper will calculate the bias between two variables
+ * between truth and reco.
+ * @param NAME of the resulting SpillMultiVar.
+ * @param TVAR function to broadcast over the true interactions.
+ * @param RVAR function to broadcast over the reco interactions.
+ * @param CAT function that defines the truth category.
+ * @param SEL function to select reco interactions.
+ * @return a vector with the bias between TVAR and RVAR as called on reco
+ * interactions passing SEL that are matched to by the true interaction passing
+ * category cut CAT.
+*/
+#define VARDLP_BIAS(NAME,TVAR,RVAR,CAT,SEL)                                     \
+    const SpillMultiVar NAME([](const caf::SRSpillProxy* sr)                    \
+    {                                                                           \
+        std::vector<double> var;                                                \
+        for(auto const& i : sr->dlp_true)                                       \
+        {                                                                       \
+            if(CAT(i) && i.match.size() > 0 && SEL(sr->dlp[i.match[0]]))        \
+                var.push_back((RVAR(sr->dlp[i.match[0]]) - TVAR(i)) / TVAR(i)); \
+        }                                                                       \
+        return var;                                                             \
+    })
+
+/**
  * Preprocessor wrapper for looping over reco interactions which match to
  * truth interactions of the specified category and applying a SpillMultiVar.
  * The SpillMultiVar accepts a vector as a result of some function running over
