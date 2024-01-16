@@ -33,7 +33,7 @@ namespace vars
         {
             double cat(2);
             if(cuts::signal_1mu1p(interaction)) cat = 0;
-            else if(cuts::other_nu(interaction)) cat = 1;
+            else if(cuts::other_nu_1mu1p(interaction)) cat = 1;
             return cat;
         }
 

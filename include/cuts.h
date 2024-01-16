@@ -116,7 +116,22 @@ namespace cuts
      * @return true if the interaction has a 1mu1p topology.
      */
     template<class T>
-        bool topological_cut(const T & interaction) { return topology<T>(interaction) == "0ph0e1mu0pi1p"; }
+        bool topological_1mu1p_cut(const T & interaction) { return topology<T>(interaction) == "0ph0e1mu0pi1p"; }
+    
+    /**
+     * Apply a 1muNp topological cut. The interaction must have a topology
+     * matching 1muNp as defined by the conditions in the count_primaries()
+     * function.
+     * @tparam T the type of interaction (true or reco).
+     * @param interaction to select on.
+     * @return true if the interaction has a 1muNp topology.
+     */
+    template<class T>
+        bool topological_1muNp_cut(const T & interaction)
+        {
+            std::vector<uint32_t> c(count_primaries(interaction));
+            return c[0] == 0 && c[1] == 0 && c[2] == 1 && c[3] == 0 && c[4] >= 1;
+        }
     
     /**
      * Apply a flash time cut. The interaction must be matched to an in-time
@@ -138,26 +153,49 @@ namespace cuts
         bool fiducial_containment_cut(const T & interaction) { return fiducial_cut<T>(interaction) && containment_cut<T>(interaction); }
 
     /**
-     * Apply a fiducial, containment, and topological cut (logical "and" of each).
+     * Apply a fiducial, containment, and topological (1mu1p) cut (logical
+     * "and" of each).
      * @tparam T the type of interaction (true or reco).
      * @param interaction to select on.
      * @return true if the interaction passes the fiducial, containment, and
      * topological cut.
      */
     template<class T>
-        bool fiducial_containment_topological_cut(const T & interaction) { return fiducial_cut<T>(interaction) && containment_cut<T>(interaction) && topological_cut<T>(interaction); }
-    
+        bool fiducial_containment_topological_1mu1p_cut(const T & interaction) { return fiducial_cut<T>(interaction) && containment_cut<T>(interaction) && topological_1mu1p_cut<T>(interaction); }
+
     /**
-     * Apply a fiducial, containment, topological, and flash time cut (logical
+     * Apply a fiducial, containment, and topological (1muNp) cut (logical
      * "and" of each).
+     * @tparam T the type of interaction (true or reco).
+     * @param interaction to select on.
+     * @return true if the interaction passes the fiducial, containment, and
+     * topological cut.
+     */
+    template<class T>
+        bool fiducial_containment_topological_1muNp_cut(const T & interaction) { return fiducial_cut<T>(interaction) && containment_cut<T>(interaction) && topological_1muNp_cut<T>(interaction); }
+
+    /**
+     * Apply a fiducial, containment, topological (1mu1p), and flash time cut
+     * (logical "and" of each).
      * @tparam T the type of interaction (true or reco).
      * @param interaction to select on.
      * @return true if the interaction passes the fiducial, containment,
      * topological, and flash time cut.
      */
     template<class T>
-        bool all_cut(const T & interaction) { return topological_cut<T>(interaction) && fiducial_cut<T>(interaction) && flash_cut<T>(interaction) && containment_cut<T>(interaction); }
+        bool all_1mu1p_cut(const T & interaction) { return topological_1mu1p_cut<T>(interaction) && fiducial_cut<T>(interaction) && flash_cut<T>(interaction) && containment_cut<T>(interaction); }
 
+    /**
+     * Apply a fiducial, containment, topological (1muNp), and flash time cut
+     * (logical "and" of each).
+     * @tparam T the type of interaction (true or reco).
+     * @param interaction to select on.
+     * @return true if the interaction passes the fiducial, containment,
+     * topological, and flash time cut.
+     */
+    template<class T>
+        bool all_1muNp_cut(const T & interaction) { return topological_1muNp_cut<T>(interaction) && fiducial_cut<T>(interaction) && flash_cut<T>(interaction) && containment_cut<T>(interaction); }
+    
     /**
      * Defined the true neutrino interaction classification.
      * @tparam T the type of interaction (true or reco).
@@ -210,16 +248,34 @@ namespace cuts
      * @return true if the interaction is a 1mu1p neutrino interaction.
      */
     template<class T>
-        bool signal_1mu1p(const T & interaction) { return topology<T>(interaction) == "0ph0e1mu0pi1p" && neutrino(interaction); }
+        bool signal_1mu1p(const T & interaction) { return topological_1mu1p_cut<T>(interaction) && neutrino(interaction); }
 
     /**
-     * Define the true "other neutrino" interaction classification.
+     * Define the true 1muNp interaction classification.
+     * @tparam T the type of interaction (true or reco).
+     * @param interaction to select on.
+     * @return true if the interaction is a 1muNp neutrino interaction.
+     */
+    template<class T>
+        bool signal_1muNp(const T & interaction) { return topological_1muNp_cut<T>(interaction) && neutrino(interaction); }
+
+    /**
+     * Define the true "other neutrino" interaction classification (1mu1p).
      * @tparam T the type of interaction (true or reco).
      * @param interaction to select on.
      * @return true if the interaction is an "other neutrino" interaction.
      */
     template<class T>
-        bool other_nu(const T & interaction) { return topology<T>(interaction) != "0ph0e1mu0pi1p" && neutrino(interaction); }
+        bool other_nu_1mu1p(const T & interaction) { return !topological_1mu1p_cut<T>(interaction) && neutrino(interaction); }
+    
+    /**
+     * Define the true "other neutrino" interaction classification (1muNp).
+     * @tparam T the type of interaction (true or reco).
+     * @param interaction to select on.
+     * @return true if the interaction is an "other neutrino" interaction.
+     */
+    template<class T>
+        bool other_nu_1muNp(const T & interaction) { return !topological_1muNp_cut<T>(interaction) && neutrino(interaction); }
 
     /**
      * Define true muon particle classification

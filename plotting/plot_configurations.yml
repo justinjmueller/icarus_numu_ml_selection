@@ -9,7 +9,7 @@
     histtype: barstacked
 - name: reco_energy_1mu1p
   type: hist1d
-  var: sVisibleEnergyPTT_Topology_AllCut
+  var: sVisibleEnergyPTT_Topology_All1mu1pCut
   categories: {0: 1$\mu$1p, 1: 1$\mu$0h, 2: 1$\mu$Np, 3: 1$\mu$1$\pi$1p, 4: Other $\nu_\mu$ CC, 5: $\nu$ NC, 6: Cosmic}
   xlabel: Reconstructed Visible Energy [MeV]
   ylabel: Entries / 2.5e20 POT
@@ -17,9 +17,19 @@
   save: reco_energy_1mu1p.png
   plot_kwargs:
     histtype: barstacked
+- name: reco_energy_1muNp
+  type: hist1d
+  var: sVisibleEnergyPTT_Topology_All1muNpCut
+  categories: {0: 1$\mu$1p, 1: 1$\mu$0h, 2: 1$\mu$Np, 3: 1$\mu$1$\pi$1p, 4: Other $\nu_\mu$ CC, 5: $\nu$ NC, 6: Cosmic}
+  xlabel: Reconstructed Visible Energy [MeV]
+  ylabel: Entries / 2.5e20 POT
+  title: Selected 1$\mu$Np Candidates
+  save: reco_energy_1muNp.png
+  plot_kwargs:
+    histtype: barstacked
 - name: reco_energy_interaction_mode_1mu1p
   type: hist1d
-  var: sVisibleEnergyPTT_InteractionMode_AllCut
+  var: sVisibleEnergyPTT_InteractionMode_All1mu1pCut
   categories: {0: $\nu_\mu$ CC QE, 1: $\nu_\mu$ CC Res, 2: $\nu_\mu$ CC MEC, 3: $\nu_\mu$ CC DIS, 4: $\nu_\mu$ CC Coh, 5: $\nu_e$ CC, 6: $\nu$ NC, 7: Cosmic}
   xlabel: Reconstructed Visible Energy [MeV]
   ylabel: Entries / 2.5e20 POT
@@ -27,14 +37,34 @@
   save: reco_energy_interaction_mode_1mu1p.png
   plot_kwargs:
     histtype: barstacked
+- name: reco_energy_interaction_mode_1muNp
+  type: hist1d
+  var: sVisibleEnergyPTT_InteractionMode_All1muNpCut
+  categories: {0: $\nu_\mu$ CC QE, 1: $\nu_\mu$ CC Res, 2: $\nu_\mu$ CC MEC, 3: $\nu_\mu$ CC DIS, 4: $\nu_\mu$ CC Coh, 5: $\nu_e$ CC, 6: $\nu$ NC, 7: Cosmic}
+  xlabel: Reconstructed Visible Energy [MeV]
+  ylabel: Entries / 2.5e20 POT
+  title: Selected 1$\mu$Np Candidates
+  save: reco_energy_interaction_mode_1muNp.png
+  plot_kwargs:
+    histtype: barstacked
 - name: reco_flashtime_1mu1p
   type: hist1d
-  var: sFlashTimePTT_Topology_AllCut
+  var: sFlashTimePTT_Topology_All1mu1pCut
   categories: {0: 1$\mu$1p, 1: 1$\mu$0h, 2: 1$\mu$Np, 3: 1$\mu$1$\pi$1p, 4: Other $\nu_\mu$ CC, 5: $\nu$ NC, 6: Cosmic}
   xlabel: Matched Flash Time [$\mu$s]
   ylabel: Entries / 2.5e20 POT
   title: Selected 1$\mu$1p Candidates
   save: reco_flashtime_1mu1p.png
+  plot_kwargs:
+    histtype: barstacked
+- name: reco_flashtime_1muNp
+  type: hist1d
+  var: sFlashTimePTT_Topology_All1muNpCut
+  categories: {0: 1$\mu$1p, 1: 1$\mu$0h, 2: 1$\mu$Np, 3: 1$\mu$1$\pi$1p, 4: Other $\nu_\mu$ CC, 5: $\nu$ NC, 6: Cosmic}
+  xlabel: Matched Flash Time [$\mu$s]
+  ylabel: Entries / 2.5e20 POT
+  title: Selected 1$\mu$Np Candidates
+  save: reco_flashtime_1muNp.png
   plot_kwargs:
     histtype: barstacked
 - name: csda_muon
@@ -177,7 +207,7 @@
   direction: ttp
   pops: [0, 1, 2]
   labels: [1$\mu$1p, Other $\nu$, Cosmic]
-  cuts: [NoCut, FVCut, FVConCut, FVConTopCut, AllCut]
+  cuts: [NoCut, FVCut, FVConCut, FVConTop1mu1pCut, All1mu1pCut]
   clabels: ["No Cut", "Fiducial\nVolume", "Containment", "Topological", "Flash Time"]
   title: 1$\mu$1p Selection Statistics
   xlabel: Interactions / 2.5e20 POT
@@ -188,7 +218,7 @@
   direction: ptt
   pops: [0, 1, 2]
   labels: [1$\mu$1p, Other $\nu$, Cosmic]
-  cuts: [NoCut, FVCut, FVConCut, FVConTopCut, AllCut]
+  cuts: [NoCut, FVCut, FVConCut, FVConTop1mu1pCut, All1mu1pCut]
   clabels: ["No Cut", "Fiducial\nVolume", "Containment", "Topological", "Flash Time"]
   title: 1$\mu$1p Selection Statistics
   xlabel: Interactions / 2.5e20 POT
