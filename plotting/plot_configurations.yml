@@ -21,6 +21,7 @@
   type: hist1d
   var: sVisibleEnergyPTT_Topology_All1muNpCut
   categories: {0: 1$\mu$1p, 1: 1$\mu$0h, 2: 1$\mu$Np, 3: 1$\mu$1$\pi$1p, 4: Other $\nu_\mu$ CC, 5: $\nu$ NC, 6: Cosmic}
+  merge: [[2,0], [1,], [3,], [4,], [5,], [6,]]
   xlabel: Reconstructed Visible Energy [MeV]
   ylabel: Entries / 2.5e20 POT
   title: Selected 1$\mu$Np Candidates
