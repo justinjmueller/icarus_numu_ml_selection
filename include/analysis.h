@@ -27,7 +27,7 @@ namespace ana
     RCATVAR(kCountPTT,count);
     TCATVAR(kVisibleEnergyTTP,visible_energy);
     RCATVAR(kVisibleEnergyPTT,visible_energy);
-    RCATVAR(kFlashTime,flash_time);
+    RCATVAR(kFlashTimePTT,flash_time);
     
     // Variables for confusion matrix.
     PVARDLP_TRUE(kPrimaryTruth,vars::primary,cuts::no_cut,cuts::matched);
