@@ -27,6 +27,13 @@
   save: reco_flashtime_1mu1p.png
   plot_kwargs:
     histtype: barstacked
+- name: csda_muon
+  type: hist2d
+  var: sCSDA_muon
+  xlabel: True Deposited Energy [MeV]
+  ylabel: Reco CSDA Energy [MeV]
+  title: Muon CSDA Energy Estimation
+  save: csda_muon.png
 - name: lowx
   type: hist2d
   var: sLowX

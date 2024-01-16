@@ -80,8 +80,9 @@ void analysis()
     /**
      * Spectra (1D) for particles.
     */
-    spectra.add_spectrum1d("sCSDA", Binning::Simple(50, 0, 2500), kCSDA);
-    spectra.add_spectrum1d("sCSDATruth", Binning::Simple(50, 0, 2500), kCSDATruth);
+    //spectra.add_spectrum1d("sCSDA_muon", Binning::Simple(50, 0, 2500), kCSDA_muon);
+    //spectra.add_spectrum1d("sCSDATruth_muon", Binning::Simple(50, 0, 2500), kCSDATruth_muon);
+    spectra.add_spectrum2d("sCSDA_muon", Binning::Simple(50, 0, 2500), Binning::Simple(50, 0, 2500), kCSDATruth_muon, kCSDA_muon);
 
     /**
      * Spectra (2D) for matched (truth-to-predicted) particles.

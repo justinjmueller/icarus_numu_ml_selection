@@ -214,6 +214,15 @@ namespace cuts
      * @return true if the particle is a muon.
     */
     template<class T>
-        bool muon(const T & particle) { return particle.pid == 2; }
+        bool muon(const T & particle) { return particle.pid == 2 && particle.is_contained; }
+
+    /**
+     * Define true muon particle classification (matched)
+     * @tparam T the type of particle (true or reco)
+     * @param particle to select on.
+     * @return true if the particle is a muon (matched).
+    */
+    template<class T>
+        bool matched_muon(const T & particle) { return muon(particle) && matched(particle); }
 }
 #endif

@@ -70,8 +70,10 @@ namespace ana
     PVAR_TTP(kPrimaryPID_Cosmic,vars::primary_pid,cuts::cosmic,cuts::no_cut,cuts::no_cut);
 
     // Variables for 2D "true vs. reco" style plots.
-    PVARDLP_TRUE(kCSDATruth,vars::csda_ke,cuts::no_cut,cuts::no_cut);
-    PVAR_TTP(kCSDA,vars::csda_ke,cuts::no_cut,cuts::no_cut,cuts::no_cut);
+    PVARDLP_TRUE(kCSDATruth_muon,vars::energy_deposit,cuts::no_cut,cuts::matched_muon);
+    PVAR_TTP(kCSDA_muon,vars::csda_ke,cuts::no_cut,cuts::muon,cuts::no_cut);
+
+    // Variables for 
 
     PVARDLP_TRUE(kLowXTruth,vars::lowx,cuts::no_cut,cuts::matched);
     PVAR_TTP(kLowX,vars::lowx,cuts::no_cut,cuts::no_cut,cuts::no_cut);

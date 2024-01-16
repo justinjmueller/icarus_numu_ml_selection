@@ -164,6 +164,15 @@ namespace vars
         double csda_ke(const T & particle) { return particle.csda_ke; }
 
     /**
+     * Variable for true particle energy deposited.
+     * @tparam T the type of particle (true or reco).
+     * @param particle to apply the variable on.
+     * @return the energy deposited by the particle (truth only).
+    */
+    template<class T>
+        double energy_deposit(const T & particle) { return particle.energy_deposit; }
+
+    /**
      * Variable for the particles lowest x-coordinate.
      * @tparam T the type of particle (true or reco)
      * @param particle to apply the variable on.
