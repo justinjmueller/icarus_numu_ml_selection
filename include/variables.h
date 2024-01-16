@@ -78,6 +78,40 @@ namespace vars
         }
 
     /**
+     * Variable for enumerating interaction categories. This categorization
+     * uses the interaction type (generator truth) classify the interactions
+     * 0: nu_mu CC QE, 1: nu_mu CC Res, 2: nu_mu CC MEC, 3: nu_mu CC DIS, 4: nu_mu CC Coh, 5: nu_e CC, 6: NC, 7: Cosmic
+     * @tparam T the type of interaction (true or reco).
+     * @param interaction to apply the variable on.
+     * @return the enumerated category of the interaction.
+    */
+    template<class T>
+        double category_interaction_mode(const T & interaction)
+        {
+            double cat(7);
+
+            if(interaction.is_neutrino)
+            {
+                if(interaction.nu_current_type == 0)
+                {
+                    if(abs(interaction.nu_pdg_code) == 14)
+                    {
+                        if(interaction.nu_interaction_mode == 0) cat = 0;
+                        else if(interaction.nu_interaction_mode == 1) cat = 1;
+                        else if(interaction.nu_interaction_mode == 10) cat = 2;
+                        else if(interaction.nu_interaction_mode == 2) cat = 3;
+                        else if(interaction.nu_interaction_mode == 3) cat = 4;
+                        else cat = 8;
+                    }
+                    else cat = 5;
+                }
+                else cat = 6;
+            }
+
+            return cat;
+        }
+
+    /**
      * Variable for counting particles in interactions.
      * @tparam T the type of interaction (true or reco).
      * @param interaction to apply the variable on.

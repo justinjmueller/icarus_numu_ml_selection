@@ -256,7 +256,8 @@
     VARDLP_RCAT(kCategoryPTT_FVConCut,vars::category,cuts::fiducial_containment_cut);                \
     VARDLP_RCAT(kCategoryPTT_FVConTopCut,vars::category,cuts::fiducial_containment_topological_cut); \
     VARDLP_RCAT(kCategoryPTT_AllCut,vars::category,cuts::all_cut);                                   \
-    VARDLP_RCAT(kCategoryTopologyPTT_AllCut,vars::category_topology,cuts::all_cut)
+    VARDLP_RCAT(kCategoryTopologyPTT_AllCut,vars::category_topology,cuts::all_cut);                  \
+    VARDLP_RCAT(kCategoryInteractionModePTT_AllCut,vars::category_interaction_mode,cuts::all_cut)
 
 /**
  * Preprocessor macro for broadcasting a variable across true interactions

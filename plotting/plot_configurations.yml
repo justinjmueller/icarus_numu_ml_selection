@@ -17,6 +17,16 @@
   save: reco_energy_1mu1p.png
   plot_kwargs:
     histtype: barstacked
+- name: reco_energy_interaction_mode_1mu1p
+  type: hist1d
+  var: sVisibleEnergyPTT_InteractionMode_AllCut
+  categories: {0: $\nu_\mu$ CC QE, 1: $\nu_\mu$ CC Res, 2: $\nu_\mu$ CC MEC, 3: $\nu_\mu$ CC DIS, 4: $\nu_\mu$ CC Coh, 5: $\nu_e$ CC, 6: $\nu$ NC, 7: Cosmic}
+  xlabel: Reconstructed Visible Energy [MeV]
+  ylabel: Entries / 2.5e20 POT
+  title: Selected 1$\mu$1p Candidates
+  save: reco_energy_interaction_mode_1mu1p.png
+  plot_kwargs:
+    histtype: barstacked
 - name: reco_flashtime_1mu1p
   type: hist1d
   var: sFlashTimePTT_Topology_AllCut

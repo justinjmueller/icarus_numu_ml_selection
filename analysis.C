@@ -66,6 +66,7 @@ void analysis()
      * Spectra (2D) for (stacked) reconstructed quantities.
     */
     spectra.add_spectrum2d("sVisibleEnergyPTT_Topology_AllCut", Binning::Simple(10, 0, 10), Binning::Simple(20, 0, 3000), kCategoryTopologyPTT_AllCut, kVisibleEnergyPTT_AllCut);
+    spectra.add_spectrum2d("sVisibleEnergyPTT_InteractionMode_AllCut", Binning::Simple(10, 0, 10), Binning::Simple(20, 0, 3000), kCategoryInteractionModePTT_AllCut, kVisibleEnergyPTT_AllCut);
     spectra.add_spectrum2d("sFlashTimePTT_Topology_AllCut", Binning::Simple(10, 0, 10), Binning::Simple(50, -4, 4), kCategoryTopologyPTT_AllCut, kFlashTimePTT_AllCut);
 
     /**
