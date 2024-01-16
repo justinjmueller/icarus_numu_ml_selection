@@ -154,12 +154,14 @@ def plot_histogram_1d(rf, desc):
         centers = [(yedges[1:] + yedges[:-1]) / 2.0 for c in contents]
         edges = [yedges for c in contents]
         labels = list(desc.categories.values())
+        cs = [f'C{i}' for i in range(len(contents))]
         if hasattr(desc, 'merge'):
             contents = [np.sum(np.array(contents)[m,:], axis=0) for m in desc.merge]
             centers = [centers[m[0]] for m in desc.merge]
             edges = [edges[m[0]] for m in desc.merge]
             labels = [labels[m[0]] for m in desc.merge]
-        cs = [f'C{i}' for i in range(len(contents))][::-1]
+            cs = [cs[m[-1]] for m in desc.merge]
+        cs = cs[::-1]
         contents = contents[::-1]
         centers = centers[::-1]
         edges = edges[::-1]
