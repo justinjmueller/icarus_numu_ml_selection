@@ -146,7 +146,10 @@ def plot_histogram_1d(rf, desc):
 
     if isinstance(desc.var, list):
         contents, edges, centers = load_histograms(rf, desc.var)
-        labels = desc.var
+        if hasattr(desc, 'labels'):
+            labels = desc.labels
+        else:
+            labels = desc.var
         cs = [f'C{i}' for i in range(len(contents))]
     else:
         contents, xedges, yedges = load_histograms(rf, desc.var)
