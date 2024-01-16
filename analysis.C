@@ -92,10 +92,8 @@ void analysis()
     spectra.add_spectrum2d("sFlashTimePTT_Topology_All1muNpCut", Binning::Simple(10, 0, 10), Binning::Simple(50, -4, 4), kCategoryTopologyPTT_All1muNpCut, kFlashTimePTT_All1muNpCut);
 
     /**
-     * Spectra (1D) for particles.
+     * Spectra (2D) for particles.
     */
-    //spectra.add_spectrum1d("sCSDA_muon", Binning::Simple(50, 0, 2500), kCSDA_muon);
-    //spectra.add_spectrum1d("sCSDATruth_muon", Binning::Simple(50, 0, 2500), kCSDATruth_muon);
     spectra.add_spectrum2d("sCSDA_muon", Binning::Simple(50, 0, 2500), Binning::Simple(50, 0, 2500), kCSDATruth_muon, kCSDA_muon);
 
     /**
