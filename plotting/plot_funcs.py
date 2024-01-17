@@ -164,26 +164,32 @@ def plot_histogram_1d(rf, desc):
             edges = [edges[m[0]] for m in desc.merge]
             labels = [labels[m[0]] for m in desc.merge]
             cs = [cs[m[-1]] for m in desc.merge]
+        
+    if desc.plot_kwargs.get('histtype', 'none') == 'barstacked':
         cs = cs[::-1]
         contents = contents[::-1]
         centers = centers[::-1]
         edges = edges[::-1]
         labels = labels[::-1]
+
     ax.hist(centers, weights=contents, range=(edges[0][0], edges[0][-1]), bins=edges[0], label=labels, color=cs, **desc.plot_kwargs)
     ax.set_xlim(edges[0][0], edges[0][-1])
     ax.set_xlabel(desc.xlabel)
     ax.set_ylabel(desc.ylabel)
     ax.xaxis.set_major_locator(MaxNLocator(integer=True))
-    if isinstance(desc.var, list):
-        ax.legend()
+    h, l = ax.get_legend_handles_labels()
+
+    show_percentage = hasattr(desc, 'show_percentage') and desc.show_percentage
+    if show_percentage:
+        l = [f'{l} ({np.sum(contents[li]):.0f}, {np.sum(contents[li]) / np.sum(contents):.02%})'for li, l in enumerate(l)]
     else:
-        show_percentage = hasattr(desc, 'show_percentage') and desc.show_percentage
-        h, l = ax.get_legend_handles_labels()
-        if show_percentage:
-            l = [f'{l} ({np.sum(contents[li]):.0f}, {np.sum(contents[li]) / np.sum(contents):.02%})'for li, l in enumerate(l)]
-        else:
-            l = [f'{l} ({np.sum(contents[li]):.0f})'for li, l in enumerate(l)]
-        ax.legend(h[::-1], l[::-1])
+        l = [f'{l} ({np.sum(contents[li]):.0f})'for li, l in enumerate(l)]
+
+    if desc.plot_kwargs.get('histtype', 'none') == 'barstacked':
+        h = h[::-1]
+        l = l[::-1]
+
+    ax.legend(h, l)
     figure.suptitle(desc.title)
     figure.savefig(desc.save)
     plt.close(figure)
