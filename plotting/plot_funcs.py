@@ -51,7 +51,7 @@ def plot_flow(rf, desc):
     Parameters
     ----------
     rf: ROOT file (uproot)
-        The opened uproot ROOT file that conains the histogram.
+        The opened uproot ROOT file that contains the histogram.
     desc: PlotDescription
         An instance of the PlotDescription class that describes the plot details.
 
@@ -66,8 +66,9 @@ def plot_flow(rf, desc):
     ylocs = np.arange(len(desc.cuts)) * (bar_size * (npops + 1))
     counts = np.array([load_histograms(rf, f'sCount{desc.direction.upper()}_{c}')[0] for c in desc.cuts])[::-1,:,0]
     for pi, pop in enumerate(desc.pops):
-        ax.barh(ylocs + (pi + npops * -0.5)*bar_size, counts[:,pop], align='edge', height=bar_size, label=desc.labels[pi])
-        for ci, c in enumerate(counts[:,pop]):
+        total = np.sum(counts[:,pop], axis=1) if isinstance(pop, list) else counts[:,pop]
+        ax.barh(ylocs + (pi + npops * -0.5)*bar_size, total, align='edge', height=bar_size, label=desc.labels[pi])
+        for ci, c in enumerate(total):
             plt.text(1.2*10**desc.span[0], ci - (1.0-pi)*bar_size, f'{c:.02e}', color='white', va="center", fontsize=18, weight='bold')
 
     ax.set(yticks=ylocs, yticklabels=desc.clabels[::-1], ylim=[0 - bar_size, len(desc.cuts)])
