@@ -28,7 +28,9 @@ namespace vars
      * Variable for enumerating interaction categories. This is a basic
      * categorization using only signal, neutrino background, and cosmic
      * background as the three categories.
-     * 0: 1mu1p, 1: 1muNp (N > 1), 2: Other nu, 3: cosmic
+     * 0: 1mu1p (contained and fiducial), 1: 1mu1p (not contained or fiducial)
+     * 2: 1muNp (N > 1, contained and fiducial), 3: 1muNp (N > 1, not contained
+     * or fiducial), 4: Other nu, 5: cosmic
      * @tparam T the type of interaction (true or reco).
      * @param interaction to apply the variable on.
      * @return the enumerated category of the interaction.
@@ -36,10 +38,18 @@ namespace vars
     template<class T>
         double category(const T & interaction)
         {
-            double cat(3);
-            if(cuts::signal_1mu1p(interaction)) cat = 0;
-            else if(cuts::signal_1muNp(interaction)) cat = 1;
-            else if(cuts::other_nu_1muNp(interaction)) cat = 2;
+            double cat(5);
+            if(cuts::signal_1mu1p(interaction))
+            {
+                if(cuts::fiducial_containment_cut(interaction)) cat = 0;
+                else cat = 1;
+            }
+            else if(cuts::signal_1muNp(interaction))
+            {
+                if(cuts::fiducial_containment_cut(interaction)) cat = 2;
+                else cat = 3;
+            }
+            else if(cuts::other_nu_1muNp(interaction)) cat = 4;
             return cat;
         }
 
