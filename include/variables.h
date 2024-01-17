@@ -6,6 +6,10 @@
 #ifndef VARIABLES_H
 #define VARIABLES_H
 
+#define MUON_MASS 105.6583745
+#define PION_MASS 139.57039
+#define PROTON_MASS 938.2720813
+
 #include <algorithm>
 
 namespace vars
@@ -141,23 +145,19 @@ namespace vars
             double energy(0);
             for(const auto & p : interaction.particles)
             {
-                if constexpr (std::is_same_v<T, caf::SRInteractionTruthDLPProxy>)
+                if(p.is_primary)
                 {
-                    if(p.is_primary)
+                    if constexpr (std::is_same_v<T, caf::SRInteractionTruthDLPProxy>)
                     {
                         energy += p.energy_deposit;
-                        if(p.pid == 2) energy += 105.658;
                     }
-                }
-                else
-                {
-                    if(p.is_primary && p.pid < 2)
-                        energy += p.calo_ke;
-                    else if(p.is_primary)
+                    else
                     {
-                        energy += p.csda_ke;
-                        if(p.pid == 2) energy += 105.658;
+                        if(p.pid < 2) energy += p.calo_ke;
+                        else energy += p.csda_ke;
                     }
+                    if(p.pid == 2) energy += MUON_MASS;
+                    else if(p.pid == 3) energy += PION_MASS;
                 }
             }
             return energy;
