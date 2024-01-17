@@ -250,3 +250,25 @@
   xlabel: Interactions / 2.5e20 POT
   span: [1,9]
   save: flow_1mu1p_purity.png
+- name: flow_1muNp_efficiency
+  type: flow
+  direction: ttp
+  pops: [0, 1, 2]
+  labels: [1$\mu$Np, Other $\nu$, Cosmic]
+  cuts: [NoCut, FVCut, FVConCut, FVConTop1mu1pCut, All1mu1pCut]
+  clabels: ["No Cut", "Fiducial\nVolume", "Containment", "Topological", "Flash Time"]
+  title: 1$\mu$Np Selection Statistics
+  xlabel: Interactions / 2.5e20 POT
+  span: [1,9]
+  save: flow_1muNp_efficiency.png
+- name: flow_1muNp_purity
+  type: flow
+  direction: ptt
+  pops: [0, 1, 2]
+  labels: [1$\mu$Np, Other $\nu$, Cosmic]
+  cuts: [NoCut, FVCut, FVConCut, FVConTop1mu1pCut, All1mu1pCut]
+  clabels: ["No Cut", "Fiducial\nVolume", "Containment", "Topological", "Flash Time"]
+  title: 1$\mu$Np Selection Statistics
+  xlabel: Interactions / 2.5e20 POT
+  span: [1,9]
+  save: flow_1mu1Np_purity.png
