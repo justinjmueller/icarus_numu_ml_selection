@@ -7,6 +7,16 @@
   save: count_particles.png
   plot_kwargs:
     histtype: barstacked
+- name: muon_overlap
+  type: hist1d
+  var: [sNonCCOverlap, sCCOverlap]
+  labels: [Non- Cathode-Crossing Muons, Cathode-Crossing Muons]
+  xlabel: Intersection / Union of Best Match
+  ylabel: Entries / 2.5e20 POT
+  title: Overlap Fraction
+  save: muon_overlap.png
+  plot_kwargs:
+    histtype: step
 - name: energy_1mu1p_bias
   type: hist1d
   var: [sEnergy_1mu1p_signal_bias, sEnergy_1mu1p_othernu_bias, sEnergy_1mu1p_cosmic_bias]

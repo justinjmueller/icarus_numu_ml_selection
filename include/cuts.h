@@ -10,6 +10,7 @@
 #include <vector>
 #include <string>
 #include <sstream>
+#include <numeric>
 
 namespace cuts
 {
@@ -278,7 +279,7 @@ namespace cuts
         bool other_nu_1muNp(const T & interaction) { return !topological_1muNp_cut<T>(interaction) && neutrino(interaction); }
 
     /**
-     * Define true muon particle classification
+     * Define true muon particle classification.
      * @tparam T the type of particle (true or reco)
      * @param particle to select on.
      * @return true if the particle is a muon.
@@ -287,12 +288,62 @@ namespace cuts
         bool muon(const T & particle) { return particle.pid == 2 && particle.is_contained; }
 
     /**
-     * Define true muon particle classification (matched)
+     * Define true muon particle classification (matched).
      * @tparam T the type of particle (true or reco)
      * @param particle to select on.
      * @return true if the particle is a muon (matched).
     */
     template<class T>
         bool matched_muon(const T & particle) { return muon(particle) && matched(particle); }
+
+    /**
+     * Define cut for muons crossing the cathode.
+     * @tparam T the type of particle (true or reco).
+     * @param particle to select on.
+     * @return true if the particle is a muon that crosses the cathode.
+    */
+    template<class T>
+        bool cathode_crossing_muon(const T & particle)
+        {
+            bool cc(particle.pid == 2);
+            if(cc && particle.volume_id == 0)
+            {
+                int p0(std::copysign(1, particle.start_point[0] + 210.215));
+                int p1(std::copysign(1, particle.end_point[0] + 210.215));
+                cc = cc && p0 != p1;
+            }
+            else if(cc && particle.volume_id == 1)
+            {
+                int p0(std::copysign(1, particle.start_point[0] - 210.215));
+                int p1(std::copysign(1, particle.end_point[0] - 210.215));
+                cc = cc && p0 != p1;
+            }
+            return cc;
+        }
+
+    /**
+     * Define cut for muons not crossing the cathode.
+     * @tparam T the type of particle (true or reco).
+     * @param particle to select on.
+     * @return true if the particle is a muon that does not cross the cathode.
+    */
+    template<class T>
+        bool non_cathode_crossing_muon(const T & particle)
+        {
+            bool cc(particle.pid == 2);
+            if(cc && particle.volume_id == 0)
+            {
+                int p0(std::copysign(1, particle.start_point[0] + 210.215));
+                int p1(std::copysign(1, particle.end_point[0] + 210.215));
+                cc = cc && p0 == p1;
+            }
+            else if(cc && particle.volume_id == 1)
+            {
+                int p0(std::copysign(1, particle.start_point[0] - 210.215));
+                int p1(std::copysign(1, particle.end_point[0] - 210.215));
+                cc = cc && p0 == p1;
+            }
+            return cc;
+        }
 }
 #endif

@@ -84,4 +84,8 @@ namespace ana
     // Variables for match validation.
     PVARDLP_TRUE(kLowXTruth,vars::lowx,cuts::no_cut,cuts::matched);
     PVAR_TTP(kLowX,vars::lowx,cuts::no_cut,cuts::no_cut,cuts::no_cut);
+
+    // Simple particle variables.
+    PVARDLP_TRUE(kCCOverlap,vars::overlap,cuts::no_cut,cuts::cathode_crossing_muon);
+    PVARDLP_TRUE(kNonCCOverlap,vars::overlap,cuts::no_cut,cuts::non_cathode_crossing_muon);
 }

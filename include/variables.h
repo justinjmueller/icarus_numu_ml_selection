@@ -228,6 +228,15 @@ namespace vars
     */
     template<class T>
         double energy_deposit(const T & particle) { return particle.energy_deposit; }
+    
+    /**
+     * Variable for particle overlap (IoU) of best match.
+     * @tparam T the type of particle (true or reco).
+     * @param particle to apply the variable on.
+     * @return the particle overlap of the best match (IoU).
+    */
+    template<class T>
+        double overlap(const T & particle) { return particle.match.size() > 0 ? (double)particle.match_overlap[0] : 0.0; }
 
     /**
      * Variable for the particles lowest x-coordinate.

@@ -20,7 +20,7 @@ void analysis()
 {
     SpecContainer spectra("/exp/icarus/data/users/mueller/mlcafs/bnb_nucosmics.flat.root", "spectra.root", 1.253e19, 2.5e20);
     //SpecContainer spectra("/exp/icarus/data/users/mueller/mlcafs/bnb_intime.flat.root", "spectra.root");
-    //SpecContainer spectra("/exp/icarus/data/users/mueller/mlcafs/mpv_mpr.flat.root", "spectra.root");
+    //SpecContainer spectra("/exp/icarus/data/users/mueller/mlcafs/mpv_mpr.flat.root", "spectra.root", 1e19, 2.5e20);
 
     /**
      * Spectra (1D) for interactions.
@@ -101,6 +101,8 @@ void analysis()
      * Spectra (2D) for particles.
     */
     spectra.add_spectrum2d("sCSDA_muon", Binning::Simple(50, 0, 2500), Binning::Simple(50, 0, 2500), kCSDATruth_muon, kCSDA_muon);
+    spectra.add_spectrum1d("sCCOverlap", Binning::Simple(50, 0, 1), kCCOverlap);
+    spectra.add_spectrum1d("sNonCCOverlap", Binning::Simple(50, 0, 1), kNonCCOverlap);
 
     /**
      * Spectra (2D) for matched (truth-to-predicted) particles.
