@@ -174,7 +174,15 @@ namespace vars
             }
             return energy;
         }
-    
+    /**
+     * Variable for energy of the neutrino primary of the interaction.
+     * @tparam T the type of interaction (true or reco).
+     * @param interaction to apply the variable on.
+     * @return the neutrino energy.
+    */
+    template<class T>
+        double neutrino_energy(const T & interaction) { return 1000*interaction.nu_energy_init; }
+
     /**
      * Variable for matched interaction flash time.
      * @tparam T the type of interaction (true or reco).

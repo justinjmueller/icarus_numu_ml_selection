@@ -37,6 +37,26 @@
   save: energy_1muNp_bias.png
   plot_kwargs:
     histtype: barstacked
+- name: nuenergy_1mu1p_bias
+  type: hist1d
+  var: [sNuEnergy_1mu1p_signal_bias, sNuEnergy_1mu1p_othernu_bias]
+  labels: ['1$\mu$1p', 'Other $\nu$']
+  xlabel: (Reco E - True E) / True E
+  ylabel: Entries / 2.5e20 POT
+  title: Energy Reconstruction Bias for Selected 1$\mu$1p Candidates
+  save: nuenergy_1mu1p_bias.png
+  plot_kwargs:
+    histtype: barstacked
+- name: nuenergy_1muNp_bias
+  type: hist1d
+  var: [sNuEnergy_1muNp_signal_bias, sNuEnergy_1muNp_othernu_bias]
+  labels: ['1$\mu$Np', 'Other $\nu$']
+  xlabel: (Reco E - True E) / True E
+  ylabel: Entries / 2.5e20 POT
+  title: Energy Reconstruction Bias for Selected 1$\mu$Np Candidates
+  save: nuenergy_1muNp_bias.png
+  plot_kwargs:
+    histtype: barstacked
 - name: reco_energy_1mu1p
   type: hist1d
   var: sVisibleEnergyPTT_Topology_All1mu1pCut
