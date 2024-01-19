@@ -19,7 +19,7 @@ using namespace ana;
 void analysis()
 {
     SpecContainer spectra("/exp/icarus/data/users/mueller/mlcafs/bnb_nucosmics.flat.root", "spectra.root", 1.253e19, 2.5e20);
-    //SpecContainer spectra("/exp/icarus/data/users/mueller/mlcafs/bnb_intime.flat.root", "spectra.root");
+    //SpecContainer spectra("/exp/icarus/data/users/mueller/mlcafs/bnb_intime.flat.root", "spectra.root", 9070*2.05e14, 2.5e20);
     //SpecContainer spectra("/exp/icarus/data/users/mueller/mlcafs/mpv_mpr.flat.root", "spectra.root", 1e19, 2.5e20);
 
     /**
