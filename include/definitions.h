@@ -111,6 +111,42 @@
     })
 
 /**
+ * Preprocessor wrapper for looping over true particles and broadcasting a
+ * SpillMultiVar over the matched (truth->reco) particle. The SpillMultiVar
+ * accepts a vector as a result of some function running over the top-level
+ * StandardRecord. This wrapper will calculate the bias between two variables
+ * between truth and reco.
+ * @param NAME of the resulting SpillMultiVar.
+ * @param TVAR function to broadcast over the true particles.
+ * @param RVAR function to broadcast over the reco particles.
+ * @param CAT function that defines the truth category.
+ * @param SEL function to select reco particles.
+ * @return a vector with the bias between TVAR and RVAR as called on reco
+ * particles passing SEL that are matched to by the true particle passing
+ * category cut CAT.
+*/
+#define PVARDLP_BIAS(NAME,TVAR,RVAR,CAT,SEL)                                                   \
+    const SpillMultiVar NAME([](const caf::SRSpillProxy* sr)                                  \
+    {                                                                                         \
+        std::vector<double> var;                                                              \
+        std::map<caf::Proxy<int64_t>, const caf::Proxy<caf::SRParticleDLP> *> reco_particles; \
+        for(auto const& i : sr->dlp)                                                          \
+        {                                                                                     \
+            for(auto const& p : i.particles)                                                  \
+                reco_particles.insert(std::make_pair(p.id, &p));                              \
+        }                                                                                     \
+        for(auto const& i : sr->dlp_true)                                                     \
+        {                                                                                     \
+            for(auto const& p : i.particles)                                                  \
+            {                                                                                 \
+                if(CAT(p) && p.match.size() > 0 && SEL(*reco_particles[p.match[0]]))          \
+                    var.push_back((RVAR(*reco_particles[p.match[0]]) - TVAR(p)) / TVAR(p));   \
+            }                                                                                 \
+        }                                                                                     \
+        return var;                                                                           \
+    })
+
+/**
  * Preprocessor wrapper for looping over reco interactions which match to
  * truth interactions of the specified category and applying a SpillMultiVar.
  * The SpillMultiVar accepts a vector as a result of some function running over

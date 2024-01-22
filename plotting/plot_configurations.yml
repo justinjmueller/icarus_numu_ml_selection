@@ -137,6 +137,23 @@
   ylabel: Reco CSDA Energy [MeV]
   title: Muon CSDA Energy Estimation
   save: csda_muon2muon.png
+- name: csda_muon_bias2d
+  type: hist2d
+  var: sCSDA_muon_bias2d
+  xlabel: True Deposited Energy [MeV]
+  ylabel: ($E_{csda}$ -  $E_{dep}$) / $E_{dep}$
+  title: Muon CSDA Energy Estimation
+  save: csda_muon_bias2d.png
+- name: csda_muon_bias
+  type: hist1d
+  var: [sCSDA_muon_bias,]
+  labels: ['muons',]
+  xlabel: ($E_{csda}$ -  $E_{dep}$) / $E_{dep}$
+  ylabel: Entries / 2.5e20 POT
+  title: Energy Reconstruction for Contained Muons
+  save: csda_muon_bias.png
+  plot_kwargs:
+    histtype: barstacked
 - name: lowx
   type: hist2d
   var: sLowX

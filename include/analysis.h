@@ -74,6 +74,8 @@ namespace ana
     PVAR_TTP(kCSDA_muon,vars::csda_ke,cuts::no_cut,cuts::muon,cuts::no_cut);
     PVAR_TTP(kCSDA_muon2muon,vars::csda_ke_muon,cuts::no_cut,cuts::muon,cuts::no_cut);
 
+    PVARDLP_BIAS(kCSDA_muon_bias,vars::energy_deposit,vars::csda_ke_muon,cuts::muon,cuts::no_cut);
+
     // Variables for 2D bias plots.
     VARDLP_BIAS(kEnergy_1mu1p_signal_bias,vars::visible_energy,vars::visible_energy,cuts::signal_1mu1p,cuts::all_1mu1p_cut);
     VARDLP_BIAS(kEnergy_1mu1p_othernu_bias,vars::visible_energy,vars::visible_energy,cuts::other_nu_1mu1p,cuts::all_1mu1p_cut);
