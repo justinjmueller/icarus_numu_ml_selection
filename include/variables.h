@@ -245,6 +245,33 @@ namespace vars
     */
     template<class T>
         double energy_deposit(const T & particle) { return particle.energy_deposit; }
+
+    /**
+     * Variable for true particle energy starting kinetic energy.
+     * @tparam T the type of particle (true or reco).
+     * @param particle to apply the variable on.
+     * @return the starting kinetic energy of the particle.
+    */
+    template<class T>
+        double ke_init(const T & particle)
+        {
+            double energy(particle.energy_init);
+            switch (particle.pid)
+            {
+            case 2:
+                energy -= MUON_MASS;
+                break;
+            case 3:
+                energy -= PION_MASS;
+                break;
+            case 4:
+                energy -= PROTON_MASS;
+                break;
+            default:
+                break;
+            }
+            return energy;
+        }
     
     /**
      * Variable for particle overlap (IoU) of best match.

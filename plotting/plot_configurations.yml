@@ -141,17 +141,37 @@
   type: hist2d
   var: sCSDA_muon_bias2d
   xlabel: True Deposited Energy [MeV]
-  ylabel: ($E_{csda}$ -  $E_{dep}$) / $E_{dep}$
+  ylabel: ($E_{csda}$ -  $E_{true}$) / $E_{true}$
   title: Muon CSDA Energy Estimation
   save: csda_muon_bias2d.png
 - name: csda_muon_bias
   type: hist1d
   var: [sCSDA_muon_bias,]
   labels: ['muons',]
-  xlabel: ($E_{csda}$ -  $E_{dep}$) / $E_{dep}$
+  xlabel: ($E_{csda}$ -  $E_{true}$) / $E_{true}$
   ylabel: Entries / 2.5e20 POT
   title: Energy Reconstruction for Contained Muons
   save: csda_muon_bias.png
+  plot_kwargs:
+    histtype: barstacked
+- name: csda_nonccmuon_bias
+  type: hist1d
+  var: [sCSDA_noncc_muon_bias,]
+  labels: ['muons',]
+  xlabel: ($E_{csda}$ -  $E_{true}$) / $E_{true}$
+  ylabel: Entries / 2.5e20 POT
+  title: Energy Reconstruction for Contained Muons
+  save: csda_nonccmuon_bias.png
+  plot_kwargs:
+    histtype: barstacked
+- name: csda_wellrecomuon_bias
+  type: hist1d
+  var: [sCSDA_wellreco_muon_bias,]
+  labels: ['muons',]
+  xlabel: ($E_{csda}$ -  $E_{true}$) / $E_{true}$
+  ylabel: Entries / 2.5e20 POT
+  title: Energy Reconstruction for Contained Muons
+  save: csda_wellrecomuon_bias.png
   plot_kwargs:
     histtype: barstacked
 - name: lowx

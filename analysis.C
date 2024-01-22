@@ -109,6 +109,8 @@ void analysis()
     spectra.add_spectrum2d("sCSDA_muon2muon", Binning::Simple(50, 0, 1000), Binning::Simple(50, 0, 1000), kCSDATruth_muon, kCSDA_muon2muon);
     spectra.add_spectrum2d("sCSDA_muon_bias2d", Binning::Simple(50, 0, 1000), Binning::Simple(150,-1,1), kCSDATruth_muon, kCSDA_muon_bias);
     spectra.add_spectrum1d("sCSDA_muon_bias", Binning::Simple(75,-1,1), kCSDA_muon_bias);
+    spectra.add_spectrum1d("sCSDA_noncc_muon_bias", Binning::Simple(75,-1,1), kCSDA_noncc_muon_bias);
+    spectra.add_spectrum1d("sCSDA_wellreco_muon_bias", Binning::Simple(75,-1,1), kCSDA_wellreco_muon_bias);
     spectra.add_spectrum1d("sCCOverlap", Binning::Simple(50, 0, 1), kCCOverlap);
     spectra.add_spectrum1d("sNonCCOverlap", Binning::Simple(50, 0, 1), kNonCCOverlap);
 

@@ -347,5 +347,15 @@ namespace cuts
     */
     template<class T>
         bool contained_tpc_muon(const T & particle) { return muon(particle) && !cathode_crossing(particle); }
+
+    /**
+     * Define muons contained that are well-reconstructed.
+     * @tparam T the type of particle (true or reco)
+     * @param particle to select on.
+     * @return true if the particle is a contained muon that is
+     * well-reconstructed.
+    */
+    template<class T>
+        bool wellreco_muon(const T & particle) { return muon(particle) && wellreco(particle); }
 }
 #endif
