@@ -105,7 +105,8 @@ void analysis()
     /**
      * Spectra (2D) for particles.
     */
-    spectra.add_spectrum2d("sCSDA_muon", Binning::Simple(50, 0, 2500), Binning::Simple(50, 0, 2500), kCSDATruth_muon, kCSDA_muon);
+    spectra.add_spectrum2d("sCSDA_muon", Binning::Simple(50, 0, 1000), Binning::Simple(50, 0, 1000), kCSDATruth_muon, kCSDA_muon);
+    spectra.add_spectrum2d("sCSDA_muon2muon", Binning::Simple(50, 0, 1000), Binning::Simple(50, 0, 1000), kCSDATruth_muon, kCSDA_muon2muon);
     spectra.add_spectrum1d("sCCOverlap", Binning::Simple(50, 0, 1), kCCOverlap);
     spectra.add_spectrum1d("sNonCCOverlap", Binning::Simple(50, 0, 1), kNonCCOverlap);
 

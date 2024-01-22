@@ -229,6 +229,15 @@ namespace vars
         double csda_ke(const T & particle) { return particle.csda_ke; }
 
     /**
+     * Variable for particle csda_ke (muons only).
+     * @tparam T the type of particle (true or reco).
+     * @param particle to apply the variable on.
+     * @return the csda_ke of the particle (if a muon).
+    */
+    template<class T>
+        double csda_ke_muon(const T & particle) { return (cuts::muon(particle)) ? csda_ke(particle) : -1; }
+
+    /**
      * Variable for true particle energy deposited.
      * @tparam T the type of particle (true or reco).
      * @param particle to apply the variable on.

@@ -72,6 +72,7 @@ namespace ana
     // Variables for 2D "true vs. reco" style plots.
     PVARDLP_TRUE(kCSDATruth_muon,vars::energy_deposit,cuts::no_cut,cuts::matched_muon);
     PVAR_TTP(kCSDA_muon,vars::csda_ke,cuts::no_cut,cuts::muon,cuts::no_cut);
+    PVAR_TTP(kCSDA_muon2muon,vars::csda_ke_muon,cuts::no_cut,cuts::muon,cuts::no_cut);
 
     // Variables for 2D bias plots.
     VARDLP_BIAS(kEnergy_1mu1p_signal_bias,vars::visible_energy,vars::visible_energy,cuts::signal_1mu1p,cuts::all_1mu1p_cut);

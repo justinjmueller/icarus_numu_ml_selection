@@ -130,6 +130,13 @@
   ylabel: Reco CSDA Energy [MeV]
   title: Muon CSDA Energy Estimation
   save: csda_muon.png
+- name: csda_muon2muon
+  type: hist2d
+  var: sCSDA_muon2muon
+  xlabel: True Deposited Energy [MeV]
+  ylabel: Reco CSDA Energy [MeV]
+  title: Muon CSDA Energy Estimation
+  save: csda_muon2muon.png
 - name: lowx
   type: hist2d
   var: sLowX
