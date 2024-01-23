@@ -70,13 +70,13 @@ namespace ana
     PVAR_TTP(kPrimaryPID_Cosmic,vars::primary_pid,cuts::cosmic,cuts::no_cut,cuts::no_cut);
 
     // Variables for 2D "true vs. reco" style plots.
-    PVARDLP_TRUE(kCSDATruth_muon,vars::ke_init,cuts::no_cut,cuts::matched_muon);
-    PVAR_TTP(kCSDA_muon,vars::csda_ke,cuts::no_cut,cuts::muon,cuts::no_cut);
-    PVAR_TTP(kCSDA_muon2muon,vars::csda_ke_muon,cuts::no_cut,cuts::muon,cuts::no_cut);
+    PVARDLP_TRUE(kCSDATruth_muon,vars::ke_init,cuts::neutrino,cuts::matched_muon);
+    PVAR_TTP(kCSDA_muon,vars::csda_ke,cuts::neutrino,cuts::muon,cuts::no_cut);
+    PVAR_TTP(kCSDA_muon2muon,vars::csda_ke_muon,cuts::neutrino,cuts::muon,cuts::no_cut);
 
-    PVARDLP_BIAS(kCSDA_muon_bias,vars::ke_init,vars::csda_ke_muon,cuts::muon,cuts::no_cut);
-    PVARDLP_BIAS(kCSDA_noncc_muon_bias,vars::ke_init,vars::csda_ke_muon,cuts::contained_tpc_muon,cuts::no_cut);
-    PVARDLP_BIAS(kCSDA_wellreco_muon_bias,vars::ke_init,vars::csda_ke_muon,cuts::wellreco_muon,cuts::no_cut);
+    PVARDLP_BIAS(kCSDA_muon_bias,vars::ke_init,vars::csda_ke_muon,cuts::neutrino,cuts::muon,cuts::no_cut);
+    PVARDLP_BIAS(kCSDA_noncc_muon_bias,vars::ke_init,vars::csda_ke_muon,cuts::neutrino,cuts::contained_tpc_muon,cuts::no_cut);
+    PVARDLP_BIAS(kCSDA_wellreco_muon_bias,vars::ke_init,vars::csda_ke_muon,cuts::neutrino,cuts::wellreco_muon,cuts::no_cut);
 
     // Variables for 2D bias plots.
     VARDLP_BIAS(kEnergy_1mu1p_signal_bias,vars::visible_energy,vars::visible_energy,cuts::signal_1mu1p,cuts::all_1mu1p_cut);
