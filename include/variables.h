@@ -208,7 +208,13 @@ namespace vars
      * @return the matched flash time of the interaction.
     */
     template<class T>
-        double flash_time(const T & interaction) { return interaction.flash_time; }
+        double flash_time(const T & interaction)
+        {
+            if(!cuts::valid_flashmatch(interaction))
+                return -100000.0;
+            else
+                return interaction.flash_time;
+        }
 
     /**
      * Variable for particle primary categorizations.
@@ -307,7 +313,13 @@ namespace vars
      * @return the lowest x-coordinate of the particle start/end points.
     */
     template<class T>
-        double lowx(const T & particle) { return std::min(particle.start_point[0], particle.end_point[0]); }
+        double lowx(const T & particle)
+        {
+            if(std::isnan(particle.start_point[0]) || std::isnan(particle.end_point[0]) || std::isinf(particle.start_point[0]) || std::isinf(particle.end_point[0]))
+                return -100000.;
+            else
+                return std::min(particle.start_point[0], particle.end_point[0]);
+        }
 }
 
 #endif

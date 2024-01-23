@@ -34,6 +34,15 @@ namespace cuts
         bool wellreco(const T & obj) { return matched(obj) && obj.match[0] > 0.9; }
 
     /**
+     * Apply a cut on the validity of the flash match.
+     * @tparam T the type of interaction (true or reco).
+     * @param interaction on which to place the flash validity cut.
+     * @return true if the interaction is flash matched and the time is valid.
+    */
+    template<class T>
+        bool valid_flashmatch(const T & interaction) { return !std::isnan(interaction.flash_time) && interaction.fmatched == 1; }
+
+    /**
      * Count the primaries of the interaction with cuts applied to each particle.
      * @tparam T the type of interaction (true or reco).
      * @param interaction to find the topology of.
@@ -142,7 +151,13 @@ namespace cuts
      * @return true if the interaction has been matched to an in-time flash.
      */
     template<class T>
-        bool flash_cut(const T & interaction) { return ((interaction.fmatched == 1) && (interaction.flash_time >= 0) && (interaction.flash_time <= 1.6)); }
+        bool flash_cut(const T & interaction)
+        {
+            if(!valid_flashmatch(interaction))
+                return false;
+            else
+                return (interaction.flash_time >= 0) && (interaction.flash_time <= 1.6);
+        }
 
     /**
      * Apply a fiducial and containment cut (logical "and" of both).
@@ -305,14 +320,14 @@ namespace cuts
     template<class T>
         bool cathode_crossing(const T & particle)
         {
-            bool cc(false);
-            if(particle.volume_id == 0)
+            bool cc(!std::isnan(particle.start_point[0]) && !std::isnan(particle.end_point[0]));
+            if(cc && particle.volume_id == 0)
             {
                 int p0(std::copysign(1, particle.start_point[0] + 210.215));
                 int p1(std::copysign(1, particle.end_point[0] + 210.215));
                 cc = p0 != p1;
             }
-            else if(particle.volume_id == 1)
+            else if(cc && particle.volume_id == 1)
             {
                 int p0(std::copysign(1, particle.start_point[0] - 210.215));
                 int p1(std::copysign(1, particle.end_point[0] - 210.215));
