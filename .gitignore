@@ -3,6 +3,9 @@
 !*.*
 !*/
 
+# CSV files
+*.csv
+
 # Prerequisites
 *.d
 
