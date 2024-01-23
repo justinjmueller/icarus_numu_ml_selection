@@ -25,6 +25,24 @@ namespace vars
         double count(const T & obj) { return 1.0; }
 
     /**
+     * Variable for image_id (unique identifier for the event).
+     * @tparam T the type of object (true or reco, interaction or particle).
+     * @param interaction/particle to apply the variable on.
+     * @return the image_id of the interaction/particle.
+    */
+    template<class T>
+        double image_id(const T & obj) { return obj.image_id; }
+
+    /**
+     * Variable for id (unique identifier for the object).
+     * @tparam T the type of object (true or reco, interaction or particle).
+     * @param interaction/particle to apply the variable on.
+     * @return the id of the interaction/particle.
+    */
+    template<class T>
+        double id(const T & obj) { return obj.id; }
+
+    /**
      * Variable for enumerating interaction categories. This is a basic
      * categorization using only signal, neutrino background, and cosmic
      * background as the three categories.
