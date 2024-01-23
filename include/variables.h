@@ -253,6 +253,15 @@ namespace vars
         double csda_ke(const T & particle) { return particle.csda_ke; }
 
     /**
+     * Variable for particle calo_ke.
+     * @tparam T the type of particle (true or reco).
+     * @param particle to apply the variable on.
+     * @return the calo_ke of the particle.
+    */
+    template<class T>
+        double calo_ke(const T & particle) { return particle.calo_ke; }
+
+    /**
      * Variable for particle csda_ke (muons only).
      * @tparam T the type of particle (true or reco).
      * @param particle to apply the variable on.
