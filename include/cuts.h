@@ -312,6 +312,24 @@ namespace cuts
         bool matched_muon(const T & particle) { return muon(particle) && matched(particle); }
 
     /**
+     * Define true proton particle classification.
+     * @tparam T the type of particle (true or reco)
+     * @param particle to select on.
+     * @return true if the particle is a proton.
+    */
+    template<class T>
+        bool proton(const T & particle) { return particle.pid == 4 && particle.is_contained; }
+
+    /**
+     * Define true proton particle classification (matched).
+     * @tparam T the type of particle (true or reco)
+     * @param particle to select on.
+     * @return true if the particle is a proton (matched).
+    */
+    template<class T>
+        bool matched_proton(const T & particle) { return proton(particle) && matched(particle); }
+
+    /**
      * Define cut for particles crossing the cathode.
      * @tparam T the type of particle (true or reco).
      * @param particle to select on.

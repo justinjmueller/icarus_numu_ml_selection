@@ -34,7 +34,12 @@ const SpillMultiVar kParticleCSV([](const caf::SRSpillProxy* sr)
             if(cuts::neutrino(i) && cuts::matched_muon(p) && cuts::muon(*reco_particles[p.match[0]]))
             {
                 auto rp = reco_particles[p.match[0]];
-                std::cout << vars::ke_init(p) << "," << vars::csda_ke_muon(*rp) << std::endl;
+                std::cout << "2," << vars::ke_init(p) << "," << vars::csda_ke(*rp) << std::endl;
+            }
+            else if(cuts::neutrino(i) && cuts::matched_proton(p) && cuts::proton(*reco_particles[p.match[0]]))
+            {
+                auto rp = reco_particles[p.match[0]];
+                std::cout << "4," << vars::ke_init(p) << "," << vars::csda_ke(*rp) << std::endl;
             }
         }
     }
