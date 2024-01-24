@@ -37,12 +37,12 @@ const SpillMultiVar kParticleCSV([](const caf::SRSpillProxy* sr)
             if(cuts::neutrino(i) && cuts::matched_muon(p) && cuts::muon(*reco_particles[p.match[0]]))
             {
                 auto rp = reco_particles[p.match[0]];
-                output << std::fixed << "PARTICLE," << vars::image_id(i) << "," << vars::id(i) << "," << "2," << vars::ke_init(p) << "," vars::energy_deposit(p) << "," << vars::csda_ke(*rp) << std::endl;
+                output << std::fixed << "PARTICLE," << vars::image_id(i) << "," << vars::id(i) << "," << "2," << vars::ke_init(p) << "," << vars::energy_deposit(p) << "," << vars::csda_ke(*rp) << std::endl;
             }
             else if(cuts::neutrino(i) && cuts::matched_proton(p) && cuts::proton(*reco_particles[p.match[0]]))
             {
                 auto rp = reco_particles[p.match[0]];
-                output << std::fixed << "PARTICLE," << vars::image_id(i) << "," << vars::id(i) << "," << "4," << vars::ke_init(p) << "," vars::energy_deposit(p) << "," << vars::csda_ke(*rp) << std::endl;
+                output << std::fixed << "PARTICLE," << vars::image_id(i) << "," << vars::id(i) << "," << "4," << vars::ke_init(p) << "," << vars::energy_deposit(p) << "," << vars::csda_ke(*rp) << std::endl;
             }
         }
         if(cuts::signal_1mu1p(i) && cuts::fiducial_containment_cut(i))
