@@ -6,6 +6,9 @@
 # CSV files
 *.csv
 
+# Log files
+*.log
+
 # Prerequisites
 *.d
 
