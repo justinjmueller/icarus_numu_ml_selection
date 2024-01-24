@@ -9,12 +9,15 @@
 #include <vector>
 #include <map>
 #include <iostream>
+#include <fstream>
 
 #include "cuts.h"
 #include "variables.h"
 
 #include "sbnana/CAFAna/Core/MultiVar.h"
 #include "sbnanaobj/StandardRecord/Proxy/SRProxy.h"
+
+std::ofstream output("output.log");
 
 const SpillMultiVar kParticleCSV([](const caf::SRSpillProxy* sr)
 {
@@ -34,13 +37,19 @@ const SpillMultiVar kParticleCSV([](const caf::SRSpillProxy* sr)
             if(cuts::neutrino(i) && cuts::matched_muon(p) && cuts::muon(*reco_particles[p.match[0]]))
             {
                 auto rp = reco_particles[p.match[0]];
-                std::cout << "2," << vars::ke_init(p) << "," << vars::csda_ke(*rp) << std::endl;
+                output << "PARTICLE," << vars::image_id(i) << "," << vars::id(i) << "," << "2," << vars::ke_init(p) << "," << vars::csda_ke(*rp) << std::endl;
             }
             else if(cuts::neutrino(i) && cuts::matched_proton(p) && cuts::proton(*reco_particles[p.match[0]]))
             {
                 auto rp = reco_particles[p.match[0]];
-                std::cout << "4," << vars::ke_init(p) << "," << vars::csda_ke(*rp) << std::endl;
+                output << "PARTICLE," << vars::image_id(i) << "," << vars::id(i) << "," << "4," << vars::ke_init(p) << "," << vars::csda_ke(*rp) << std::endl;
             }
+        }
+        if(cuts::signal_1mu1p(i) && cuts::fiducial_containment_cut(i))
+        {
+            bool selected_fv(cuts::matched(i) && cuts::fiducial_cut(sr->dlp[i.match[0]]));
+            bool selected_cn(cuts::matched(i) && cuts::containment_cut(sr->dlp[i.match[0]]));
+            output << "SIG1MU1P," << vars::image_id(i) << "," << vars::id(i) << "," << vars::leading_muon_ke(i) << "," << vars::leading_proton_ke(i) << "," << selected_fv << "," << selected_cn << std::endl;
         }
     }
     return var;
