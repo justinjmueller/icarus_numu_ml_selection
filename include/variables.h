@@ -329,6 +329,44 @@ namespace vars
             else
                 return std::min(particle.start_point[0], particle.end_point[0]);
         }
+
+    /**
+     * Variable for finding the leading muon kinetic energy.
+     * @tparam T the type of interaction (true or reco).
+     * @param interaction to apply the variable on.
+     * @return the kinetic energy of the leading muon.
+    */
+    template<class T>
+        double leading_muon_ke(const T & interaction)
+        {
+            constexpr bool is_truth(std::is_same_v<T, caf::SRInteractionTruthDLPProxy>);
+            double leading_muon_ke(0);
+            for(auto & p : interaction.particles)
+            {
+                if(p.pid == 2 && (is_truth ? ke_init(p) : csda_ke(p)) > leading_muon_ke)
+                    leading_muon_ke = is_truth ? ke_init(p) : csda_ke(p);
+            }
+            return leading_muon_ke;
+        }
+    
+    /**
+     * Variable for finding the leading proton kinetic energy.
+     * @tparam T the type of interaction (true or reco).
+     * @param interaction to apply the variable on.
+     * @return the kinetic energy of the leading muon.
+    */
+    template<class T>
+        double leading_proton_ke(const T & interaction)
+        {
+            constexpr bool is_truth(std::is_same_v<T, caf::SRInteractionTruthDLPProxy>);
+            double leading_proton_ke(0);
+            for(auto & p : interaction.particles)
+            {
+                if(p.pid == 4 && (is_truth ? ke_init(p) : csda_ke(p)) > leading_proton_ke)
+                    leading_proton_ke = is_truth ? ke_init(p) : csda_ke(p);
+            }
+            return leading_proton_ke;
+        }
 }
 
 #endif
