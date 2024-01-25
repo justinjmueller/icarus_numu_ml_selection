@@ -50,6 +50,8 @@ const SpillMultiVar kParticleCSV([](const caf::SRSpillProxy* sr)
             bool selected_fv(cuts::matched(i) && cuts::fiducial_cut(sr->dlp[i.match[0]]));
             bool selected_cn(cuts::matched(i) && cuts::containment_cut(sr->dlp[i.match[0]]));
             output << std::fixed << "SIG1MU1P," << vars::image_id(i) << "," << vars::id(i) << "," << vars::leading_muon_ke(i) << "," << vars::leading_proton_ke(i) << "," << selected_fv << "," << selected_cn << std::endl;
+            for(auto const & p : i.particles)
+                output << std::fixed << "SIGPART," << vars::image_id(i) << "," << vars::id(i) << "," << p.pid << "," << p.is_primary << "," << p.is_contained << "," << p.num_voxels << "," << p.energy_init << "," << p.start_point[0] << "," << p.end_point[0] << std::endl;
         }
     }
     return var;
