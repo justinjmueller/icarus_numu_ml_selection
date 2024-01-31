@@ -43,6 +43,15 @@ namespace vars
         double id(const T & obj) { return obj.id; }
 
     /**
+     * Variable for the cryostat of the object.
+     * @tparam T the type of object (true or reco, interaction or particle).
+     * @param interaction/particle to apply the variable on.
+     * @return the cryostat of the interaction/particle.
+    */
+    template<class T>
+        double cryostat(const T & obj) { return object.volume_id; }
+
+    /**
      * Variable for enumerating interaction categories. This is a basic
      * categorization using only signal, neutrino background, and cosmic
      * background as the three categories.
