@@ -160,6 +160,22 @@ namespace cuts
         }
 
     /**
+     * Apply a flash time cut. The interaction must be matched to an in-time
+     * flash. The in-time definition is valid for BNB data.
+     * @tparam T the type of interaction (true or reco).
+     * @param interaction to select on.
+     * @return true if the interaction has been matched to an in-time flash.
+     */
+    template<class T>
+        bool flash_cut_data(const T & interaction)
+        {
+            if(!valid_flashmatch(interaction))
+                return false;
+            else
+                return (interaction.flash_time >= -0.5) && (interaction.flash_time <= 1.4);
+        }
+
+    /**
      * Apply a fiducial and containment cut (logical "and" of both).
      * @tparam T the type of interaction (true or reco).
      * @param interaction to select on.
