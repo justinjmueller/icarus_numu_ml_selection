@@ -339,12 +339,14 @@ namespace vars
     template<class T>
         double leading_muon_ke(const T & interaction)
         {
-            constexpr bool is_truth(std::is_same_v<T, caf::SRInteractionTruthDLPProxy>);
             double leading_muon_ke(0);
             for(auto & p : interaction.particles)
             {
-                if(p.pid == 2 && (is_truth ? ke_init(p) : csda_ke(p)) > leading_muon_ke)
-                    leading_muon_ke = is_truth ? ke_init(p) : csda_ke(p);
+                double energy(csda_ke(p));
+                if constexpr (std::is_same_v<T, caf::SRInteractionTruthDLPProxy>)
+                    energy = ke_init(p);
+                if(p.pid == 2 && energy > leading_muon_ke)
+                    leading_muon_ke = energy;
             }
             return leading_muon_ke;
         }
@@ -362,8 +364,11 @@ namespace vars
             double leading_proton_ke(0);
             for(auto & p : interaction.particles)
             {
-                if(p.pid == 4 && (is_truth ? ke_init(p) : csda_ke(p)) > leading_proton_ke)
-                    leading_proton_ke = is_truth ? ke_init(p) : csda_ke(p);
+                double energy(csda_ke(p));
+                if constexpr (std::is_same_v<T, caf::SRInteractionTruthDLPProxy>)
+                    energy = ke_init(p);
+                if(p.pid == 4 && energy > leading_proton_ke)
+                    leading_proton_ke = energy;
             }
             return leading_proton_ke;
         }
