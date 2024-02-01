@@ -108,9 +108,11 @@ namespace vars
                 }
                 if(counts[0] == 0 && counts[1] == 0 && counts[2] == 1)
                 {
-                    if(counts[3] == 0 && counts[4] == 1) cat = 0;
+                    if(counts[3] == 0 && counts[4] == 1 && interaction.is_contained && interaction.is_fiducial) cat = 0;
+                    else if(counts[3] == 0 && counts[4] == 1) cat = 7;
                     else if(counts[3] == 0 && counts[4] == 0) cat = 1;
-                    else if(counts[3] == 0 && counts[4] > 1) cat = 2;
+                    else if(counts[3] == 0 && counts[4] > 1 && interaction.is_contained && interaction.is_fiducial) cat = 2;
+                    else if(counts[3] == 0 && counts[4] > 1) cat = 7;
                     else if(counts[3] == 1 && counts[4] == 1) cat = 3;
                     else if(interaction.nu_current_type == 0) cat = 4;
                 }
