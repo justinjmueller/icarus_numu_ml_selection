@@ -324,6 +324,7 @@
     VARDLP_RCAT(kCategoryPTT_FVConTop1muNpCut,vars::category,cuts::fiducial_containment_topological_1muNp_cut); \
     VARDLP_RCAT(kCategoryPTT_All1mu1pCut,vars::category,cuts::all_1mu1p_cut);                                   \
     VARDLP_RCAT(kCategoryPTT_All1muNpCut,vars::category,cuts::all_1muNp_cut);                                   \
+    VARDLP_RCAT(kCategoryTopologyPTT_NoCut,vars::category_topology,cuts::no_cut);                               \
     VARDLP_RCAT(kCategoryTopologyPTT_All1mu1pCut,vars::category_topology,cuts::all_1mu1p_cut);                  \
     VARDLP_RCAT(kCategoryTopologyPTT_All1muNpCut,vars::category_topology,cuts::all_1muNp_cut);                  \
     VARDLP_RCAT(kCategoryInteractionModePTT_All1mu1pCut,vars::category_interaction_mode,cuts::all_1mu1p_cut);   \
