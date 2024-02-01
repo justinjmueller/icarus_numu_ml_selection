@@ -190,4 +190,60 @@ const SpillMultiVar kCSVLogger([](const caf::SRSpillProxy* sr)
     return std::vector<double>{1};
 });
 
+const SpillMultiVar kDataLogger([](const caf::SRSpillProxy* sr)
+{
+    /**
+     * Loop over reconstructed interactions and log interaction-level
+     * information. No truth information can be used.
+    */
+    for(auto const & i : sr->dlp)
+    {
+        if(cuts::topological_1muNp_cut(i))
+        {
+            size_t leading_muon(0), leading_proton(0), index(0);
+            double leading_muon_ke(0), leading_proton_ke(0);
+            for(auto & p : i.particles)
+            {
+                if(p.pid == 2 && p.csda_ke > leading_muon_ke)
+                {
+                    leading_muon = index;
+                    leading_muon_ke = p.csda_ke;
+                }
+                else if(p.pid == 4 && p.csda_ke > leading_proton_ke)
+                {
+                    leading_proton = index;
+                    leading_proton_ke = p.csda_ke;
+                }
+                ++index;
+            }
+            OUT(output,"INTERACTION")   << CSV(sr->hdr.run) << CSV(sr->hdr.evt)
+                                        << CSV(vars::image_id(i)) << CSV(vars::id(i))
+                                        << CSV(vars::cryostat(i)) << CSV(i.is_fiducial)
+                                        << CSV(i.is_contained) << CSV(cuts::topology(i))
+                                        << CSV(cuts::flash_cut_data(i))
+                                        << CSV(i.vertex[0]) << CSV(i.vertex[1]) << CSV(i.vertex[2])
+                                        << CSV(i.particles[leading_muon].length)
+                                        << CSV(vars::leading_muon_ke(i))
+                                        << CSV(i.particles[leading_proton].length)
+                                        << CSV(vars::leading_proton_ke(i))
+                                        << CSV(vars::flash_time(i))
+                                        << CSV(i.particles[leading_muon].end_point[0])
+                                        << CSV(i.particles[leading_muon].end_point[1])
+                                        << CSV(i.particles[leading_muon].end_point[2])
+                                        << CSV(i.particles[leading_muon].start_dir[0])
+                                        << CSV(i.particles[leading_muon].start_dir[1])
+                                        << CSV(i.particles[leading_muon].start_dir[2])
+                                        << CSV(i.particles[leading_proton].end_point[0])
+                                        << CSV(i.particles[leading_proton].end_point[1])
+                                        << CSV(i.particles[leading_proton].end_point[2])
+                                        << CSV(i.particles[leading_proton].start_dir[0])
+                                        << CSV(i.particles[leading_proton].start_dir[1])
+                                        << CSV(i.particles[leading_proton].start_dir[2])
+                                        << std::endl;
+        }
+    }
+
+    return std::vector<double>{1};
+});
+
 #endif
