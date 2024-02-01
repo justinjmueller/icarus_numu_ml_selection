@@ -197,7 +197,7 @@
   xlabel: True Particle Category
   ylabel: Reconstructed Particle Category
   clabel: Primary Efficiency
-  title: Particle Primary/Non-primary Confusion
+  title: Particle Primary Confusion
   entries: [Non-primary, Primary]
   save: primary_confusion.png
 - name: pid
@@ -225,7 +225,7 @@
   xlabel: True Particle Category
   ylabel: Reconstructed Particle Category
   clabel: Primary Efficiency
-  title: Particle Primary/Non-primary Confusion (Neutrinos)
+  title: Particle Primary Confusion (Neutrinos)
   entries: [Non-primary, Primary]
   save: primary_neutrino_confusion.png
 - name: pid_neutrino
@@ -253,7 +253,7 @@
   xlabel: True Particle Category
   ylabel: Reconstructed Particle Category
   clabel: Primary Efficiency
-  title: Particle Primary/Non-primary Confusion (Cosmics)
+  title: Particle Primary Confusion (Cosmics)
   entries: [Non-primary, Primary]
   save: primary_cosmic_confusion.png
 - name: pid_cosmic
@@ -281,7 +281,7 @@
   xlabel: True Particle Category
   ylabel: Reconstructed Particle Category
   clabel: Primary Efficiency
-  title: Particle Primary/Non-primary Confusion
+  title: Particle Primary Confusion
   entries: [Non-primary, Primary]
   save: primary_wellreco_confusion.png
 - name: pid_wellreco
