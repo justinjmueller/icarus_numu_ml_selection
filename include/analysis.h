@@ -82,13 +82,15 @@ namespace ana
     VARDLP_BIAS(kEnergy_1mu1p_signal_bias,vars::visible_energy,vars::visible_energy,cuts::signal_1mu1p,cuts::all_1mu1p_cut);
     VARDLP_BIAS(kEnergy_1mu1p_othernu_bias,vars::visible_energy,vars::visible_energy,cuts::other_nu_1mu1p,cuts::all_1mu1p_cut);
     VARDLP_BIAS(kEnergy_1mu1p_cosmic_bias,vars::visible_energy,vars::visible_energy,cuts::cosmic,cuts::all_1mu1p_cut);
-    VARDLP_BIAS(kEnergy_1muNp_signal_bias,vars::visible_energy,vars::visible_energy,cuts::signal_1muNp,cuts::all_1muNp_cut);
+    VARDLP_BIAS(kEnergy_1muNp_1p_signal_bias,vars::visible_energy,vars::visible_energy,cuts::signal_1mu1p,cuts::all_1muNp_cut);
+    VARDLP_BIAS(kEnergy_1muNp_Np_signal_bias,vars::visible_energy,vars::visible_energy,cuts::signal_1muNp_Nnot1,cuts::all_1muNp_cut);
     VARDLP_BIAS(kEnergy_1muNp_othernu_bias,vars::visible_energy,vars::visible_energy,cuts::other_nu_1muNp,cuts::all_1muNp_cut);
     VARDLP_BIAS(kEnergy_1muNp_cosmic_bias,vars::visible_energy,vars::visible_energy,cuts::cosmic,cuts::all_1muNp_cut);
 
     VARDLP_BIAS(kNuEnergy_1mu1p_signal_bias,vars::neutrino_energy,vars::visible_energy,cuts::signal_1mu1p,cuts::all_1mu1p_cut);
     VARDLP_BIAS(kNuEnergy_1mu1p_othernu_bias,vars::neutrino_energy,vars::visible_energy,cuts::other_nu_1mu1p,cuts::all_1mu1p_cut);
-    VARDLP_BIAS(kNuEnergy_1muNp_signal_bias,vars::neutrino_energy,vars::visible_energy,cuts::signal_1muNp,cuts::all_1muNp_cut);
+    VARDLP_BIAS(kNuEnergy_1muNp_1p_signal_bias,vars::neutrino_energy,vars::visible_energy,cuts::signal_1mu1p,cuts::all_1muNp_cut);
+    VARDLP_BIAS(kNuEnergy_1muNp_Np_signal_bias,vars::neutrino_energy,vars::visible_energy,cuts::signal_1muNp_Nnot1,cuts::all_1muNp_cut);
     VARDLP_BIAS(kNuEnergy_1muNp_othernu_bias,vars::neutrino_energy,vars::visible_energy,cuts::other_nu_1muNp,cuts::all_1muNp_cut);
 
     // Variables for match validation.

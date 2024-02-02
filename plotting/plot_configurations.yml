@@ -29,8 +29,8 @@
     histtype: barstacked
 - name: energy_1muNp_bias
   type: hist1d
-  var: [sEnergy_1muNp_signal_bias, sEnergy_1muNp_othernu_bias]
-  labels: ['1$\mu$Np', 'Other $\nu$']
+  var: [sEnergy_1muNp_1p_signal_bias, sEnergy_1muNp_Np_signal_bias, sEnergy_1muNp_othernu_bias]
+  labels: ['1$\mu$1p', '1$\mu$2+p', 'Other $\nu$']
   xlabel: ($E_{reco}$ -  $E_{visible}$) / $E_{visible}$
   ylabel: Entries / 2.5e20 POT
   title: Energy Reconstruction for Selected 1$\mu$Np Candidates
@@ -49,8 +49,8 @@
     histtype: barstacked
 - name: nuenergy_1muNp_bias
   type: hist1d
-  var: [sNuEnergy_1muNp_signal_bias, sNuEnergy_1muNp_othernu_bias]
-  labels: ['1$\mu$Np', 'Other $\nu$']
+  var: [sNuEnergy_1muNp_1p_signal_bias, sNuEnergy_1muNp_Np_signal_bias, sNuEnergy_1muNp_othernu_bias]
+  labels: ['1$\mu$1p', '1$\mu$2+p', 'Other $\nu$']
   xlabel: ($E_{reco}$ -  $E_{\nu}$) / $E_{\nu}$
   ylabel: Entries / 2.5e20 POT
   title: Energy Reconstruction for Selected 1$\mu$Np Candidates

@@ -292,6 +292,15 @@ namespace cuts
         bool signal_1muNp(const T & interaction) { return topological_1muNp_cut<T>(interaction) && neutrino(interaction); }
 
     /**
+     * Define the true 1muNp interaction classification (N > 1 strictly).
+     * @tparam T the type of interaction (true or reco).
+     * @param interaction to select on.
+     * @return true if the interaction is a 1muNp (N > 1) neutrino interaction.
+     */
+    template<class T>
+        bool signal_1muNp_Nnot1(const T & interaction) { return !topological_1mu1p_cut(interaction) && topological_1muNp_cut<T>(interaction) && neutrino(interaction); }
+
+    /**
      * Define the true "other neutrino" interaction classification (1mu1p).
      * @tparam T the type of interaction (true or reco).
      * @param interaction to select on.
