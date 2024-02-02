@@ -164,7 +164,10 @@ def plot_histogram_1d(rf, desc):
             centers = [centers[m[0]] for m in desc.merge]
             edges = [edges[m[0]] for m in desc.merge]
             labels = [labels[m[0]] for m in desc.merge]
-            cs = [cs[m[-1]] for m in desc.merge]
+            if hasattr(desc, 'colors'):
+                cs = [cs[i] for i in desc.colors]
+            else:
+                cs = [cs[np.min(m)] for m in desc.merge]
         
     if desc.plot_kwargs.get('histtype', 'none') == 'barstacked':
         cs = cs[::-1]
