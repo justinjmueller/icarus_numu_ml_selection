@@ -177,6 +177,9 @@ def plot_histogram_1d(rf, desc):
         labels = labels[::-1]
 
     ax.hist(centers, weights=contents, range=(edges[0][0], edges[0][-1]), bins=edges[0], label=labels, color=cs, **desc.plot_kwargs)
+    mean = np.average(centers[0], weights=np.sum(contents, axis=0))
+    rms = np.sqrt(np.average(np.square(centers[0] - mean), weights=np.sum(contents,axis=0)))
+    print(mean, rms)
     ax.set_xlim(edges[0][0], edges[0][-1])
     ax.set_xlabel(desc.xlabel)
     ax.set_ylabel(desc.ylabel)
