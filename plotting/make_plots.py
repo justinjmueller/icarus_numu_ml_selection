@@ -29,6 +29,8 @@ def main(spectra_file, configuration, plot, output):
     None.
     """
     cfg = dict()
+    if isinstance(configuration[0], list):
+        configuration = [c for y in configuration for c in y]
     for c in configuration:
         with open(c, 'r') as f:
             cfg = {**cfg, **toml.load(f)}
@@ -52,7 +54,7 @@ def main(spectra_file, configuration, plot, output):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('-s', '--spectra', default='../spectra_combined.root')
-    parser.add_argument('-c', '--config', action='append')
+    parser.add_argument('-c', '--config', action='append', nargs='*')
     parser.add_argument('-p', '--plot', action='append')
     parser.add_argument('-o', '--output')
     args = parser.parse_args()
