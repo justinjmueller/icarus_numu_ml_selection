@@ -4,8 +4,12 @@ import matplotlib.pyplot as plt
 from matplotlib.ticker import MaxNLocator
 
 class PlotDescription:
-    def __init__(self, cfg):
+    def __init__(self, k, cfg, output):
         plt.style.use('plot_style.mplstyle')
+        self.name = k
+        if output[-1] != '/':
+            output = output + '/'
+        self.save = f'{output}{self.name}.png'
         for k, v in cfg.items():
             setattr(self, k, v)
 

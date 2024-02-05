@@ -1,0 +1,120 @@
+[primary_confusion]
+type = 'confusion'
+vars = 'sPrimary_confusion'
+xlabel = 'True Particle Category'
+ylabel = 'Reconstructed Particle Category'
+clabel = 'Primary Efficiency'
+title = 'Particle Primary Confusion'
+entries = ['Non-primary', 'Primary']
+
+[pid_confusion]
+type = 'confusion'
+vars = 'sPID_confusion'
+xlabel = 'True Particle Type'
+ylabel = 'Reconstructed Particle Type'
+clabel = 'PID Efficiency'
+title = 'Particle PID Confusion'
+entries = ['Photon', 'Electron', 'Muon', 'Pion', 'Proton']
+
+[primary_pid_confusion]
+type = 'confusion'
+vars = 'sPrimaryPID_confusion'
+xlabel = 'True Particle Type'
+ylabel = 'Reconstructed Particle Type'
+clabel = 'Efficiency'
+title = 'Particle Primary+PID Confusion'
+entries = ['sPhoton','sElectron','sMuon','sPion','sProton','pPhoton','pElectron','pMuon','pPion','pProton']
+figsize = [16,12]
+
+[primary_neutrino_confusion]
+type = 'confusion'
+vars = 'sPrimary_Neutrino_confusion'
+xlabel = 'True Particle Category'
+ylabel = 'Reconstructed Particle Category'
+clabel = 'Primary Efficiency'
+title = 'Particle Primary Confusion (Neutrinos)'
+entries = ['Non-primary', 'Primary']
+
+[pid_neutrino_confusion]
+type = 'confusion'
+vars = 'sPID_Neutrino_confusion'
+xlabel = 'True Particle Type'
+ylabel = 'Reconstructed Particle Type'
+clabel = 'PID Efficiency (Neutrinos)'
+title = 'Particle PID Confusion'
+entries = ['Photon', 'Electron', 'Muon', 'Pion', 'Proton']
+
+[primary_pid_neutrino_confusion]
+type = 'confusion'
+vars = 'sPrimaryPID_Neutrino_confusion'
+xlabel = 'True Particle Type'
+ylabel = 'Reconstructed Particle Type'
+clabel = 'Efficiency'
+title = 'Particle Primary+PID Confusion (Neutrinos)'
+entries = ['sPhoton','sElectron','sMuon','sPion','sProton','pPhoton','pElectron','pMuon','pPion','pProton']
+figsize = [16,12]
+
+[primary_cosmic_confusion]
+type = 'confusion'
+vars = 'sPrimary_Cosmic_confusion'
+xlabel = 'True Particle Category'
+ylabel = 'Reconstructed Particle Category'
+clabel = 'Primary Efficiency'
+title = 'Particle Primary Confusion (Cosmics)'
+entries = ['Non-primary', 'Primary']
+
+[pid_cosmic_confusion]
+type = 'confusion'
+vars = 'sPID_Cosmic_confusion'
+xlabel = 'True Particle Type'
+ylabel = 'Reconstructed Particle Type'
+clabel = 'PID Efficiency (Cosmics)'
+title = 'Particle PID Confusion'
+entries = ['Photon', 'Electron', 'Muon', 'Pion', 'Proton']
+
+[primary_pid_cosmic_confusion]
+type = 'confusion'
+vars = 'sPrimaryPID_Cosmic_confusion'
+xlabel = 'True Particle Type'
+ylabel = 'Reconstructed Particle Type'
+clabel = 'Efficiency'
+title = 'Particle Primary+PID Confusion (Cosmics)'
+entries = ['sPhoton','sElectron','sMuon','sPion','sProton','pPhoton','pElectron','pMuon','pPion','pProton']
+figsize = [16,12]
+
+[primary_wellreco_confusion]
+type = 'confusion'
+vars = 'sPrimaryWellReco_confusion'
+xlabel = 'True Particle Category'
+ylabel = 'Reconstructed Particle Category'
+clabel = 'Primary Efficiency'
+title = 'Particle Primary Confusion'
+entries = ['Non-primary', 'Primary']
+
+[pid_wellreco_confusion]
+type = 'confusion'
+vars = 'sPIDWellReco_confusion'
+xlabel = 'True Particle Type'
+ylabel = 'Reconstructed Particle Type'
+clabel = 'PID Efficiency'
+title = 'Particle PID Confusion'
+entries = ['Photon', 'Electron', 'Muon', 'Pion', 'Proton']
+
+[pid_neutrino_wellreco_confusion]
+type = 'confusion'
+vars = 'sPIDWellReco_Cosmic_confusion'
+xlabel = 'True Particle Type'
+ylabel = 'Reconstructed Particle Type'
+clabel = 'PID Efficiency (Neutrinos)'
+title = 'Particle PID Confusion'
+entries = ['Photon', 'Electron', 'Muon', 'Pion', 'Proton']
+
+[primary_pid_wellreco_confusion]
+type = 'confusion'
+vars = 'sPrimaryPIDWellReco_confusion'
+xlabel = 'True Particle Type'
+ylabel = 'Reconstructed Particle Type'
+clabel = 'Efficiency'
+title = 'Particle Primary+PID Confusion'
+entries = ['sPhoton','sElectron','sMuon','sPion','sProton','pPhoton','pElectron','pMuon','pPion','pProton']
+figsize = [16,12]

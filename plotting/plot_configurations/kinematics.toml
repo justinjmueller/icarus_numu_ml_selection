@@ -1,0 +1,47 @@
+[csda_muon]
+type = 'hist2d'
+vars = 'sCSDA_muon'
+xlabel = 'True Deposited Energy [MeV]'
+ylabel = 'Reco CSDA Energy [MeV]'
+title = 'Muon CSDA Energy Estimation'
+
+[csda_muon2muon]
+type = 'hist2d'
+vars = 'sCSDA_muon2muon'
+xlabel = 'True Kinetic Energy [MeV]'
+ylabel = 'Reco CSDA Energy [MeV]'
+title = 'Muon CSDA Energy Estimation'
+
+[csda_muon_bias2d]
+type = 'hist2d'
+vars = 'sCSDA_muon_bias2d'
+xlabel = 'True Kinetic Energy [MeV]'
+ylabel = '($E_{csda}$ -  $E_{true}$) / $E_{true}$'
+title = 'Muon CSDA Energy Estimation'
+
+[csda_muon_bias]
+type = 'hist1d'
+vars = ['sCSDA_muon_bias',]
+labels = ['muons',]
+xlabel = '($E_{csda}$ -  $E_{true}$) / $E_{true}$'
+ylabel = 'Entries / 2.5e20 POT'
+title = 'Energy Reconstruction for Contained Muons'
+plot_kwargs = {histtype = 'barstacked'}
+
+[csda_nonccmuon_bias]
+type = 'hist1d'
+vars = ['sCSDA_noncc_muon_bias',]
+labels = ['muons',]
+xlabel = '($E_{csda}$ -  $E_{true}$) / $E_{true}$'
+ylabel = 'Entries / 2.5e20 POT'
+title = 'Energy Reconstruction for Contained Muons'
+plot_kwargs = {histtype = 'barstacked'}
+
+[csda_wellrecomuon_bias]
+type = 'hist1d'
+vars = ['sCSDA_wellreco_muon_bias',]
+labels = ['muons',]
+xlabel = '($E_{csda}$ -  $E_{true}$) / $E_{true}$'
+ylabel = 'Entries / 2.5e20 POT'
+title = 'Energy Reconstruction for Contained Muons'
+plot_kwargs = {histtype = 'barstacked'}

@@ -1,0 +1,23 @@
+[count_particles]
+type = 'hist1d'
+vars = ['sCountParticles', 'sCountPrimaries']
+xlabel = 'Particles'
+ylabel = 'Entries / 2.5e20 POT'
+title = 'Interaction Multiplicity'
+plot_kwargs = {histtype = 'barstacked'}
+
+[muon_overlap]
+type = 'hist1d'
+vars = ['sNonCCOverlap', 'sCCOverlap']
+labels = ['Non- Cathode-Crossing Muons', 'Cathode-Crossing Muons']
+xlabel = 'Intersection / Union of Best Match'
+ylabel = 'Entries / 2.5e20 POT'
+title = 'Overlap Fraction'
+plot_kwargs = {histtype = 'step'}
+
+[lowx]
+type = 'hist2d'
+vars = 'sLowX'
+xlabel = 'True Low X-Coordinate [cm]'
+ylabel = 'Reco Low X-Coordinate [cm]'
+title = 'Particle Lowest X-Coordinate'
