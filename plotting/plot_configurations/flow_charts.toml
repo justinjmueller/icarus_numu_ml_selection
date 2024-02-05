@@ -1,7 +1,7 @@
 [flow_1mu1p_efficiency]
 type = 'flow'
 direction = 'ttp'
-pops = [[0,1], [2,3,4], 5]
+pops = [[0,1], [2,3,4], [5,]]
 labels = ['1$\mu$1p', 'Other $\nu$', 'Cosmic']
 cuts = ['NoCut', 'FVCut', 'FVConCut', 'FVConTop1mu1pCut', 'All1mu1pCut']
 clabels = ['No Cut', 'Fiducial\nVolume', 'Containment', 'Topological', 'Flash Time']
@@ -12,7 +12,7 @@ span = [1,9]
 [flow_1mu1p_purity]
 type = 'flow'
 direction = 'ptt'
-pops = [[0,1], [2,3,4], 5]
+pops = [[0,1], [2,3,4], [5,]]
 labels = ['1$\mu$1p', 'Other $\nu$', 'Cosmic']
 cuts = ['NoCut', 'FVCut', 'FVConCut', 'FVConTop1mu1pCut', 'All1mu1pCut']
 clabels = ['No Cut', 'Fiducial\nVolume', 'Containment', 'Topological', 'Flash Time']
@@ -23,7 +23,7 @@ span = [1,9]
 [flow_1muNp_efficiency]
 type = 'flow'
 direction = 'ttp'
-pops = [[0,1,2,3], 4, 5]
+pops = [[0,1,2,3], [4,], [5,]]
 labels = ['1$\mu$Np', 'Other $\nu$', 'Cosmic']
 cuts = ['NoCut', 'FVCut', 'FVConCut', 'FVConTop1muNpCut', 'All1muNpCut']
 clabels = ['No Cut', 'Fiducial\nVolume', 'Containment', 'Topological', 'Flash Time']
@@ -34,7 +34,7 @@ span = [1,9]
 [flow_1muNp_purity]
 type = 'flow'
 direction = 'ptt'
-pops = [[0,1,2,3], 4, 5]
+pops = [[0,1,2,3], [4,], [5,]]
 labels = ['1$\mu$Np', 'Other $\nu$', 'Cosmic']
 cuts = ['NoCut', 'FVCut', 'FVConCut', 'FVConTop1muNpCut', 'All1muNpCut']
 clabels = ['No Cut', 'Fiducial\nVolume', 'Containment', 'Topological', 'Flash Time']

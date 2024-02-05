@@ -75,7 +75,7 @@ def plot_flow(rf, desc):
         for ci, c in enumerate(total):
             plt.text(1.2*10**desc.span[0], ci - (1.0-pi)*bar_size, f'{c:.02e}', color='white', va="center", fontsize=18, weight='bold')
 
-    ax.set(yticks=ylocs, yticklabels=desc.clabels[::-1], ylim=[0 - bar_size, len(desc.cuts)])
+    ax.set(yticks=ylocs, yticklabels=[x.replace(r'\n', '\n') for x in desc.clabels[::-1]], ylim=[0 - bar_size, len(desc.cuts)])
     ax.set_xscale('log')
     ax.set_xlim(10**desc.span[0], 10**desc.span[1])
     ax.set_ylim(-0.5,4.5)
@@ -108,7 +108,7 @@ def plot_confusion(rf, desc):
     figure = plt.figure(figsize=fs)
     ax = figure.add_subplot()
 
-    contents, xedges, yedges = load_histograms(rf, desc.var)
+    contents, xedges, yedges = load_histograms(rf, desc.vars)
     contents /= np.sum(contents, axis=0)    
     x, y = np.meshgrid(xedges, yedges)
     pc = ax.pcolormesh(x, y, contents, cmap='Blues', vmin=0, vmax=1.0)
@@ -149,16 +149,16 @@ def plot_histogram_1d(rf, desc):
     figure = plt.figure(figsize=(8,6))
     ax = figure.add_subplot()
 
-    if isinstance(desc.var, list):
-        contents, edges, centers = load_histograms(rf, desc.var)
+    if isinstance(desc.vars, list):
+        contents, edges, centers = load_histograms(rf, desc.vars)
         if hasattr(desc, 'labels'):
             labels = desc.labels
         else:
-            labels = desc.var
+            labels = desc.vars
         cs = [f'C{i}' for i in range(len(contents))]
     else:
-        contents, xedges, yedges = load_histograms(rf, desc.var)
-        contents = [contents[c,:] for c in desc.categories.keys()]
+        contents, xedges, yedges = load_histograms(rf, desc.vars)
+        contents = [contents[int(c),:] for c in desc.categories.keys()]
         centers = [(yedges[1:] + yedges[:-1]) / 2.0 for c in contents]
         edges = [yedges for c in contents]
         labels = list(desc.categories.values())
@@ -183,7 +183,7 @@ def plot_histogram_1d(rf, desc):
     ax.hist(centers, weights=contents, range=(edges[0][0], edges[0][-1]), bins=edges[0], label=labels, color=cs, **desc.plot_kwargs)
     mean = np.average(centers[0], weights=np.sum(contents, axis=0))
     rms = np.sqrt(np.average(np.square(centers[0] - mean), weights=np.sum(contents,axis=0)))
-    print(mean, rms)
+    #print(mean, rms)
     ax.set_xlim(edges[0][0], edges[0][-1])
     ax.set_xlabel(desc.xlabel)
     ax.set_ylabel(desc.ylabel)
@@ -224,7 +224,7 @@ def plot_histogram_2d(rf, desc):
     figure = plt.figure(figsize=(8,6))
     ax = figure.add_subplot()
 
-    contents, xedges, yedges = load_histograms(rf, desc.var)
+    contents, xedges, yedges = load_histograms(rf, desc.vars)
     x, y = np.meshgrid(xedges, yedges)
     pc = ax.pcolormesh(x, y, contents.transpose(), cmap='Blues')
 

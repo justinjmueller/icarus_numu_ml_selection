@@ -1,8 +1,3 @@
-import yaml
-import uproot
-import sys
-from plot_funcs import PlotDescription, plot_histogram_1d, plot_histogram_2d, plot_confusion, plot_flow
-
 import uproot
 import sys
 import argparse
@@ -36,13 +31,23 @@ def main(spectra_file, configuration, plot, output):
     cfg = dict()
     for c in configuration:
         with open(c, 'r') as f:
-            cfg = cfg | toml.load(f)
+            cfg = {**cfg, **toml.load(f)}
     plot_keys = list(cfg.keys()) if plot is None else plot
-    for k in (pbar := tqdm(plot_keys)):
+
+    rf = uproot.open(spectra_file)
+
+    pbar = tqdm(plot_keys)
+    for k in pbar:
         pbar.set_description(f'Making plot "{k}"')
         desc = PlotDescription(k, cfg[k], output)
-        time.sleep(1)
-
+        if desc.type == 'hist1d':
+            plot_histogram_1d(rf, desc)
+        elif desc.type == 'hist2d':
+            plot_histogram_2d(rf, desc)
+        elif desc.type == 'confusion':
+            plot_confusion(rf, desc)
+        elif desc.type == 'flow':
+            plot_flow(rf, desc)
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()

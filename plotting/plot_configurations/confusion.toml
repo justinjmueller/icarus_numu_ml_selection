@@ -40,8 +40,8 @@ type = 'confusion'
 vars = 'sPID_Neutrino_confusion'
 xlabel = 'True Particle Type'
 ylabel = 'Reconstructed Particle Type'
-clabel = 'PID Efficiency (Neutrinos)'
-title = 'Particle PID Confusion'
+clabel = 'PID Efficiency'
+title = 'Particle PID Confusion (Neutrinos)'
 entries = ['Photon', 'Electron', 'Muon', 'Pion', 'Proton']
 
 [primary_pid_neutrino_confusion]
@@ -68,8 +68,8 @@ type = 'confusion'
 vars = 'sPID_Cosmic_confusion'
 xlabel = 'True Particle Type'
 ylabel = 'Reconstructed Particle Type'
-clabel = 'PID Efficiency (Cosmics)'
-title = 'Particle PID Confusion'
+clabel = 'PID Efficiency'
+title = 'Particle PID Confusion (Cosmics)'
 entries = ['Photon', 'Electron', 'Muon', 'Pion', 'Proton']
 
 [primary_pid_cosmic_confusion]
@@ -102,11 +102,11 @@ entries = ['Photon', 'Electron', 'Muon', 'Pion', 'Proton']
 
 [pid_neutrino_wellreco_confusion]
 type = 'confusion'
-vars = 'sPIDWellReco_Cosmic_confusion'
+vars = 'sPIDWellReco_Neutrino_confusion'
 xlabel = 'True Particle Type'
 ylabel = 'Reconstructed Particle Type'
-clabel = 'PID Efficiency (Neutrinos)'
-title = 'Particle PID Confusion'
+clabel = 'PID Efficiency'
+title = 'Particle PID Confusion (Neutrinos)'
 entries = ['Photon', 'Electron', 'Muon', 'Pion', 'Proton']
 
 [primary_pid_wellreco_confusion]
