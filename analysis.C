@@ -19,9 +19,24 @@ using namespace ana;
 */
 void analysis()
 {
-    SpecContainer spectra("/pnfs/icarus/scratch/users/mueller/bnb_nucosmics_v6.flat.root", "spectra.root", 1.253e19, 2.5e20);
-    //SpecContainer spectra("/exp/icarus/data/users/mueller/mlcafs/bnb_intime.flat.root", "spectra.root", 9070*2.05e14, 2.5e20);
-    //SpecContainer spectra("/exp/icarus/data/users/mueller/mlcafs/mpv_mpr.flat.root", "spectra.root", 1e19, 2.5e20);
+    /**
+     * 1. BNB neutrino (full flux) + out-of-time cosmics (v09_63_01).
+     * 2. BNB in-time cosmics + out-of-time cosmics (v09_63_01).
+    */
+    //SpecContainer spectra("/pnfs/icarus/scratch/users/mueller/bnb_nucosmics_v6.flat.root", "spectra_nucosmics.root", 1.253e19, 2.5e20);
+    //SpecContainer spectra("/exp/icarus/data/users/mueller/mlcafs/bnb_intime.flat.root", "spectra_intime.root", 9070*2.05e14, 2.5e20);
+
+    /**
+     * 3. BNB neutrino (full flux) + out-of-time cosmics *     Central Value    * (v09_82_01).
+     * 4. BNB neutrino (full flux) + out-of-time cosmics * Coherent Noise +4.5% * (v09_82_01).
+    */
+    SpecContainer spectra("/pnfs/icarus/scratch/users/mueller/ml_hdf5/bnb_nu_sys/systematics_cv.flat.root", "spectra_cv.root", -1, 2.5e20);
+    //SpecContainer spectra("/pnfs/icarus/scratch/users/mueller/ml_hdf5/bnb_nu_sys/systematics_tpcnoise_coh_p1.flat.root", "spectra_tpcnoise_coh_p1.root", -1, 2.5e20);
+    
+    /**
+     * 5. MPV/MPR sample (v09_63_00).
+    */
+    //SpecContainer spectra("/exp/icarus/data/users/mueller/mlcafs/mpv_mpr.flat.root", "spectra_mpvmpr.root", 1e19, 2.5e20);
 
     /**
      * Spectra (1D) for interactions.
@@ -144,5 +159,6 @@ void analysis()
      * Dummy spectra for dumping particle-level information to stdout.
     */
     //spectra.add_spectrum1d("sCSVLogger", Binning::Simple(1, 0, 2), kCSVLogger);
+    spectra.add_spectrum1d("sSignalLogger", Binning::Simple(1, 0, 2), kSignalLogger);
     spectra.run();
 }
