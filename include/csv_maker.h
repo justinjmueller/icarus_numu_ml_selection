@@ -23,6 +23,64 @@ std::ofstream output("output.log");
 #define OUT(STREAM,TAG) STREAM << std::fixed << TAG << ","
 #define CSV(VAL) VAL << ","
 
+/**
+ * "Dummy" SpillMultiVar for writing weight information about each neutrino
+ * into an output CSV log file.
+ * @param sr is an SRSpillProxy that attaches to the StandardRecord of the
+ * current spill.
+ * @return a vector with a single dummy entry.
+*/
+const SpillMultiVar kReweight([](const caf::SRSpillProxy* sr)
+{
+    for(auto const & i : sr->dlp_true)
+    {
+        if(cuts::neutrino(i))
+        {
+            OUT(output,"REWEIGHT")  << CSV(sr->hdr.run) << CSV(sr->hdr.subrun)
+                                    << CSV(sr->hdr.evt) << CSV(i.nu_id);
+            for(size_t j(0); j < sr->mc.nu[i.nu_id].wgt[52].univ.size(); ++j)
+                output << CSV(sr->mc.nu[i.nu_id].wgt[52].univ[j]);
+            output << std::endl;
+        }
+    }
+    return std::vector<double>{1};
+});
+
+/**
+ * "Dummy" SpillMultiVar for writing information about each selected 1mu1p
+ * candidate into a CSV log file. 
+ * @param sr is an SRSpillProxy that attaches to the StandardRecord of the
+ * current spill.
+ * @return a vector with a single dummy entry.
+*/
+const SpillMultiVar kSelected1mu1p([](const caf::SRSpillProxy* sr)
+{
+    for(auto const & i : sr->dlp)
+    {
+        if(cuts::all_1mu1p_cut(i))
+        {
+            if(cuts::matched(i))
+            {
+                const auto & t = sr->dlp_true[i.match[0]];
+                OUT(output,"SELECTED_1MU1P")    << CSV(sr->hdr.run) << CSV(sr->hdr.subrun)
+                                                << CSV(sr->hdr.evt) << CSV(t.nu_id)
+                                                << CSV(vars::category(t))
+                                                << CSV(vars::category_topology(t))
+                                                << CSV(vars::category_interaction_mode(t))
+                                                << CSV(vars::visible_energy(i))
+                                                << std::endl;
+            }
+            else
+            {
+                OUT(output,"SELECTED_NONE") << CSV(sr->hdr.run) << CSV(sr->hdr.subrun)
+                                            << CSV(sr->hdr.evt) << CSV(-1) << CSV(-1)
+                                            << CSV(-1) << CSV(-1) << CSV(-1) << std::endl;
+            }
+        }
+    }
+    return std::vector<double>{1};
+});
+
 const SpillMultiVar kCSVLogger([](const caf::SRSpillProxy* sr)
 {
     /**

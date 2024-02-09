@@ -7,6 +7,7 @@
 #include "include/analysis.h"
 #include "include/container.h"
 #include "include/csv_maker.h"
+#include "include/systematics.h"
 #include "sbnana/CAFAna/Core/Binning.h"
 
 using namespace ana;
@@ -156,9 +157,10 @@ void analysis()
     spectra.add_spectrum2d("sPrimaryPIDWellReco_Neutrino_confusion", Binning::Simple(10,0,10), Binning::Simple(10,0,10), kPrimaryPIDWellRecoTruth_Neutrino, kPrimaryPIDWellReco_Neutrino);
 
     /**
-     * Dummy spectra for dumping particle-level information to stdout.
+     * Dummy spectra for dumping particle-level information to a CSV log file.
     */
-    //spectra.add_spectrum1d("sCSVLogger", Binning::Simple(1, 0, 2), kCSVLogger);
-    spectra.add_spectrum1d("sSignalLogger", Binning::Simple(1, 0, 2), kSignalLogger);
+    spectra.add_spectrum1d("sSelected1mu1p", Binning::Simple(1, 0, 2), kSelected1mu1p);
+    spectra.add_spectrum1d("sReweight", Binning::Simple(1, 0, 2), kReweight);
+
     spectra.run();
 }
