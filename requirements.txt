@@ -6,3 +6,4 @@ matplotlib
 h5py
 toml
 tqdm
+awkward
