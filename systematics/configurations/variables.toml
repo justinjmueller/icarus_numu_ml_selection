@@ -1,0 +1,149 @@
+[reco_energy_1mu1p_flux]
+var = 'visible_energy'
+bins = [20, 0, 3000]
+ylim = [0, 300]
+categorical_var = 'category_topology'
+sys_var = 'flux'
+categories = ['1$\mu$1p', '1$\mu$0h', '1$\mu$Np, N$>$1', '1$\mu$1$\pi$1p', 'Other $\nu_\mu$ CC', '$\nu$ NC', 'Cosmic', 'Other']
+merge = [[0,], [2,], [1,], [3,], [4,7], [5,], [6,]]
+colors = [0, 1, 2, 3, 4, 5, 6]
+xlabel = 'Reconstructed Visible Energy [MeV]'
+ylabel = 'Entries / 2.5e20 POT'
+title = 'Selected 1$\mu$1p Candidates'
+show_percentage = true
+plot_kwargs = {histtype = 'barstacked'}
+
+[reco_energy_1mu1p_genie]
+var = 'visible_energy'
+bins = [20, 0, 3000]
+ylim = [0, 300]
+categorical_var = 'category_topology'
+sys_var = 'genie'
+categories = ['1$\mu$1p', '1$\mu$0h', '1$\mu$Np, N$>$1', '1$\mu$1$\pi$1p', 'Other $\nu_\mu$ CC', '$\nu$ NC', 'Cosmic', 'Other']
+merge = [[0,], [2,], [1,], [3,], [4,7], [5,], [6,]]
+colors = [0, 1, 2, 3, 4, 5, 6]
+xlabel = 'Reconstructed Visible Energy [MeV]'
+ylabel = 'Entries / 2.5e20 POT'
+title = 'Selected 1$\mu$1p Candidates'
+show_percentage = true
+plot_kwargs = {histtype = 'barstacked'}
+
+[reco_energy_1mu1p_stat]
+var = 'visible_energy'
+bins = [20, 0, 3000]
+ylim = [0, 300]
+categorical_var = 'category_topology'
+sys_var = 'statistical'
+categories = ['1$\mu$1p', '1$\mu$0h', '1$\mu$Np, N$>$1', '1$\mu$1$\pi$1p', 'Other $\nu_\mu$ CC', '$\nu$ NC', 'Cosmic', 'Other']
+merge = [[0,], [2,], [1,], [3,], [4,7], [5,], [6,]]
+colors = [0, 1, 2, 3, 4, 5, 6]
+xlabel = 'Reconstructed Visible Energy [MeV]'
+ylabel = 'Entries / 2.5e20 POT'
+title = 'Selected 1$\mu$1p Candidates'
+show_percentage = true
+plot_kwargs = {histtype = 'barstacked'}
+
+[reco_energy_1mu1p_totalnostat]
+var = 'visible_energy'
+bins = [20, 0, 3000]
+ylim = [0, 300]
+categorical_var = 'category_topology'
+sys_var = 'TotalNoStat'
+categories = ['1$\mu$1p', '1$\mu$0h', '1$\mu$Np, N$>$1', '1$\mu$1$\pi$1p', 'Other $\nu_\mu$ CC', '$\nu$ NC', 'Cosmic', 'Other']
+merge = [[0,], [2,], [1,], [3,], [4,7], [5,], [6,]]
+colors = [0, 1, 2, 3, 4, 5, 6]
+xlabel = 'Reconstructed Visible Energy [MeV]'
+ylabel = 'Entries / 2.5e20 POT'
+title = 'Selected 1$\mu$1p Candidates'
+show_percentage = true
+plot_kwargs = {histtype = 'barstacked'}
+
+[reco_energy_1mu1p_total]
+var = 'visible_energy'
+bins = [20, 0, 3000]
+ylim = [0, 300]
+categorical_var = 'category_topology'
+sys_var = 'total'
+categories = ['1$\mu$1p', '1$\mu$0h', '1$\mu$Np, N$>$1', '1$\mu$1$\pi$1p', 'Other $\nu_\mu$ CC', '$\nu$ NC', 'Cosmic', 'Other']
+merge = [[0,], [2,], [1,], [3,], [4,7], [5,], [6,]]
+colors = [0, 1, 2, 3, 4, 5, 6]
+xlabel = 'Reconstructed Visible Energy [MeV]'
+ylabel = 'Entries / 2.5e20 POT'
+title = 'Selected 1$\mu$1p Candidates'
+show_percentage = true
+plot_kwargs = {histtype = 'barstacked'}
+
+[reco_pt_1mu1p_flux]
+var = 'interaction_pt'
+bins = [25, 0, 1500]
+ylim = [0, 250]
+categorical_var = 'category_topology'
+sys_var = 'flux'
+categories = ['1$\mu$1p', '1$\mu$0h', '1$\mu$Np, N$>$1', '1$\mu$1$\pi$1p', 'Other $\nu_\mu$ CC', '$\nu$ NC', 'Cosmic', 'Other']
+merge = [[0,], [2,], [1,], [3,], [4,7], [5,], [6,]]
+colors = [0, 1, 2, 3, 4, 5, 6]
+xlabel = 'Reconstructed Transverse Momentum [MeV/c]'
+ylabel = 'Entries / 2.5e20 POT'
+title = 'Selected 1$\mu$1p Candidates'
+show_percentage = true
+plot_kwargs = {histtype = 'barstacked'}
+
+[reco_pt_1mu1p_genie]
+var = 'interaction_pt'
+bins = [25, 0, 1500]
+ylim = [0, 250]
+categorical_var = 'category_topology'
+sys_var = 'genie'
+categories = ['1$\mu$1p', '1$\mu$0h', '1$\mu$Np, N$>$1', '1$\mu$1$\pi$1p', 'Other $\nu_\mu$ CC', '$\nu$ NC', 'Cosmic', 'Other']
+merge = [[0,], [2,], [1,], [3,], [4,7], [5,], [6,]]
+colors = [0, 1, 2, 3, 4, 5, 6]
+xlabel = 'Reconstructed Transverse Momentum [MeV/c]'
+ylabel = 'Entries / 2.5e20 POT'
+title = 'Selected 1$\mu$1p Candidates'
+show_percentage = true
+plot_kwargs = {histtype = 'barstacked'}
+
+[reco_pt_1mu1p_stat]
+var = 'interaction_pt'
+bins = [25, 0, 1500]
+ylim = [0, 250]
+categorical_var = 'category_topology'
+sys_var = 'statistical'
+categories = ['1$\mu$1p', '1$\mu$0h', '1$\mu$Np, N$>$1', '1$\mu$1$\pi$1p', 'Other $\nu_\mu$ CC', '$\nu$ NC', 'Cosmic', 'Other']
+merge = [[0,], [2,], [1,], [3,], [4,7], [5,], [6,]]
+colors = [0, 1, 2, 3, 4, 5, 6]
+xlabel = 'Reconstructed Transverse Momentum [MeV/c]'
+ylabel = 'Entries / 2.5e20 POT'
+title = 'Selected 1$\mu$1p Candidates'
+show_percentage = true
+plot_kwargs = {histtype = 'barstacked'}
+
+[reco_pt_1mu1p_totalnostat]
+var = 'interaction_pt'
+bins = [25, 0, 1500]
+ylim = [0, 250]
+categorical_var = 'category_topology'
+sys_var = 'TotalNoStat'
+categories = ['1$\mu$1p', '1$\mu$0h', '1$\mu$Np, N$>$1', '1$\mu$1$\pi$1p', 'Other $\nu_\mu$ CC', '$\nu$ NC', 'Cosmic', 'Other']
+merge = [[0,], [2,], [1,], [3,], [4,7], [5,], [6,]]
+colors = [0, 1, 2, 3, 4, 5, 6]
+xlabel = 'Reconstructed Transverse Momentum [MeV/c]'
+ylabel = 'Entries / 2.5e20 POT'
+title = 'Selected 1$\mu$1p Candidates'
+show_percentage = true
+plot_kwargs = {histtype = 'barstacked'}
+
+[reco_pt_1mu1p_total]
+var = 'interaction_pt'
+bins = [25, 0, 1500]
+ylim = [0, 250]
+categorical_var = 'category_topology'
+sys_var = 'total'
+categories = ['1$\mu$1p', '1$\mu$0h', '1$\mu$Np, N$>$1', '1$\mu$1$\pi$1p', 'Other $\nu_\mu$ CC', '$\nu$ NC', 'Cosmic', 'Other']
+merge = [[0,], [2,], [1,], [3,], [4,7], [5,], [6,]]
+colors = [0, 1, 2, 3, 4, 5, 6]
+xlabel = 'Reconstructed Transverse Momentum [MeV/c]'
+ylabel = 'Entries / 2.5e20 POT'
+title = 'Selected 1$\mu$1p Candidates'
+show_percentage = true
+plot_kwargs = {histtype = 'barstacked'}
