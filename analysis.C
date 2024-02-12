@@ -7,7 +7,6 @@
 #include "include/analysis.h"
 #include "include/container.h"
 #include "include/csv_maker.h"
-#include "include/systematics.h"
 #include "sbnana/CAFAna/Core/Binning.h"
 
 using namespace ana;
@@ -28,11 +27,11 @@ void analysis()
     //SpecContainer spectra("/exp/icarus/data/users/mueller/mlcafs/bnb_intime.flat.root", "spectra_intime.root", 9070*2.05e14, 2.5e20);
 
     /**
-     * 3. BNB neutrino (full flux) + out-of-time cosmics *     Central Value    * (v09_82_01).
-     * 4. BNB neutrino (full flux) + out-of-time cosmics * Coherent Noise +4.5% * (v09_82_01).
+     * 3. BNB neutrino (full flux) + out-of-time cosmics *     Central Value    * (v09_82_02_01).
+     * 4. BNB neutrino (full flux) + out-of-time cosmics * Coherent Noise +4.5% * (v09_82_02_01).
     */
-    SpecContainer spectra("/pnfs/icarus/scratch/users/mueller/ml_hdf5/bnb_nu_sys/systematics_cv.flat.root", "spectra_cv.root", -1, 2.5e20);
-    //SpecContainer spectra("/pnfs/icarus/scratch/users/mueller/ml_hdf5/bnb_nu_sys/systematics_tpcnoise_coh_p1.flat.root", "spectra_tpcnoise_coh_p1.root", -1, 2.5e20);
+    SpecContainer spectra("/pnfs/icarus/scratch/users/mueller/ml_hdf5/bnb_nu_sys/systematics_cv_v2.flat.root", "spectra_cv.root", -1, 2.5e20);
+    //SpecContainer spectra("/pnfs/icarus/scratch/users/mueller/ml_hdf5/bnb_nu_sys/systematics_tpcnoise_coh_p1_v2.flat.root", "spectra_tpcnoise_coh_p1.root", -1, 2.5e20);
     
     /**
      * 5. MPV/MPR sample (v09_63_00).
@@ -160,7 +159,7 @@ void analysis()
      * Dummy spectra for dumping particle-level information to a CSV log file.
     */
     spectra.add_spectrum1d("sSelected1mu1p", Binning::Simple(1, 0, 2), kSelected1mu1p);
-    spectra.add_spectrum1d("sReweight", Binning::Simple(1, 0, 2), kReweight);
+    //spectra.add_spectrum1d("sReweight", Binning::Simple(1, 0, 2), kReweight);
 
     spectra.run();
 }
