@@ -451,10 +451,14 @@ namespace vars
     template<class T>
         double interaction_pt(const T & interaction)
         {
-            double pt(0);
+            double px(0), py(0);
             for(const auto & p : interaction.particles)
-                pt += transverse_momentum(p);
-            return pt;
+                if(p.is_primary)
+                {
+                    px += p.momentum[0];
+                    py += p.momentum[1];
+                }
+            return std::sqrt(std::pow(px, 2) + std::pow(py, 2));
         }
 }
 
