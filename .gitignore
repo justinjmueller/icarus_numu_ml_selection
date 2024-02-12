@@ -6,6 +6,10 @@
 # CSV files
 *.csv
 
+# NumPy files
+*.npz
+*.npy
+
 # Log files
 *.log
 
