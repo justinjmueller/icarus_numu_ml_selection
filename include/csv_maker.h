@@ -68,13 +68,20 @@ const SpillMultiVar kSelected1mu1p([](const caf::SRSpillProxy* sr)
                                                 << CSV(vars::category_topology(t))
                                                 << CSV(vars::category_interaction_mode(t))
                                                 << CSV(vars::visible_energy(i))
+                                                << CSV(vars::leading_muon_ke(i))
+                                                << CSV(vars::leading_proton_ke(i))
+                                                << CSV(vars::leading_muon_pt(i))
+                                                << CSV(vars::leading_proton_pt(i))
+                                                << CSV(vars::interaction_pt(i))
                                                 << std::endl;
             }
             else
             {
                 OUT(output,"SELECTED_NONE") << CSV(sr->hdr.run) << CSV(sr->hdr.subrun)
                                             << CSV(sr->hdr.evt) << CSV(-1) << CSV(-1)
-                                            << CSV(-1) << CSV(-1) << CSV(-1) << std::endl;
+                                            << CSV(-1) << CSV(-1) << CSV(-1)
+                                            << CSV(-1) << CSV(-1) << CSV(-1)
+                                            << CSV(-1) << CSV(-1) << std::endl;
             }
         }
     }

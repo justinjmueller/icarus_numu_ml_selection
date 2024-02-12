@@ -342,6 +342,34 @@ namespace vars
         }
 
     /**
+     * Finds the index corresponding to the leading particle of the specifed
+     * particle type.
+     * @tparam T the type of intearction (true or reco).
+     * @param interaction to operate on.
+     * @param pid of the particle type.
+     * @return the index of the leading particle (highest KE). 
+    */
+    template <class T>
+        size_t leading_particle_index(const T & interaction, uint16_t pid)
+        {
+            double leading_ke(0);
+            size_t index(0);
+            for(size_t i(0); i < interaction.particles.size(); ++i)
+            {
+                const auto & p = interaction.particles[i];
+                double energy(csda_ke(p));
+                if constexpr (std::is_same_v<T, caf::SRInteractionTruthDLPProxy>)
+                    energy = ke_init(p);
+                if(p.pid == pid && energy > leading_ke)
+                {
+                    leading_ke = energy;
+                    index = i;
+                }
+            }
+            return index;
+        }
+    
+    /**
      * Variable for finding the leading muon kinetic energy.
      * @tparam T the type of interaction (true or reco).
      * @param interaction to apply the variable on.
@@ -350,16 +378,11 @@ namespace vars
     template<class T>
         double leading_muon_ke(const T & interaction)
         {
-            double leading_muon_ke(0);
-            for(auto & p : interaction.particles)
-            {
-                double energy(csda_ke(p));
-                if constexpr (std::is_same_v<T, caf::SRInteractionTruthDLPProxy>)
-                    energy = ke_init(p);
-                if(p.pid == 2 && energy > leading_muon_ke)
-                    leading_muon_ke = energy;
-            }
-            return leading_muon_ke;
+            size_t i(leading_particle_index(interaction, 2));
+            double energy(csda_ke(interaction.particles[i]));
+            if constexpr (std::is_same_v<T, caf::SRInteractionTruthDLPProxy>)
+                energy = ke_init(interaction.particles[i]);
+            return energy;
         }
     
     /**
@@ -371,17 +394,67 @@ namespace vars
     template<class T>
         double leading_proton_ke(const T & interaction)
         {
-            constexpr bool is_truth(std::is_same_v<T, caf::SRInteractionTruthDLPProxy>);
-            double leading_proton_ke(0);
-            for(auto & p : interaction.particles)
-            {
-                double energy(csda_ke(p));
-                if constexpr (std::is_same_v<T, caf::SRInteractionTruthDLPProxy>)
-                    energy = ke_init(p);
-                if(p.pid == 4 && energy > leading_proton_ke)
-                    leading_proton_ke = energy;
-            }
-            return leading_proton_ke;
+            size_t i(leading_particle_index(interaction, 4));
+            double energy(csda_ke(interaction.particles[i]));
+            if constexpr (std::is_same_v<T, caf::SRInteractionTruthDLPProxy>)
+                energy = ke_init(interaction.particles[i]);
+            return energy;
+        }
+
+    /**
+     * Variable for the transverse momentum of a particle.
+     * @tparam T the type of particle (true or reco).
+     * @param particle to apply the variable on.
+     * @return the transverse momentum of the particle
+    */
+    template<class T>
+        double transverse_momentum(const T & particle)
+        {
+            if constexpr (std::is_same_v<T, caf::SRParticleTruthDLPProxy>)
+                return std::sqrt(std::pow(particle.truth_momentum[0], 2) + std::pow(particle.truth_momentum[1], 2));
+            else
+                return std::sqrt(std::pow(particle.momentum[0], 2) + std::pow(particle.momentum[1], 2));
+        }
+    
+    /**
+     * Variable for the transverse momentum of the leading muon.
+     * @tparam T the type of interaction (true or reco).
+     * @param interaction to apply the variable on.
+     * @return the transverse momentum of the leading muon.
+    */
+    template<class T>
+        double leading_muon_pt(const T & interaction)
+        {
+            size_t i(leading_particle_index(interaction, 2));
+            return transverse_momentum(interaction.particles[i]);
+        }
+
+    /**
+     * Variable for the transverse momentum of the leading proton.
+     * @tparam T the type of interaction (true or reco).
+     * @param interaction to apply the variable on.
+     * @return the transverse momentum of the leading proton.
+    */
+    template<class T>
+        double leading_proton_pt(const T & interaction)
+        {
+            size_t i(leading_particle_index(interaction, 2));
+            return transverse_momentum(interaction.particles[i]);
+        }
+    
+    /**
+     * Variable for the transverse momentum of the interaction.
+     * @tparam T the type of interaction (true or reco).
+     * @param interaction to apply the variable on.
+     * @return the transverse momentum of the primary particles.
+    */
+    template<class T>
+        double interaction_pt(const T & interaction)
+        {
+            double pt(0);
+            for(const auto & p : interaction.particles)
+                pt += transverse_momentum(p);
+            return pt;
         }
 }
 
