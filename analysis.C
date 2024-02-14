@@ -29,12 +29,16 @@ void analysis()
     /**
      * 3. BNB neutrino (full flux) + out-of-time cosmics *     Central Value    * (v09_82_02_01).
      * 4. BNB neutrino (full flux) + out-of-time cosmics * Coherent Noise +4.5% * (v09_82_02_01).
+     * 5. BNB neutrino (full flux) + out-of-time cosmics *  Elli. Recombination * (v09_82_02_01).
+     * 6. BNB neutrino (full flux) + out-of-time cosmics * Untuned Signal Shape * (v09_82_02_01).
     */
     SpecContainer spectra("/pnfs/icarus/scratch/users/mueller/ml_hdf5/bnb_nu_sys/systematics_cv_v2.flat.root", "spectra_cv.root", -1, 2.5e20);
     //SpecContainer spectra("/pnfs/icarus/scratch/users/mueller/ml_hdf5/bnb_nu_sys/systematics_tpcnoise_coh_p1_v2.flat.root", "spectra_tpcnoise_coh_p1.root", -1, 2.5e20);
+    //SpecContainer spectra("/pnfs/icarus/scratch/users/mueller/ml_hdf5/bnb_nu_sys/systematics_recombination.flat.root", "spectra_recombination.root", -1, 2.5e20);
+    //SpecContainer spectra("/pnfs/icarus/scratch/users/mueller/ml_hdf5/bnb_nu_sys/systematics_untunedsigshape.flat.root", "spectra_untunedsigshape.root", -1, 2.5e20);
     
     /**
-     * 5. MPV/MPR sample (v09_63_00).
+     * 7. MPV/MPR sample (v09_63_00).
     */
     //SpecContainer spectra("/exp/icarus/data/users/mueller/mlcafs/mpv_mpr.flat.root", "spectra_mpvmpr.root", 1e19, 2.5e20);
 
@@ -159,7 +163,6 @@ void analysis()
      * Dummy spectra for dumping particle-level information to a CSV log file.
     */
     spectra.add_spectrum1d("sSelected1mu1p", Binning::Simple(1, 0, 2), kSelected1mu1p);
-    //spectra.add_spectrum1d("sReweight", Binning::Simple(1, 0, 2), kReweight);
 
     spectra.run();
 }
