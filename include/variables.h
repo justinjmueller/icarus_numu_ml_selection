@@ -438,7 +438,7 @@ namespace vars
     template<class T>
         double leading_proton_pt(const T & interaction)
         {
-            size_t i(leading_particle_index(interaction, 2));
+            size_t i(leading_particle_index(interaction, 4));
             return transverse_momentum(interaction.particles[i]);
         }
     
@@ -459,6 +459,80 @@ namespace vars
                     py += p.momentum[1];
                 }
             return std::sqrt(std::pow(px, 2) + std::pow(py, 2));
+        }
+
+    /**
+     * Variable for the cosine of the track angle within the XZ plane.
+     * @tparam T the type of particle (true or reco)
+     * @param particle to apply the variable on.
+     * @return the cosine of the track angle within the XZ plane ()
+    */
+    template<class T>
+        double cosine_theta_xz(const T & particle)
+        {
+            return particle.momentum[2] / std::sqrt(std::pow(particle.momentum[0], 2) + std::pow(particle.momentum[2], 2));
+        }
+
+    /**
+     * Variable for cosine theta_xz (transverse) of the leading muon.
+     * @tparam T the type of interaction (true or reco).
+     * @param interaction to apply the variable on.
+     * @return the cosine theta_xz of the leading muon.
+    */
+    template<class T>
+        double leading_muon_cosine_theta_xz(const T & interaction)
+        {
+            size_t i(leading_particle_index(interaction, 2));
+            return cosine_theta_xz(interaction.particles[i]);
+        }
+
+    /**
+     * Variable for cosine theta_xz (transverse) of the leading proton.
+     * @tparam T the type of interaction (true or reco).
+     * @param interaction to apply the variable on.
+     * @return the cosine theta_xz of the leading proton.
+    */
+    template<class T>
+        double leading_proton_cosine_theta_xz(const T & interaction)
+        {
+            size_t i(leading_particle_index(interaction, 4));
+            return cosine_theta_xz(interaction.particles[i]);
+        }
+    
+    /**
+     * Variable for the cosine of the opening angle between leading muon and
+     * proton.
+     * @tparam T the type of interaction (true or reco).
+     * @param interaction to apply the variable on.
+     * @return the cosine of the opening angle between the leading muon and
+     * proton.
+    */
+    template<class T>
+        double cosine_opening_angle(const T & interaction)
+        {
+            auto & m(interaction.particles[leading_particle_index(interaction, 2)]);
+            auto & p(interaction.particles[leading_particle_index(interaction, 4)]);
+            double num(m.momentum[0] * p.momentum[0] + m.momentum[1] * p.momentum[1] + m.momentum[2] * p.momentum[2]);
+            num /= std::sqrt(m.csda_ke * p.csda_ke);
+            return num;
+        }
+
+    /**
+     * Variable for the cosine of the opening angle between leading muon and
+     * proton in the transverse plane.
+     * @tparam T the type of interaction (true or reco).
+     * @param interaction to apply the variable on.
+     * @return the cosine of the opening angle between the leading muon and
+     * proton in the transverse plane.
+    */
+    template<class T>
+        double cosine_opening_angle_transverse(const T & interaction)
+        {
+            auto & m(interaction.particles[leading_particle_index(interaction, 2)]);
+            auto & p(interaction.particles[leading_particle_index(interaction, 4)]);
+            double num(m.momentum[0] * p.momentum[0] + m.momentum[1] * p.momentum[1]);
+            num /= std::sqrt(transverse_momentum(m) * transverse_momentum(p));
+            return num;
         }
 }
 

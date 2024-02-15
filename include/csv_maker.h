@@ -24,6 +24,26 @@ std::ofstream output("output.log");
 #define CSV(VAL) VAL << ","
 
 /**
+ * "Dummy" SpillMultiVar for  writing information about each signal 1mu1p
+ * (using truth information) into a CSV log file.
+ * @param sr is an SRSpillProxy that attaches to the StandardRecord of the
+ * current spill.
+ * @return a vector a single dummy entry.
+*/
+const SpillMultiVar kSignal1mu1p([](const caf::SRSpillProxy* sr)
+{
+    for(auto const & i : sr->dlp_true)
+    {
+        if(cuts::signal_1mu1p(i) && cuts::fiducial_containment_cut(i))
+        {
+            OUT(output, "SIGNAL_1MU1P") << CSV(sr->hdr.run) << CSV(sr->hdr.subrun)
+                                        << CSV(sr->hdr.evt) << CSV(i.nu_id) << std::endl;
+        }
+    }
+    return std::vector<double>{1};
+});
+
+/**
  * "Dummy" SpillMultiVar for writing information about each selected 1mu1p
  * candidate into a CSV log file. 
  * @param sr is an SRSpillProxy that attaches to the StandardRecord of the
@@ -50,6 +70,10 @@ const SpillMultiVar kSelected1mu1p([](const caf::SRSpillProxy* sr)
                                                 << CSV(vars::leading_muon_pt(i))
                                                 << CSV(vars::leading_proton_pt(i))
                                                 << CSV(vars::interaction_pt(i))
+                                                << CSV(vars::leading_muon_cosine_theta_xz(i))
+                                                << CSV(vars::leading_proton_cosine_theta_xz(i))
+                                                << CSV(vars::cosine_opening_angle(i))
+                                                << CSV(vars::cosine_opening_angle_transverse(i))
                                                 << std::endl;
             }
             else
@@ -58,7 +82,9 @@ const SpillMultiVar kSelected1mu1p([](const caf::SRSpillProxy* sr)
                                             << CSV(sr->hdr.evt) << CSV(-1) << CSV(-1)
                                             << CSV(-1) << CSV(-1) << CSV(-1)
                                             << CSV(-1) << CSV(-1) << CSV(-1)
-                                            << CSV(-1) << CSV(-1) << std::endl;
+                                            << CSV(-1) << CSV(-1) << CSV(-1)
+                                            << CSV(-1) << CSV(-1) << CSV(-1)
+                                            << std::endl;
             }
         }
     }
