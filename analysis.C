@@ -23,7 +23,7 @@ void analysis()
      * 1. BNB neutrino (full flux) + out-of-time cosmics (v09_63_01).
      * 2. BNB in-time cosmics + out-of-time cosmics (v09_63_01).
     */
-    //SpecContainer spectra("/pnfs/icarus/scratch/users/mueller/bnb_nucosmics_v6.flat.root", "spectra_nucosmics.root", 1.253e19, 2.5e20);
+    SpecContainer spectra("/pnfs/icarus/scratch/users/mueller/bnb_nucosmics_v6.flat.root", "spectra_nucosmics.root", 1.253e19, 2.5e20);
     //SpecContainer spectra("/exp/icarus/data/users/mueller/mlcafs/bnb_intime.flat.root", "spectra_intime.root", 9070*2.05e14, 2.5e20);
 
     /**
@@ -32,7 +32,7 @@ void analysis()
      * 5. BNB neutrino (full flux) + out-of-time cosmics *  Elli. Recombination * (v09_82_02_01).
      * 6. BNB neutrino (full flux) + out-of-time cosmics * Untuned Signal Shape * (v09_82_02_01).
     */
-    SpecContainer spectra("/pnfs/icarus/scratch/users/mueller/ml_hdf5/bnb_nu_sys/systematics_cv_v2.flat.root", "spectra_cv.root", -1, 2.5e20);
+    //SpecContainer spectra("/pnfs/icarus/scratch/users/mueller/ml_hdf5/bnb_nu_sys/systematics_cv_v2.flat.root", "spectra_cv.root", -1, 2.5e20);
     //SpecContainer spectra("/pnfs/icarus/scratch/users/mueller/ml_hdf5/bnb_nu_sys/systematics_tpcnoise_coh_p1_v2.flat.root", "spectra_tpcnoise_coh_p1.root", -1, 2.5e20);
     //SpecContainer spectra("/pnfs/icarus/scratch/users/mueller/ml_hdf5/bnb_nu_sys/systematics_recombination.flat.root", "spectra_recombination.root", -1, 2.5e20);
     //SpecContainer spectra("/pnfs/icarus/scratch/users/mueller/ml_hdf5/bnb_nu_sys/systematics_untunedsigshape.flat.root", "spectra_untunedsigshape.root", -1, 2.5e20);

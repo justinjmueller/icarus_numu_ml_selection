@@ -39,6 +39,19 @@ const SpillMultiVar kSignal1mu1p([](const caf::SRSpillProxy* sr)
             OUT(output, "SIGNAL_1MU1P") << CSV(sr->hdr.run) << CSV(sr->hdr.subrun)
                                         << CSV(sr->hdr.evt) << CSV(i.nu_id) << std::endl;
         }
+        if(cuts::matched(i) && !cuts::signal_1mu1p(i) && cuts::all_1mu1p_cut(sr->dlp[i.match[0]]))
+        {
+            const auto & r = sr->dlp[i.match[0]];
+            const auto & p = i.particle_counts;
+            const auto & pr = cuts::count_primaries(i);
+            OUT(output, "MISTAKE_1MU1P")    << CSV(sr->hdr.run) << CSV(sr->hdr.subrun)
+                                            << CSV(sr->hdr.evt) << CSV(i.nu_id)
+                                            << CSV(vars::image_id(i)) << CSV(vars::id(i))
+                                            << CSV(p[0]) << CSV(p[1]) << CSV(p[2])
+                                            << CSV(p[3]) << CSV(p[4]) << CSV(pr[0])
+                                            << CSV(pr[1]) << CSV(pr[2]) << CSV(pr[3])
+                                            << CSV(pr[4]) << std::endl;
+        }
     }
     return std::vector<double>{1};
 });
@@ -61,6 +74,7 @@ const SpillMultiVar kSelected1mu1p([](const caf::SRSpillProxy* sr)
                 const auto & t = sr->dlp_true[i.match[0]];
                 OUT(output,"SELECTED_1MU1P")    << CSV(sr->hdr.run) << CSV(sr->hdr.subrun)
                                                 << CSV(sr->hdr.evt) << CSV(t.nu_id)
+                                                << CSV(vars::image_id(i)) << CSV(vars::id(i))
                                                 << CSV(vars::category(t))
                                                 << CSV(vars::category_topology(t))
                                                 << CSV(vars::category_interaction_mode(t))
