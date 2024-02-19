@@ -62,7 +62,7 @@ namespace cuts
                         energy = p.energy_deposit;
                     if(p.pid == 2 && energy > 143.425) // Muon greater than 50 cm.
                         ++counts[p.pid];
-                    else if((p.pid < 4 && energy > 25) || (p.pid == 4 && energy > 50))
+                    else if((p.pid != 2 && p.pid < 4 && energy > 25) || (p.pid == 4 && energy > 50))
                         ++counts[p.pid];
                 }
             }

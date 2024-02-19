@@ -94,18 +94,7 @@ namespace vars
             uint16_t cat(6);
             if(interaction.is_neutrino)
             {
-                uint32_t counts[5] = {};
-                for(auto &p : interaction.particles)
-                {
-                    if(p.is_primary)
-                    {
-                        double energy(p.csda_ke);
-                        if constexpr (std::is_same_v<T, caf::SRInteractionTruthDLPProxy>)
-                            energy = p.energy_deposit;
-                        if((p.pid < 4 && energy > 25) || (p.pid == 4 && energy > 50))
-                            ++counts[p.pid];
-                    }
-                }
+                std::vector<uint32_t> counts(cuts::count_primaries(interaction));
                 if(counts[0] == 0 && counts[1] == 0 && counts[2] == 1)
                 {
                     if(counts[3] == 0 && counts[4] == 1 && interaction.is_contained && interaction.is_fiducial) cat = 0;
