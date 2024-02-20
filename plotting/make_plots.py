@@ -40,7 +40,8 @@ def main(spectra_file, configuration, plot, output):
 
     pbar = tqdm(plot_keys)
     for k in pbar:
-        pbar.set_description(f'Making plot "{k}"')
+
+        pbar.set_description(f'{"Making plot `" + k + "`":^45}')
         desc = PlotDescription(k, cfg[k], output)
         if desc.type == 'hist1d':
             plot_histogram_1d(rf, desc)
