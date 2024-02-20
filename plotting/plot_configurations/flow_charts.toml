@@ -1,7 +1,7 @@
 [flow_1mu1p_efficiency]
 type = 'flow'
 direction = 'ttp'
-pops = [[0,1], [2,3,4], [5,]]
+pops = [[0,1], [2,3,4,5,6], [7,]]
 labels = ['1$\mu$1p', 'Other $\nu$', 'Cosmic']
 cuts = ['NoCut', 'FVCut', 'FVConCut', 'FVConTop1mu1pCut', 'All1mu1pCut']
 clabels = ['No Cut', 'Fiducial\nVolume', 'Containment', 'Topological', 'Flash Time']
@@ -12,7 +12,7 @@ span = [1,9]
 [flow_1mu1p_purity]
 type = 'flow'
 direction = 'ptt'
-pops = [[0,1], [2,3,4], [5,]]
+pops = [[0,1], [2,3,4,5,6], [7,]]
 labels = ['1$\mu$1p', 'Other $\nu$', 'Cosmic']
 cuts = ['NoCut', 'FVCut', 'FVConCut', 'FVConTop1mu1pCut', 'All1mu1pCut']
 clabels = ['No Cut', 'Fiducial\nVolume', 'Containment', 'Topological', 'Flash Time']
@@ -23,7 +23,7 @@ span = [1,9]
 [flow_1muNp_efficiency]
 type = 'flow'
 direction = 'ttp'
-pops = [[0,1,2,3], [4,], [5,]]
+pops = [[0,1,2,3], [4,5,6], [7,]]
 labels = ['1$\mu$Np', 'Other $\nu$', 'Cosmic']
 cuts = ['NoCut', 'FVCut', 'FVConCut', 'FVConTop1muNpCut', 'All1muNpCut']
 clabels = ['No Cut', 'Fiducial\nVolume', 'Containment', 'Topological', 'Flash Time']
@@ -34,10 +34,32 @@ span = [1,9]
 [flow_1muNp_purity]
 type = 'flow'
 direction = 'ptt'
-pops = [[0,1,2,3], [4,], [5,]]
+pops = [[0,1,2,3], [4,5,6], [7,]]
 labels = ['1$\mu$Np', 'Other $\nu$', 'Cosmic']
 cuts = ['NoCut', 'FVCut', 'FVConCut', 'FVConTop1muNpCut', 'All1muNpCut']
 clabels = ['No Cut', 'Fiducial\nVolume', 'Containment', 'Topological', 'Flash Time']
 title = '1$\mu$Np Selection Statistics'
+xlabel = 'Interactions / 2.5e20 POT'
+span = [1,9]
+
+[flow_1muX_efficiency]
+type = 'flow'
+direction = 'ttp'
+pops = [[0,1,2,3,4,5], [6,], [7,]]
+labels = ['$\nu_\mu$ CC', 'Other $\nu$', 'Cosmic']
+cuts = ['NoCut', 'FVCut', 'FVConCut', 'FVConTop1muXCut', 'All1muXCut']
+clabels = ['No Cut', 'Fiducial\nVolume', 'Containment', 'Topological', 'Flash Time']
+title = '$\nu_\mu$ CC Selection Statistics'
+xlabel = 'Interactions / 2.5e20 POT'
+span = [1,9]
+
+[flow_1muX_purity]
+type = 'flow'
+direction = 'ptt'
+pops = [[0,1,2,3,4,5], [6,], [7,]]
+labels = ['$\nu_\mu$ CC', 'Other $\nu$', 'Cosmic']
+cuts = ['NoCut', 'FVCut', 'FVConCut', 'FVConTop1muXCut', 'All1muXCut']
+clabels = ['No Cut', 'Fiducial\nVolume', 'Containment', 'Topological', 'Flash Time']
+title = '$\nu_\mu$ CC Selection Statistics'
 xlabel = 'Interactions / 2.5e20 POT'
 span = [1,9]

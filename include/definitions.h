@@ -315,20 +315,26 @@
     VARDLP_TCAT(kCategoryTTP_FVConCut,vars::category,cuts::fiducial_containment_cut);                           \
     VARDLP_TCAT(kCategoryTTP_FVConTop1mu1pCut,vars::category,cuts::fiducial_containment_topological_1mu1p_cut); \
     VARDLP_TCAT(kCategoryTTP_FVConTop1muNpCut,vars::category,cuts::fiducial_containment_topological_1muNp_cut); \
+    VARDLP_TCAT(kCategoryTTP_FVConTop1muXCut,vars::category,cuts::fiducial_containment_topological_1muX_cut);   \
     VARDLP_TCAT(kCategoryTTP_All1mu1pCut,vars::category,cuts::all_1mu1p_cut);                                   \
     VARDLP_TCAT(kCategoryTTP_All1muNpCut,vars::category,cuts::all_1muNp_cut);                                   \
+    VARDLP_TCAT(kCategoryTTP_All1muXCut,vars::category,cuts::all_1muX_cut);                                     \
     VARDLP_RCAT(kCategoryPTT_NoCut,vars::category,cuts::no_cut);                                                \
     VARDLP_RCAT(kCategoryPTT_FVCut,vars::category,cuts::fiducial_cut);                                          \
     VARDLP_RCAT(kCategoryPTT_FVConCut,vars::category,cuts::fiducial_containment_cut);                           \
     VARDLP_RCAT(kCategoryPTT_FVConTop1mu1pCut,vars::category,cuts::fiducial_containment_topological_1mu1p_cut); \
     VARDLP_RCAT(kCategoryPTT_FVConTop1muNpCut,vars::category,cuts::fiducial_containment_topological_1muNp_cut); \
+    VARDLP_RCAT(kCategoryPTT_FVConTop1muXCut,vars::category,cuts::fiducial_containment_topological_1muX_cut);   \
     VARDLP_RCAT(kCategoryPTT_All1mu1pCut,vars::category,cuts::all_1mu1p_cut);                                   \
     VARDLP_RCAT(kCategoryPTT_All1muNpCut,vars::category,cuts::all_1muNp_cut);                                   \
+    VARDLP_RCAT(kCategoryPTT_All1muXCut,vars::category,cuts::all_1muX_cut);                                     \
     VARDLP_RCAT(kCategoryTopologyPTT_NoCut,vars::category_topology,cuts::no_cut);                               \
     VARDLP_RCAT(kCategoryTopologyPTT_All1mu1pCut,vars::category_topology,cuts::all_1mu1p_cut);                  \
     VARDLP_RCAT(kCategoryTopologyPTT_All1muNpCut,vars::category_topology,cuts::all_1muNp_cut);                  \
+    VARDLP_RCAT(kCategoryTopologyPTT_All1muXCut,vars::category_topology,cuts::all_1muX_cut);                    \
     VARDLP_RCAT(kCategoryInteractionModePTT_All1mu1pCut,vars::category_interaction_mode,cuts::all_1mu1p_cut);   \
-    VARDLP_RCAT(kCategoryInteractionModePTT_All1muNpCut,vars::category_interaction_mode,cuts::all_1muNp_cut);
+    VARDLP_RCAT(kCategoryInteractionModePTT_All1muNpCut,vars::category_interaction_mode,cuts::all_1muNp_cut);   \
+    VARDLP_RCAT(kCategoryInteractionModePTT_All1muXCut,vars::category_interaction_mode,cuts::all_1muX_cut);
 
 
 /**
@@ -343,8 +349,10 @@
     VARDLP_TCAT(NAME ## _FVConCut,vars::VAR,cuts::fiducial_containment_cut);                                    \
     VARDLP_TCAT(NAME ## _FVConTop1mu1pCut,vars::VAR,cuts::fiducial_containment_topological_1mu1p_cut);          \
     VARDLP_TCAT(NAME ## _FVConTop1muNpCut,vars::VAR,cuts::fiducial_containment_topological_1muNp_cut);          \
+    VARDLP_TCAT(NAME ## _FVConTop1muXCut,vars::VAR,cuts::fiducial_containment_topological_1muX_cut);            \
     VARDLP_TCAT(NAME ## _All1mu1pCut,vars::VAR,cuts::all_1mu1p_cut);                                            \
-    VARDLP_TCAT(NAME ## _All1muNpCut,vars::VAR,cuts::all_1muNp_cut);
+    VARDLP_TCAT(NAME ## _All1muNpCut,vars::VAR,cuts::all_1muNp_cut);                                            \
+    VARDLP_TCAT(NAME ## _All1muXCut,vars::VAR,cuts::all_1muX_cut);
 
 
 /**
@@ -359,7 +367,9 @@
     VARDLP_PTT(NAME ## _FVConCut,vars::VAR,cuts::no_cut,cuts::fiducial_containment_cut);                           \
     VARDLP_PTT(NAME ## _FVConTop1mu1pCut,vars::VAR,cuts::no_cut,cuts::fiducial_containment_topological_1mu1p_cut); \
     VARDLP_PTT(NAME ## _FVConTop1muNpCut,vars::VAR,cuts::no_cut,cuts::fiducial_containment_topological_1muNp_cut); \
+    VARDLP_PTT(NAME ## _FVConTop1muXCut,vars::VAR,cuts::no_cut,cuts::fiducial_containment_topological_1muX_cut);   \
     VARDLP_PTT(NAME ## _All1mu1pCut,vars::VAR,cuts::no_cut,cuts::all_1mu1p_cut);                                   \
-    VARDLP_PTT(NAME ## _All1muNpCut,vars::VAR,cuts::no_cut,cuts::all_1muNp_cut);
+    VARDLP_PTT(NAME ## _All1muNpCut,vars::VAR,cuts::no_cut,cuts::all_1muNp_cut);                                   \
+    VARDLP_PTT(NAME ## _All1muXCut,vars::VAR,cuts::no_cut,cuts::all_1muX_cut);
 
 #endif
