@@ -533,6 +533,63 @@ namespace vars
             num /= std::sqrt(transverse_momentum(m) * transverse_momentum(p));
             return num;
         }
+
+    /**
+     * Variable for the cosine of the scattering angle between the primary
+     * proton and any attached proton.
+     * @tparam T the type of interaction (true or reco).
+     * @param interaction to apply the variable on.
+     * @return the cosine of the scattering angle between the primary proton
+     * and any attached proton.
+     * @note This is only valid for interactions with a primary proton.
+    */
+    template<class T>
+        double proton_scattering_cosine(const T & interaction)
+        {
+            double cos(-2);
+            size_t i(leading_particle_index(interaction, 4));
+            if(interaction.particles.size() <= i)
+                return cos;
+            auto & p(interaction.particles[i]);
+            if(p.pid == 4 && p.is_primary)
+            {
+                /**
+                 * Check if the proton has a daughter proton by comparing the end
+                 * of the primary proton to the start of each other particle.
+                */
+                for(const auto & part : interaction.particles)
+                {
+                    if(part.pid == 4 && !part.is_primary && part.start_point[0] == p.end_point[0] && part.start_point[1] == p.end_point[1] && part.start_point[2] == p.end_point[2])
+                    {
+                        double dot(p.truth_momentum[0] * part.truth_momentum[0] + p.truth_momentum[1] * part.truth_momentum[1] + p.truth_momentum[2] * part.truth_momentum[2]);
+                        double mag1(std::sqrt(std::pow(p.truth_momentum[0], 2) + std::pow(p.truth_momentum[1], 2) + std::pow(p.truth_momentum[2], 2)));
+                        double mag2(std::sqrt(std::pow(part.truth_momentum[0], 2) + std::pow(part.truth_momentum[1], 2) + std::pow(part.truth_momentum[2], 2)));
+                        cos = dot / (mag1 * mag2);
+                    }
+                }
+
+            }
+            return cos;
+      }
+    
+    /**
+     * Variable for the overlap fraction of the leading proton.
+     * @tparam T the type of interaction (true or reco).
+     * @param interaction to apply the variable on.
+     * @return the overlap fraction of the leading proton.
+    */
+    template<class T>
+        double leading_proton_overlap(const T & interaction)
+        {
+            size_t i(leading_particle_index(interaction, 4));
+            /**
+             * Check that the leading particle is actually a proton.
+            */
+            if(interaction.particles[i].pid == 4)
+                return overlap(interaction.particles[i]);
+            else
+                return -1;
+        }
 }
 
 #endif

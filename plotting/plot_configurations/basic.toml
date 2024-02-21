@@ -21,3 +21,10 @@ vars = 'sLowX'
 xlabel = 'True Low X-Coordinate [cm]'
 ylabel = 'Reco Low X-Coordinate [cm]'
 title = 'Particle Lowest X-Coordinate'
+
+[scattering_proton]
+type = 'hist2d'
+vars = 'sScatteringProtonOverlap'
+xlabel = 'Cos($\theta_{s}$)'
+ylabel = 'Overlap Fraction'
+title = 'Scattering Proton Overlap vs. Cos($\theta_{s}$)'

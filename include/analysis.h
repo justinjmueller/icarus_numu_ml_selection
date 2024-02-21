@@ -100,4 +100,6 @@ namespace ana
     // Simple particle variables.
     PVARDLP_TRUE(kCCOverlap,vars::overlap,cuts::no_cut,cuts::cathode_crossing_muon);
     PVARDLP_TRUE(kNonCCOverlap,vars::overlap,cuts::no_cut,cuts::non_cathode_crossing_muon);
+    VARDLP_TRUE(kProtonScattering,vars::proton_scattering_cosine,cuts::no_cut);
+    VARDLP_TRUE(kLeadingProtonOverlap,vars::leading_proton_overlap,cuts::no_cut);
 }

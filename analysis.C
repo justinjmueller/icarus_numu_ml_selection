@@ -173,6 +173,11 @@ void analysis()
     spectra.add_spectrum2d("sPrimaryPIDWellReco_Neutrino_confusion", Binning::Simple(10,0,10), Binning::Simple(10,0,10), kPrimaryPIDWellRecoTruth_Neutrino, kPrimaryPIDWellReco_Neutrino);
 
     /**
+     * Spectra (2D) for correlating truth quantities.
+    */
+    spectra.add_spectrum2d("sScatteringProtonOverlap", Binning::Simple(50, 0.25, 1), Binning::Simple(25, 0, 1), kProtonScattering, kLeadingProtonOverlap);
+
+    /**
      * Dummy spectra for dumping particle-level information to a CSV log file.
     */
     spectra.add_spectrum1d("sSelected", Binning::Simple(1, 0, 2), kSelected);
