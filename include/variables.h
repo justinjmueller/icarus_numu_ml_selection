@@ -6,6 +6,7 @@
 #ifndef VARIABLES_H
 #define VARIABLES_H
 
+#define ELECTRON_MASS 0.5109989461
 #define MUON_MASS 105.6583745
 #define PION_MASS 139.57039
 #define PROTON_MASS 938.2720813
@@ -301,6 +302,9 @@ namespace vars
             double energy(particle.energy_init);
             switch (particle.pid)
             {
+            case 1:
+                energy -= ELECTRON_MASS;
+                break;
             case 2:
                 energy -= MUON_MASS;
                 break;
