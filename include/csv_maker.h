@@ -40,10 +40,11 @@ void write_signal(const caf::SRSpillProxy* sr, const caf::SRInteractionTruthDLPP
  * Writes information about selected interactions to an output file.
  * @param sr is an SRSpillProxy that attaches to the StandardRecord of the
  * current spill.
- * @param i the selected interaction.
+ * @param i the truth interaction matched to by the selected interaction.
+ * @param j the selected interaction.
  * @return None.
 */
-void write_selected(const caf::SRSpillProxy* sr, const caf::SRInteractionTruthDLPProxy& i)
+void write_selected(const caf::SRSpillProxy* sr, const caf::SRInteractionTruthDLPProxy& i, const caf::SRInteractionDLPProxy& j)
 {
     output  << CSV(sr->hdr.run) << CSV(sr->hdr.subrun)
             << CSV(sr->hdr.evt) << CSV(i.nu_id)
@@ -192,7 +193,7 @@ const SpillMultiVar kSelected([](const caf::SRSpillProxy* sr)
             {
                 const auto & t = sr->dlp_true[i.match[0]];
                 OUT(output,"SELECTED_1MU1P");
-                write_selected(sr, t);
+                write_selected(sr, t, i);
             }
             else
             {
@@ -209,7 +210,7 @@ const SpillMultiVar kSelected([](const caf::SRSpillProxy* sr)
             {
                 const auto & t = sr->dlp_true[i.match[0]];
                 OUT(output,"SELECTED_1MUNP");
-                write_selected(sr, t);
+                write_selected(sr, t, i);
             }
             else
             {
@@ -226,7 +227,7 @@ const SpillMultiVar kSelected([](const caf::SRSpillProxy* sr)
             {
                 const auto & t = sr->dlp_true[i.match[0]];
                 OUT(output,"SELECTED_1MUX");
-                write_selected(sr, t);
+                write_selected(sr, t, i);
             }
             else
             {
