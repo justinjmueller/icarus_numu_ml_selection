@@ -1,8 +1,39 @@
-[variables]
+[general]
+columns = ['image_id', 'id', 'category', 'category_topology',
+           'category_mode', 'visible_energy', 'leading_muon_ke', 'leading_proton_ke', 'leading_muon_pt',
+           'leading_proton_pt', 'interaction_pt', 'leading_muon_cosine_theta_xz',
+           'leading_proton_cosine_theta_xz', 'cosine_opening_angle', 'cosine_opening_angle_transverse']
+
+[general.variables]
 visible_energy = [20, 0, 3000]
 interaction_pt = [25, 0, 1500]
 
-[geniesys]
+[sys.tpcnoise_coh]
+type = 'detector'
+cv_log = '/exp/icarus/app/users/mueller/sbn_ml_cafmaker/icarus_numu_ml_selection/output_cv.log'
+sys_log = '/exp/icarus/app/users/mueller/sbn_ml_cafmaker/icarus_numu_ml_selection/output_tpcnoise_coh_p1.log'
+channel = '1mu1p'
+nboots = 10000
+nuniverses = 1000
+
+[sys.recombination]
+type = 'detector'
+cv_log = '/exp/icarus/app/users/mueller/sbn_ml_cafmaker/icarus_numu_ml_selection/output_cv.log'
+sys_log = '/exp/icarus/app/users/mueller/sbn_ml_cafmaker/icarus_numu_ml_selection/output_recombination.log'
+channel = '1mu1p'
+nboots = 10000
+nuniverses = 1000
+
+[sys.signal_shape]
+type = 'detector'
+cv_log = '/exp/icarus/app/users/mueller/sbn_ml_cafmaker/icarus_numu_ml_selection/output_cv.log'
+sys_log = '/exp/icarus/app/users/mueller/sbn_ml_cafmaker/icarus_numu_ml_selection/output_untunedsigshape.log'
+channel = '1mu1p'
+nboots = 10000
+nuniverses = 1000
+
+[sys.geniesys]
+type = 'multisim'
 52 = 'GENIEReWeight_ICARUS_v2_multisim_ZExpAVariationResponse'
 53 = 'GENIEReWeight_ICARUS_v2_multisim_RPA_CCQE'
 54 = 'GENIEReWeight_ICARUS_v2_multisim_CoulombCCQE'
@@ -34,7 +65,8 @@ interaction_pt = [25, 0, 1500]
 80 = 'GENIEReWeight_ICARUS_v2_multisim_FSI_pi_VariationResponse'
 81 = 'GENIEReWeight_ICARUS_v2_multisim_FSI_N_VariationResponse'
 
-[fluxsys]
+[sys.fluxsys]
+type = 'multisim'
 115 = 'expskin_Flux'
 116 = 'horncurrent_Flux'
 117 = 'kminus_Flux'
