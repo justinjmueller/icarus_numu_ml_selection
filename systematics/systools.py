@@ -42,7 +42,7 @@ def extract_weights(path, selected, widx):
     Parameters
     ----------
     path: str
-        The full path of the input CAF file.
+        The full path to the input CAF file.
     selected: pandas.DataFrame
         The DataFrame containing information about the selected
         neutrinos (run, subrun, event, nu_id).
@@ -63,28 +63,42 @@ def extract_weights(path, selected, widx):
     caf['i'] = [x[0] for x in caf.index]
 
     common = caf.merge(selected, on=list(index_keys.values()), how='inner')
+    unique = ~common[['run', 'subrun', 'event', 'nu_id']].duplicated(keep='first')
+    common = common[unique]
     begin = rf['rec.mc.nu.wgt.univ..idx'].array()[0][widx]
     end = begin + rf['rec.mc.nu.wgt.univ..length'].array()[0][widx]
     l = int(rf['rec.mc.nu.wgt.univ..totarraysize'].array()[0] / len(rf['rec.mc.nu.wgt..length'].array()[0]))
-    universes = rf['rec.mc.nu.wgt.univ'].array()
-    weights = np.array([universes[ni][l*n + begin : l*n + end] for ni, n in common[['i', 'nu_id']].to_numpy()])
+    weights = np.empty((len(common), end - begin))
+    ioffset, eoffset = 0, 0
+    for wgt in rf['rec.mc.nu.wgt.univ'].iterate(step_size='1 GB'):
+        wgt = wgt['rec.mc.nu.wgt.univ']
+        batch = common[['i', 'nu_id']].to_numpy()
+        ext = np.array([wgt[ni-ioffset][l*n + begin : l*n + end] for ni, n in batch if ni-ioffset >= 0 and ni-ioffset < len(wgt)])
+        weights[eoffset:eoffset+ext.shape[0], :] = ext
+        ioffset += len(wgt)
+        eoffset += ext.shape[0]
 
     return weights
 
-def calc_covariance(selected, weights, bins):
+def calc_multisim_covariance(sys, caf, header, var, bins):
     """
     Calculates the covariance matrix of the binned reconstructed variable for
     the selected candidates using the systematic weights.
 
     Parameters
     ----------
-    selected: pandas.DataFrame
-        The DataFrame containing the tabular data about the selected candidates
-        and their binning.
-    weights: numpy.ndarray
-        The array of weights for each of the systematic universes.
-    bins: int
-        The number of bins.
+    sys: dict
+        The dictionary containing the configuration details for the systematic
+        variation. 
+    caf: str
+        The full path to the input CAF file.
+    header: list[str]
+        The list of column names for the selected interactions in the
+        input log file.
+    var: str
+        The name of the reconstructed variable.
+    bins: list[float]
+        The number of bins, lower edge, and upper edge of the variable.
 
     Returns
     -------
@@ -92,10 +106,27 @@ def calc_covariance(selected, weights, bins):
         The covariance matrix with shape (bins,bins) calculated with respect
         to the selected candidates and the weights.
     """
+    # Load the selected interactions
+    selected = read_log(sys['cv_log'], f'SELECTED_{sys["channel"].upper()}', header)
+
+    # Calculate the bin edges and the bin index for each selected
+    # interaction.
+    _, bin_edges = np.histogram(selected[var], bins=bins[0], range=bins[1:])
+    nbins = len(bin_edges) - 1
+    selected['bidx'] = np.digitize(selected[var], bin_edges) - 1
+
+    # Extract the weights for the systematic parameter.
+    weights = extract_weights(caf, selected, sys['index'])
     is_cosmic = selected['nu_id'] == -1
     ensemble = list()
     cv = list()
-    for b in range(bins):
+
+    # Loop over the bins and store 1) the total count per bin for each
+    # universe (ensemble has shape (nbins, nuniverses)) and 2) the
+    # central value for each bin (cv has shape (nbins,)). Interactions
+    # with cosmic origin are treated as having unit weight across all
+    # universes.
+    for b in range(bins[0]):
         mask = selected.bidx[~is_cosmic] == b
         e = np.sum(weights[mask, :], axis=0)
         cosmics = np.sum(selected.bidx[is_cosmic] == b)
@@ -103,21 +134,27 @@ def calc_covariance(selected, weights, bins):
             e += np.repeat(cosmics, e.shape[0])
         ensemble.append(e)
         cv.append(np.sum(selected.bidx == b))
+
+    # Calculate the covariance matrix of the ensemble about the central
+    # value points.
     ensemble = np.stack(ensemble, axis=0)
     cv = np.stack(cv, axis=0)
     cov = np.cov(np.subtract(cv[:, np.newaxis], ensemble))
     return cov
 
-def load_detector_variation(sys):
+def load_detector_variation(header, sys):
     """
     Loads the signal interactions and selected candidates common to the
     CV sample and the systematic variation sample.
 
     Parameters
     ----------
+    header: list[str]
+        The list of column names for the selected interactions in the
+        input log file.
     sys: dict
         The dictionary containing the configuration details for the systematic
-        variation
+        variation.
     
     Returns
     -------
@@ -128,10 +165,6 @@ def load_detector_variation(sys):
     sys_selected: pandas.DataFrame
         The selected candidates for the systematic variation sample.
     """
-    header = ['run', 'subrun', 'event', 'nu_id', 'image_id', 'id', 'category', 'category_topology',
-              'category_mode', 'visible_energy', 'leading_muon_ke', 'leading_proton_ke', 'leading_muon_pt',
-              'leading_proton_pt', 'interaction_pt', 'leading_muon_cosine_theta_xz',
-              'leading_proton_cosine_theta_xz', 'cosine_opening_angle', 'cosine_opening_angle_transverse']
     cv_signal = read_log(sys['cv_log'], 'NEUTRINO', header)
     sys_signal = read_log(sys['sys_log'], 'NEUTRINO', header)
     cv_selected = read_log(sys['cv_log'], f'SELECTED_{sys["channel"].upper()}', header).merge(cv_signal, how='inner', on=['run', 'subrun', 'event', 'nu_id'])
@@ -206,7 +239,7 @@ def generate_detector_universe(cov, nominal):
     perturbed = nominal + random_cholesky_variable(cov)
     return np.random.normal() * perturbed
 
-def calc_detector_response(sys, var, bins):
+def calc_detector_covariance(sys, header, var, bins):
     """
     Calculates the covariance matrix for the detector variation using
     the CV and systematic variation samples.
@@ -216,6 +249,9 @@ def calc_detector_response(sys, var, bins):
     sys: dict
         The dictionary containing the configuration details for the systematic
         variation.
+    header: list[str]
+        The list of column names for the selected interactions in the
+        input log file.
     var: str
         The name of the reconstructed variable.
     bins: list[float]
@@ -232,7 +268,7 @@ def calc_detector_response(sys, var, bins):
     dmatrix: numpy.array
         The covariance matrix of the detector response.
     """
-    common, cv_selected, sys_selected = load_detector_variation(sys)
+    common, cv_selected, sys_selected = load_detector_variation(header, sys)
 
     # Calculate the bin edges and the bin index for each interaction.
     _, bin_edges = np.histogram(cv_selected[var], bins=bins[0], range=bins[1:])
@@ -244,7 +280,7 @@ def calc_detector_response(sys, var, bins):
     nboots = sys['nboots']
     bins = np.zeros((2, nbins, nboots), dtype=np.int16)
     for i in range(nboots):
-        bins[:, :, i] = bootstrap_iterate(common, [cv_selected, sys_selected], nbins, stats_limit=1.0)
+        bins[:, :, i] = bootstrap_iterate(common, [cv_selected, sys_selected], nbins)
 
     # Calculate V_nominal and the associated covariance matrix (M_R).
     vnominal = np.mean(bins[1,:,:] - bins[0,:,:], axis=1)
@@ -266,3 +302,40 @@ def calc_detector_response(sys, var, bins):
     cv = np.array([np.sum(cv_selected['bidx'] == b) for b in range(nbins)])
 
     return cv, vnominal, rmatrix, dmatrix
+
+def calc_statistical_covariance(sys, header, var, bins):
+    """
+    Calculate the statistical covariance matrix for the selected
+    interactions.
+
+    Parameters
+    ----------
+    sys: dict
+        The dictionary containing the configuration details for the
+        uncertainty source.
+    header: list[str]
+        The list of column names for the selected interactions in the
+        input log file.
+    var: str
+        The name of the reconstructed variable.
+    bins: list[float]
+        The number of bins, lower edge, and upper edge of the variable.
+
+    Returns
+    -------
+    cov: numpy.array
+        The statistical covariance matrix.
+    """
+    selected = read_log(sys['cv_log'], f'SELECTED_{sys["channel"].upper()}', header)
+
+    # Calculate the bin edges and the bin index for each selected
+    # interaction.
+    _, bin_edges = np.histogram(selected[var], bins=bins[0], range=bins[1:])
+    nbins = len(bin_edges) - 1
+    selected['bidx'] = np.digitize(selected[var], bin_edges) - 1
+
+    # Calculate the statistical covariance matrix by constructing a
+    # diagonal matrix with the counts of selected interactions per bin.
+    cov = np.diag([np.sum(selected['bidx'] == b) for b in range(nbins)])
+    
+    return cov
