@@ -62,9 +62,8 @@ def extract_weights(path, selected, widx):
     caf = ak.to_dataframe(caf).rename(columns=index_keys)
     caf['i'] = [x[0] for x in caf.index]
 
-    common = caf.merge(selected, on=list(index_keys.values()), how='inner')
-    unique = ~common[['run', 'subrun', 'event', 'nu_id']].duplicated(keep='first')
-    common = common[unique]
+    cols = list(index_keys.values())
+    common = caf[~caf.duplicated(subset=cols, keep='first')].merge(selected[selected['nu_id'] != -1], on=cols, how='right')
     begin = rf['rec.mc.nu.wgt.univ..idx'].array()[0][widx]
     end = begin + rf['rec.mc.nu.wgt.univ..length'].array()[0][widx]
     l = int(rf['rec.mc.nu.wgt.univ..totarraysize'].array()[0] / len(rf['rec.mc.nu.wgt..length'].array()[0]))
