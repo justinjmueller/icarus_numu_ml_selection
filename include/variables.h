@@ -515,8 +515,7 @@ namespace vars
         {
             auto & m(interaction.particles[leading_particle_index(interaction, 2)]);
             auto & p(interaction.particles[leading_particle_index(interaction, 4)]);
-            double num(m.momentum[0] * p.momentum[0] + m.momentum[1] * p.momentum[1] + m.momentum[2] * p.momentum[2]);
-            num /= std::sqrt(m.csda_ke * p.csda_ke);
+            double num(m.start_dir[0] * p.start_dir[0] + m.start_dir[1] * p.start_dir[1] + m.start_dir[2] * p.start_dir[2]);
             return num;
         }
 
@@ -533,8 +532,8 @@ namespace vars
         {
             auto & m(interaction.particles[leading_particle_index(interaction, 2)]);
             auto & p(interaction.particles[leading_particle_index(interaction, 4)]);
-            double num(m.momentum[0] * p.momentum[0] + m.momentum[1] * p.momentum[1]);
-            num /= std::sqrt(transverse_momentum(m) * transverse_momentum(p));
+            double num(m.start_dir[0] * p.start_dir[0] + m.start_dir[1] * p.start_dir[1]);
+            num /= std::sqrt((1-m.start_dir[2]*m.start_dir[2])*(1-p.start_dir[2]*p.start_dir[2]));
             return num;
         }
 
