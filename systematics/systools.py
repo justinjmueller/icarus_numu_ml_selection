@@ -157,19 +157,19 @@ def load_detector_variation(header, sys):
     
     Returns
     -------
-    common_signal: pandas.DataFrame
-        The set of signal interactions common to both samples.
+    common_events: pandas.DataFrame
+        The set of events common to both samples.
     cv_selected: pandas.DataFrame
         The selected candidates for the CV sample.
     sys_selected: pandas.DataFrame
         The selected candidates for the systematic variation sample.
     """
-    cv_signal = read_log(sys['cv_log'], 'NEUTRINO', header)
-    sys_signal = read_log(sys['sys_log'], 'NEUTRINO', header)
-    cv_selected = read_log(sys['cv_log'], f'SELECTED_{sys["channel"].upper()}', header).merge(cv_signal, how='inner', on=['run', 'subrun', 'event', 'nu_id'])
-    sys_selected = read_log(sys['sys_log'], f'SELECTED_{sys["channel"].upper()}', header).merge(sys_signal, how='inner', on=['run', 'subrun', 'event', 'nu_id'])
-    common_signal = cv_signal.merge(sys_signal, how='inner', on=['run', 'subrun', 'event', 'nu_id'])
-    return common_signal, cv_selected, sys_selected
+    cv_events = read_log(sys['cv_log'], 'EVENT', header)
+    sys_events = read_log(sys['sys_log'], 'EVENT', header)
+    cv_selected = read_log(sys['cv_log'], f'SELECTED_{sys["channel"].upper()}', header)
+    sys_selected = read_log(sys['sys_log'], f'SELECTED_{sys["channel"].upper()}', header)
+    common_events = cv_events.merge(sys_events, how='inner', on=['run', 'subrun', 'event'])
+    return common_events, cv_selected, sys_selected
 
 def bootstrap_iterate(common, selected, nbins, stats_limit=1):
     """
@@ -194,7 +194,7 @@ def bootstrap_iterate(common, selected, nbins, stats_limit=1):
         The number of selected interactions in each bin.
      """
     choice = np.random.choice(np.arange(int(stats_limit * len(common)), dtype=int), size=int(stats_limit * len(common)), replace=True)
-    merged = [s.merge(common.iloc[choice], how='inner', on=['run', 'subrun', 'event', 'nu_id']) for s in selected]
+    merged = [s.merge(common.iloc[choice], how='inner', on=['run', 'subrun', 'event']) for s in selected]
     bins = np.zeros(shape=(len(merged), nbins), dtype=np.int16)
     for si, s in enumerate(merged):
         bins[si, :] = np.array([np.sum(s['bidx'] == b) for b in range(nbins)])
