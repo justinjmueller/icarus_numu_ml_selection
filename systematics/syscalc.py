@@ -6,7 +6,7 @@ import argparse
 import uproot
 import toml
 from tqdm import tqdm
-from systools import read_log, calc_multisim_covariance, calc_detector_covariance, calc_statistical_covariance
+from systools import read_log, calc_fractional_error, calc_multisim_covariance, calc_detector_covariance, calc_statistical_covariance
 
 def main(configuration, caf, channel, output):
     """
@@ -52,20 +52,26 @@ def main(configuration, caf, channel, output):
         syscfg['cv_log'] = log
         syscfg['channel'] = channel
         if syscfg['type'] == 'multisim':
-            covariances[f'{sysname}_{sysvar}'] = calc_multisim_covariance(syscfg, caf, header, sysvar, variables[sysvar])
+            covariances[f'{sysname}_{sysvar}'], cv = calc_multisim_covariance(syscfg, caf, header, sysvar, variables[sysvar])
+            covariances[f'fractional_{sysname}_{sysvar}'] = calc_fractional_error(covariances[f'{sysname}_{sysvar}'], cv)
         elif syscfg['type'] == 'detector':
-            c, v, r, d = calc_detector_covariance(syscfg, header, sysvar, variables[sysvar])
+            c, v, r, d, rcv, rcov = calc_detector_covariance(syscfg, header, sysvar, variables[sysvar])
             covariances[f'{sysname}_{sysvar}'] = d
             covariances[f'{sysname}_{sysvar}_cv'] = c
             covariances[f'{sysname}_{sysvar}_vnominal'] = v
             covariances[f'{sysname}_{sysvar}_rmatrix'] = r
+            covariances[f'{sysname}_{sysvar}_ratio'] = rcv
+            covariances[f'{sysname}_{sysvar}_cratio'] = rcov
+            covariances[f'fractional_{sysname}_{sysvar}'] = calc_fractional_error(d, c)
         elif syscfg['type'] == 'stats':
             covariances[f'statistical_{sysvar}'] = calc_statistical_covariance(syscfg, header, sysvar, variables[sysvar])
+            covariances[f'fractional_statistical_{sysvar}'] = calc_fractional_error(covariances[f'statistical_{sysvar}'], np.diag(covariances[f'statistical_{sysvar}']))
         else:
             raise ValueError(f'Unknown systematic type: {syscfg["type"]}')
         for g in syscfg['group']:
             gname = f'{g}_{sysvar}'
             covariances[gname] = covariances.get(gname, np.zeros((variables[sysvar][0], variables[sysvar][0]))) + covariances[f'{sysname}_{sysvar}']
+            covariances[f'fractional_{gname}'] = covariances.get(f'fractional_{gname}', np.zeros((variables[sysvar][0], variables[sysvar][0]))) + covariances[f'fractional_{sysname}_{sysvar}']
         
         # Save the covariance matrices (checkpoint).
         np.savez(f'{output}covariances_{channel}.npz', **covariances)

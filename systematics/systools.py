@@ -4,6 +4,26 @@ import awkward as ak
 import uproot
 from tqdm import tqdm
 
+def calc_fractional_error(cov, cv):
+    """
+    Normalize each element of the covariance matrix by the product of
+    the CV vector elements.
+
+    Parameters
+    ----------
+    cov: numpy.array
+        The covariance matrix to be normalized.
+    cv: numpy.array
+        The CV counts per bin to be used in the normalization.
+    
+    Returns
+    -------
+    numpy.array
+        The fractional covariance matrix.
+    """
+    norm = np.outer(cv, cv)        
+    return np.divide(cov, norm, where=norm!=0)
+
 def read_log(path, tag, header):
     """
     Reads an input log file and extracts lines with the specified tag
@@ -104,6 +124,8 @@ def calc_multisim_covariance(sys, caf, header, var, bins):
     cov: numpy.ndarray
         The covariance matrix with shape (bins,bins) calculated with respect
         to the selected candidates and the weights.
+    cv: numpy.ndarray
+        The central value of the selected candidates per bin.
     """
     # Load the selected interactions
     selected = read_log(sys['cv_log'], f'SELECTED_{sys["channel"].upper()}', header)
@@ -139,7 +161,7 @@ def calc_multisim_covariance(sys, caf, header, var, bins):
     ensemble = np.stack(ensemble, axis=0)
     cv = np.stack(cv, axis=0)
     cov = np.cov(np.subtract(cv[:, np.newaxis], ensemble))
-    return cov
+    return cov, cv
 
 def load_detector_variation(header, sys):
     """
@@ -266,6 +288,10 @@ def calc_detector_covariance(sys, header, var, bins):
         The covariance matrix of the nominal difference vector.
     dmatrix: numpy.array
         The covariance matrix of the detector response.
+    vratio: numpy.array
+        The bootstrapped ratio of the systematic variation to the CV sample.
+    cratio: numpy.array
+        The covariance matrix of the bootstrapped ratio.
     """
     common, cv_selected, sys_selected = load_detector_variation(header, sys)
 
@@ -285,13 +311,16 @@ def calc_detector_covariance(sys, header, var, bins):
     vnominal = np.mean(bins[1,:,:] - bins[0,:,:], axis=1)
     rmatrix = np.cov(bins[1,:,:] - bins[0,:,:] - vnominal[:,np.newaxis])
 
+    # Calculate the ratio and the associated covariance matrix.
+    vratio = np.mean(np.divide(bins[1,:,:], bins[0,:,:], where=bins[0,:,:]!=0), axis=1)
+    cratio = np.cov(np.divide(bins[1,:,:], bins[0,:,:], where=bins[0,:,:]!=0) - vratio[:,np.newaxis])
+
     # Mask bins which will cause a singular response matrix.
-    rank = np.linalg.matrix_rank(rmatrix)
     singular_mask = (vnominal != 0)
 
     # Calculate the detector response matrix (M_D).
     nuniverses = sys['nuniverses']
-    universes = np.zeros((rank, nuniverses), dtype=np.float64)
+    universes = np.zeros((np.sum(singular_mask), nuniverses), dtype=np.float64)
     for n in range(nuniverses):
         universes[:, n] = generate_detector_universe(rmatrix[singular_mask, :][:, singular_mask], vnominal[singular_mask])
     dmatrix = np.zeros((nbins, nbins), dtype=np.float64)
@@ -300,7 +329,7 @@ def calc_detector_covariance(sys, header, var, bins):
         dmatrix[b, singular_mask] = cov[bi, :]
     cv = np.array([np.sum(cv_selected['bidx'] == b) for b in range(nbins)])
 
-    return cv, vnominal, rmatrix, dmatrix
+    return cv, vnominal, rmatrix, dmatrix, vratio, cratio
 
 def calc_statistical_covariance(sys, header, var, bins):
     """
