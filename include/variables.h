@@ -538,6 +538,32 @@ namespace vars
         }
 
     /**
+     * Variable for the softmax score of the leading muon.
+     * @tparam T the type of interaction (true or reco).
+     * @param interaction to apply the variable on.
+     * @return the softmax score of the leading muon.
+    */
+    template<class T>
+        double leading_muon_softmax(const T & interaction)
+        {
+            auto & m(interaction.particles[leading_particle_index(interaction, 2)]);
+            return m.pid_scores[2];
+        }
+    
+    /**
+     * Variable for the softmax score of the leading proton.
+     * @tparam T the type of interaction (true or reco).
+     * @param interaction to apply the variable on.
+     * @return the softmax score of the leading proton.
+    */
+    template<class T>
+        double leading_proton_softmax(const T & interaction)
+        {
+            auto & p(interaction.particles[leading_particle_index(interaction, 4)]);
+            return p.pid_scores[4];
+        }
+
+    /**
      * Variable for the cosine of the scattering angle between the primary
      * proton and any attached proton.
      * @tparam T the type of interaction (true or reco).
