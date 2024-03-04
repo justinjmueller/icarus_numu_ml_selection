@@ -312,7 +312,9 @@ def calc_detector_covariance(sys, header, var, bins):
     rmatrix = np.cov(bins[1,:,:] - bins[0,:,:] - vnominal[:,np.newaxis])
 
     # Calculate the ratio and the associated covariance matrix.
-    vratio = np.mean(np.divide(bins[1,:,:], bins[0,:,:], where=bins[0,:,:]!=0), axis=1)
+    vratio = np.ones((nbins, nboots), dtype=np.float64)
+    np.divide(bins[1,:,:], bins[0,:,:], where=bins[0,:,:]!=0, out=vratio)
+    vratio = np.mean(vratio, axis=1)
     cratio = np.cov(np.divide(bins[1,:,:], bins[0,:,:], where=bins[0,:,:]!=0) - vratio[:,np.newaxis])
 
     # Mask bins which will cause a singular response matrix.
