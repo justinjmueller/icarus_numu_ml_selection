@@ -24,6 +24,18 @@ std::ofstream output("output.log");
 #define CSV(VAL) VAL << ","
 
 /**
+ * Writes information about the event to an output file.
+ * @param sr is an SRSpillProxy that attaches to the StandardRecord of the
+ * current spill.
+ * @return None.
+*/
+void write_event(const caf::SRSpillProxy* sr)
+{
+    output  << CSV(sr->hdr.run) << CSV(sr->hdr.subrun)
+            << CSV(sr->hdr.evt) << std::endl;
+}
+
+/**
  * Writes information about signal interactions to an output file.
  * @param sr is an SRSpillProxy that attaches to the StandardRecord of the
  * current spill.
@@ -182,6 +194,8 @@ const SpillMultiVar kSignal([](const caf::SRSpillProxy* sr)
 */
 const SpillMultiVar kSelected([](const caf::SRSpillProxy* sr)
 {
+    OUT(output,"EVENT");
+    write_event(sr);
     for(auto const & i : sr->dlp)
     {
         /**
