@@ -74,6 +74,8 @@ void write_selected(const caf::SRSpillProxy* sr, const caf::SRInteractionTruthDL
             << CSV(vars::leading_proton_cosine_theta_xz(j))
             << CSV(vars::cosine_opening_angle(j))
             << CSV(vars::cosine_opening_angle_transverse(j))
+            << CSV(vars::leading_muon_softmax(j))
+            << CSV(vars::leading_proton_softmax(j))
             << std::endl;
 }
 
@@ -91,7 +93,7 @@ void write_none(const caf::SRSpillProxy* sr)
             << CSV(-1) << CSV(-1) << CSV(-1)
             << CSV(-1) << CSV(-1) << CSV(-1)
             << CSV(-1) << CSV(-1) << CSV(-1)
-            << std::endl;
+            << CSV(-1) << CSV(-1) << std::endl;
 }
 
 /**
