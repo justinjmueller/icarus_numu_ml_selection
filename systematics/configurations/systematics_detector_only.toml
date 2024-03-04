@@ -1,0 +1,42 @@
+[general]
+columns = ['image_id', 'id', 'category', 'category_topology',
+           'category_mode', 'visible_energy', 'leading_muon_ke', 'leading_proton_ke', 'leading_muon_pt',
+           'leading_proton_pt', 'interaction_pt', 'leading_muon_cosine_theta_xz',
+           'leading_proton_cosine_theta_xz', 'cosine_opening_angle', 'cosine_opening_angle_transverse',
+           'leading_muon_softmax', 'leading_proton_softmax']
+cv_log = '/exp/icarus/app/users/mueller/sbn_ml_cafmaker/icarus_numu_ml_selection/output_cv.log'
+
+[general.variables]
+visible_energy = [25, 0, 3000]
+
+[sys.statistical]
+type = 'stats'
+group = ['total',]
+
+[sys.intnoise]
+type = 'detector'
+group = ['detector', 'total_nostat', 'total']
+sys_log = '/exp/icarus/app/users/mueller/sbn_ml_cafmaker/icarus_numu_ml_selection/output_intnoise.log'
+nboots = 1000
+nuniverses = 1000
+
+[sys.cohnoise]
+type = 'detector'
+group = ['detector', 'total_nostat', 'total']
+sys_log = '/exp/icarus/app/users/mueller/sbn_ml_cafmaker/icarus_numu_ml_selection/output_cohnoise.log'
+nboots = 1000
+nuniverses = 1000
+
+[sys.recombination]
+type = 'detector'
+group = ['detector', 'total_nostat', 'total']
+sys_log = '/exp/icarus/app/users/mueller/sbn_ml_cafmaker/icarus_numu_ml_selection/output_recombination.log'
+nboots = 1000
+nuniverses = 1000
+
+[sys.signal_shape]
+type = 'detector'
+group = ['detector', 'total_nostat', 'total']
+sys_log = '/exp/icarus/app/users/mueller/sbn_ml_cafmaker/icarus_numu_ml_selection/output_sigshape.log'
+nboots = 1000
+nuniverses = 1000
