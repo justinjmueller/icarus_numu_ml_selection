@@ -70,8 +70,8 @@ def main(configuration, caf, channel, output):
             raise ValueError(f'Unknown systematic type: {syscfg["type"]}')
         for g in syscfg['group']:
             gname = f'{g}_{sysvar}'
-            covariances[gname] = covariances.get(gname, np.zeros((variables[sysvar][0], variables[sysvar][0]))) + covariances[f'{sysname}_{sysvar}']
-            covariances[f'fractional_{gname}'] = covariances.get(f'fractional_{gname}', np.zeros((variables[sysvar][0], variables[sysvar][0]))) + covariances[f'fractional_{sysname}_{sysvar}']
+            covariances[gname] = covariances.get(gname, np.zeros((int(variables[sysvar][0]), int(variables[sysvar][0])))) + covariances[f'{sysname}_{sysvar}']
+            covariances[f'fractional_{gname}'] = covariances.get(f'fractional_{gname}', np.zeros((int(variables[sysvar][0]), int(variables[sysvar][0])))) + covariances[f'fractional_{sysname}_{sysvar}']
         
         # Save the covariance matrices (checkpoint).
         np.savez(f'{output}covariances_{channel}.npz', **covariances)

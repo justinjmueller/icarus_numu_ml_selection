@@ -132,7 +132,7 @@ def calc_multisim_covariance(sys, caf, header, var, bins):
 
     # Calculate the bin edges and the bin index for each selected
     # interaction.
-    _, bin_edges = np.histogram(selected[var], bins=bins[0], range=bins[1:])
+    _, bin_edges = np.histogram(selected[var], bins=int(bins[0]), range=bins[1:])
     nbins = len(bin_edges) - 1
     selected['bidx'] = np.digitize(selected[var], bin_edges) - 1
 
@@ -147,7 +147,7 @@ def calc_multisim_covariance(sys, caf, header, var, bins):
     # central value for each bin (cv has shape (nbins,)). Interactions
     # with cosmic origin are treated as having unit weight across all
     # universes.
-    for b in range(bins[0]):
+    for b in range(int(bins[0])):
         mask = selected.bidx[~is_cosmic] == b
         e = np.sum(weights[mask, :], axis=0)
         cosmics = np.sum(selected.bidx[is_cosmic] == b)
@@ -296,7 +296,7 @@ def calc_detector_covariance(sys, header, var, bins):
     common, cv_selected, sys_selected = load_detector_variation(header, sys)
 
     # Calculate the bin edges and the bin index for each interaction.
-    _, bin_edges = np.histogram(cv_selected[var], bins=bins[0], range=bins[1:])
+    _, bin_edges = np.histogram(cv_selected[var], bins=int(bins[0]), range=bins[1:])
     nbins = len(bin_edges) - 1
     cv_selected['bidx'] = np.digitize(cv_selected[var], bin_edges) - 1
     sys_selected['bidx'] = np.digitize(sys_selected[var], bin_edges) - 1
@@ -360,7 +360,7 @@ def calc_statistical_covariance(sys, header, var, bins):
 
     # Calculate the bin edges and the bin index for each selected
     # interaction.
-    _, bin_edges = np.histogram(selected[var], bins=bins[0], range=bins[1:])
+    _, bin_edges = np.histogram(selected[var], bins=int(bins[0]), range=bins[1:])
     nbins = len(bin_edges) - 1
     selected['bidx'] = np.digitize(selected[var], bin_edges) - 1
 
