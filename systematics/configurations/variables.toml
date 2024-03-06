@@ -1,149 +1,113 @@
-[reco_energy_1mu1p_flux]
+[metadata]
+columns = ['run', 'subrun', 'event', 'nu_id', 'image_id', 'id', 'category', 'category_topology', 'category_mode']
+
+[plots.hist1d_fractional_1mu1p]
+channel = '1mu1p'
+systematics = {'reweightable' = 'Flux/Interaction'}
+multiplot = 'error'
+categorical_var = 'category_topology'
+categories = ['1$\mu$1p', '1$\mu$0h', '1$\mu$Np, N$>$1', '1$\mu$1$\pi$1p', 'Other $\nu_\mu$ CC', '$\nu$ NC', 'Cosmic', 'Other']
+merge = [[0,], [2,], [1,], [3,], [4,7], [5,]]
+colors = [0, 1, 2, 3, 4, 5]
+ylabel = 'Entries'
+title = 'Selected 1$\mu$1p Candidates'
+show_percentage = true
+plot_kwargs = {histtype = 'barstacked'}
+
+[plots.hist1d_fractional_1muNp]
+channel = '1muNp'
+systematics = {'reweightable' = 'Flux/Interaction'}
+multiplot = 'error'
+categorical_var = 'category_topology'
+categories = ['1$\mu$1p', '1$\mu$0h', '1$\mu$Np, N$>$1', '1$\mu$1$\pi$1p', 'Other $\nu_\mu$ CC', '$\nu$ NC', 'Cosmic', 'Other']
+merge = [[0,], [2,], [1,], [3,], [4,7], [5,]]
+colors = [0, 1, 2, 3, 4, 5]
+ylabel = 'Entries'
+title = 'Selected 1$\mu$Np Candidates'
+show_percentage = true
+plot_kwargs = {histtype = 'barstacked'}
+
+[plots.hist1d_fractional_1muX]
+channel = '1muX'
+systematics = {'reweightable' = 'Flux/Interaction'}
+multiplot = 'error'
+categorical_var = 'category_topology'
+categories = ['1$\mu$1p', '1$\mu$0h', '1$\mu$Np, N$>$1', '1$\mu$1$\pi$1p', 'Other $\nu_\mu$ CC', '$\nu$ NC', 'Cosmic', 'Other']
+merge = [[0,], [2,], [1,], [3,], [4,7], [5,]]
+colors = [0, 1, 2, 3, 4, 5]
+ylabel = 'Entries'
+title = 'Selected $\nu_\mu$ CC Candidates'
+show_percentage = true
+plot_kwargs = {histtype = 'barstacked'}
+
+[variables.visible_energy]
 var = 'visible_energy'
-bins = [20, 0, 3000]
-ylim = [0, 300]
-categorical_var = 'category_topology'
-sys_var = 'flux'
-categories = ['1$\mu$1p', '1$\mu$0h', '1$\mu$Np, N$>$1', '1$\mu$1$\pi$1p', 'Other $\nu_\mu$ CC', '$\nu$ NC', 'Cosmic', 'Other']
-merge = [[0,], [2,], [1,], [3,], [4,7], [5,], [6,]]
-colors = [0, 1, 2, 3, 4, 5, 6]
-xlabel = 'Reconstructed Visible Energy [MeV]'
-ylabel = 'Entries / 2.5e20 POT'
-title = 'Selected 1$\mu$1p Candidates'
-show_percentage = true
-plot_kwargs = {histtype = 'barstacked'}
+bins = [25, 0, 3000]
+ylim = {'1mu1p' = [0, 2500], '1muNp' = [0, 3500], '1muX' = [0, 6000]}
+xlabel = 'Visible Energy [MeV]'
 
-[reco_energy_1mu1p_genie]
-var = 'visible_energy'
-bins = [20, 0, 3000]
-ylim = [0, 300]
-categorical_var = 'category_topology'
-sys_var = 'genie'
-categories = ['1$\mu$1p', '1$\mu$0h', '1$\mu$Np, N$>$1', '1$\mu$1$\pi$1p', 'Other $\nu_\mu$ CC', '$\nu$ NC', 'Cosmic', 'Other']
-merge = [[0,], [2,], [1,], [3,], [4,7], [5,], [6,]]
-colors = [0, 1, 2, 3, 4, 5, 6]
-xlabel = 'Reconstructed Visible Energy [MeV]'
-ylabel = 'Entries / 2.5e20 POT'
-title = 'Selected 1$\mu$1p Candidates'
-show_percentage = true
-plot_kwargs = {histtype = 'barstacked'}
-
-[reco_energy_1mu1p_stat]
-var = 'visible_energy'
-bins = [20, 0, 3000]
-ylim = [0, 300]
-categorical_var = 'category_topology'
-sys_var = 'statistical'
-categories = ['1$\mu$1p', '1$\mu$0h', '1$\mu$Np, N$>$1', '1$\mu$1$\pi$1p', 'Other $\nu_\mu$ CC', '$\nu$ NC', 'Cosmic', 'Other']
-merge = [[0,], [2,], [1,], [3,], [4,7], [5,], [6,]]
-colors = [0, 1, 2, 3, 4, 5, 6]
-xlabel = 'Reconstructed Visible Energy [MeV]'
-ylabel = 'Entries / 2.5e20 POT'
-title = 'Selected 1$\mu$1p Candidates'
-show_percentage = true
-plot_kwargs = {histtype = 'barstacked'}
-
-[reco_energy_1mu1p_totalnostat]
-var = 'visible_energy'
-bins = [20, 0, 3000]
-ylim = [0, 300]
-categorical_var = 'category_topology'
-sys_var = 'TotalNoStat'
-categories = ['1$\mu$1p', '1$\mu$0h', '1$\mu$Np, N$>$1', '1$\mu$1$\pi$1p', 'Other $\nu_\mu$ CC', '$\nu$ NC', 'Cosmic', 'Other']
-merge = [[0,], [2,], [1,], [3,], [4,7], [5,], [6,]]
-colors = [0, 1, 2, 3, 4, 5, 6]
-xlabel = 'Reconstructed Visible Energy [MeV]'
-ylabel = 'Entries / 2.5e20 POT'
-title = 'Selected 1$\mu$1p Candidates'
-show_percentage = true
-plot_kwargs = {histtype = 'barstacked'}
-
-[reco_energy_1mu1p_total]
-var = 'visible_energy'
-bins = [20, 0, 3000]
-ylim = [0, 300]
-categorical_var = 'category_topology'
-sys_var = 'total'
-categories = ['1$\mu$1p', '1$\mu$0h', '1$\mu$Np, N$>$1', '1$\mu$1$\pi$1p', 'Other $\nu_\mu$ CC', '$\nu$ NC', 'Cosmic', 'Other']
-merge = [[0,], [2,], [1,], [3,], [4,7], [5,], [6,]]
-colors = [0, 1, 2, 3, 4, 5, 6]
-xlabel = 'Reconstructed Visible Energy [MeV]'
-ylabel = 'Entries / 2.5e20 POT'
-title = 'Selected 1$\mu$1p Candidates'
-show_percentage = true
-plot_kwargs = {histtype = 'barstacked'}
-
-[reco_pt_1mu1p_flux]
+[variables.interaction_pt]
 var = 'interaction_pt'
-bins = [25, 0, 1500]
-ylim = [0, 250]
-categorical_var = 'category_topology'
-sys_var = 'flux'
-categories = ['1$\mu$1p', '1$\mu$0h', '1$\mu$Np, N$>$1', '1$\mu$1$\pi$1p', 'Other $\nu_\mu$ CC', '$\nu$ NC', 'Cosmic', 'Other']
-merge = [[0,], [2,], [1,], [3,], [4,7], [5,], [6,]]
-colors = [0, 1, 2, 3, 4, 5, 6]
-xlabel = 'Reconstructed Transverse Momentum [MeV/c]'
-ylabel = 'Entries / 2.5e20 POT'
-title = 'Selected 1$\mu$1p Candidates'
-show_percentage = true
-plot_kwargs = {histtype = 'barstacked'}
+bins = [25, 0, 1200]
+ylim = {'1mu1p' = [0, 2500], '1muNp' = [0, 3500], '1muX' = [0, 5000]}
+xlabel = 'Total Transverse Momentum [MeV]'
 
-[reco_pt_1mu1p_genie]
-var = 'interaction_pt'
-bins = [25, 0, 1500]
-ylim = [0, 250]
-categorical_var = 'category_topology'
-sys_var = 'genie'
-categories = ['1$\mu$1p', '1$\mu$0h', '1$\mu$Np, N$>$1', '1$\mu$1$\pi$1p', 'Other $\nu_\mu$ CC', '$\nu$ NC', 'Cosmic', 'Other']
-merge = [[0,], [2,], [1,], [3,], [4,7], [5,], [6,]]
-colors = [0, 1, 2, 3, 4, 5, 6]
-xlabel = 'Reconstructed Transverse Momentum [MeV/c]'
-ylabel = 'Entries / 2.5e20 POT'
-title = 'Selected 1$\mu$1p Candidates'
-show_percentage = true
-plot_kwargs = {histtype = 'barstacked'}
+[variables.leading_muon_ke]
+var = 'leading_muon_ke'
+bins = [25, 0, 2000]
+ylim = {'1mu1p' = [0, 2500], '1muNp' = [0, 4000], '1muX' = [0, 7000]}
+xlabel = 'Muon Kinetic Energy [MeV]'
 
-[reco_pt_1mu1p_stat]
-var = 'interaction_pt'
-bins = [25, 0, 1500]
-ylim = [0, 250]
-categorical_var = 'category_topology'
-sys_var = 'statistical'
-categories = ['1$\mu$1p', '1$\mu$0h', '1$\mu$Np, N$>$1', '1$\mu$1$\pi$1p', 'Other $\nu_\mu$ CC', '$\nu$ NC', 'Cosmic', 'Other']
-merge = [[0,], [2,], [1,], [3,], [4,7], [5,], [6,]]
-colors = [0, 1, 2, 3, 4, 5, 6]
-xlabel = 'Reconstructed Transverse Momentum [MeV/c]'
-ylabel = 'Entries / 2.5e20 POT'
-title = 'Selected 1$\mu$1p Candidates'
-show_percentage = true
-plot_kwargs = {histtype = 'barstacked'}
+[variables.leading_proton_ke]
+var = 'leading_proton_ke'
+bins = [25, 0, 600]
+ylim = {'1mu1p' = [0, 2500], '1muNp' = [0, 3500], '1muX' = [0, 5000]}
+xlabel = 'Proton Kinetic Energy [MeV]'
 
-[reco_pt_1mu1p_totalnostat]
-var = 'interaction_pt'
-bins = [25, 0, 1500]
-ylim = [0, 250]
-categorical_var = 'category_topology'
-sys_var = 'TotalNoStat'
-categories = ['1$\mu$1p', '1$\mu$0h', '1$\mu$Np, N$>$1', '1$\mu$1$\pi$1p', 'Other $\nu_\mu$ CC', '$\nu$ NC', 'Cosmic', 'Other']
-merge = [[0,], [2,], [1,], [3,], [4,7], [5,], [6,]]
-colors = [0, 1, 2, 3, 4, 5, 6]
-xlabel = 'Reconstructed Transverse Momentum [MeV/c]'
-ylabel = 'Entries / 2.5e20 POT'
-title = 'Selected 1$\mu$1p Candidates'
-show_percentage = true
-plot_kwargs = {histtype = 'barstacked'}
+[variables.leading_muon_pt]
+var = 'leading_muon_pt'
+bins = [25, 0, 750]
+ylim = {'1mu1p' = [0, 2500], '1muNp' = [0, 3500], '1muX' = [0, 5000]}
+xlabel = 'Muon Transverse Momentum [MeV/c]'
 
-[reco_pt_1mu1p_total]
-var = 'interaction_pt'
-bins = [25, 0, 1500]
-ylim = [0, 250]
-categorical_var = 'category_topology'
-sys_var = 'total'
-categories = ['1$\mu$1p', '1$\mu$0h', '1$\mu$Np, N$>$1', '1$\mu$1$\pi$1p', 'Other $\nu_\mu$ CC', '$\nu$ NC', 'Cosmic', 'Other']
-merge = [[0,], [2,], [1,], [3,], [4,7], [5,], [6,]]
-colors = [0, 1, 2, 3, 4, 5, 6]
-xlabel = 'Reconstructed Transverse Momentum [MeV/c]'
-ylabel = 'Entries / 2.5e20 POT'
-title = 'Selected 1$\mu$1p Candidates'
-show_percentage = true
-plot_kwargs = {histtype = 'barstacked'}
+[variables.leading_proton_pt]
+var = 'leading_proton_pt'
+bins = [25, 0, 750]
+ylim = {'1mu1p' = [0, 2500], '1muNp' = [0, 3500], '1muX' = [0, 5000]}
+xlabel = 'Proton Transverse Momentum [MeV/c]'
+
+[variables.leading_muon_cosine_theta_xz]
+var = 'leading_muon_cosine_theta_xz'
+bins = [25, -1, 1]
+ylim = {'1mu1p' = [0, 5000], '1muNp' = [0, 7000], '1muX' = [0, 15000]}
+xlabel = 'Muon Cos($\theta_{xz}$)'
+
+[variables.leading_proton_cosine_theta_xz]
+var = 'leading_proton_cosine_theta_xz'
+bins = [25, -1, 1]
+ylim = {'1mu1p' = [0, 5000], '1muNp' = [0, 7000], '1muX' = [0, 15000]}
+xlabel = 'Proton Cos($\theta_{xz}$)'
+
+[variables.cosine_opening_angle]
+var = 'cosine_opening_angle'
+bins = [25, -1, 1]
+ylim = {'1mu1p' = [0, 1400], '1muNp' = [0, 2000], '1muX' = [0, 3000]}
+xlabel = 'Cosine Opening Angle'
+
+[variables.cosine_opening_angle_transverse]
+var = 'cosine_opening_angle_transverse'
+bins = [25, -1, 1]
+ylim = {'1mu1p' = [0, 7000], '1muNp' = [0, 10000], '1muX' = [0, 15000]}
+xlabel = 'Cosine Opening Angle Transverse'
+
+[variables.leading_muon_softmax]
+var = 'leading_muon_softmax'
+bins = [25, 0, 1]
+ylim = {'1mu1p' = [0, 1400], '1muNp' = [0, 2000], '1muX' = [0, 4000]}
+xlabel = 'Muon Softmax Score'
+
+[variables.leading_proton_softmax]
+var = 'leading_proton_softmax'
+bins = [25, 0, 1]
+ylim = {'1mu1p' = [0, 14000], '1muNp' = [0, 20000], '1muX' = [0, 30000]}
+xlabel = 'Proton Softmax Score'
