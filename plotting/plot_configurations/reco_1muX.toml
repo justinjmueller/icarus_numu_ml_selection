@@ -1,0 +1,21 @@
+[reco_energy_1muX]
+type = 'hist1d'
+vars = 'sVisibleEnergyPTT_All1muXCut'
+categories = {0 = '1$\mu$1p', 1 = '1$\mu$1p (Non-signal)', 2 = '1$\mu$Np, N$>$1', 3 = '1$\mu$Np, N$>$1 (Non-signal)', 4 = '$\nu_\mu$ CC', 5 = '$\nu_\mu$ CC (Non-signal)', 6 = 'Other $\nu$', 7 = 'Cosmic'}
+merge = [[4,0,2], [5,1,3], [6,], [7,]]
+colors = [0, 1, 2, 3]
+xlabel = 'Reconstructed Visible Energy [MeV]'
+ylabel = 'Entries / 2.5e20 POT'
+title = 'Selected $\nu_\mu$ CC Candidates'
+show_percentage = true
+plot_kwargs = {histtype = 'barstacked'}
+
+[reco_energy_interaction_mode_1muX]
+type = 'hist1d'
+vars = 'sVisibleEnergyPTT_InteractionMode_All1muXCut'
+categories = {0 = '$\nu_\mu$ CC QE', 1 = '$\nu_\mu$ CC Res', 2 = '$\nu_\mu$ CC MEC', 3 = '$\nu_\mu$ CC DIS', 4 = '$\nu_\mu$ CC Coh', 5 = '$\nu_e$ CC', 6 = '$\nu$ NC', 7 = 'Cosmic'}
+xlabel = 'Reconstructed Visible Energy [MeV]'
+ylabel = 'Entries / 2.5e20 POT'
+title = 'Selected 1$\mu$1p Candidates'
+show_percentage = true
+plot_kwargs = {histtype = 'barstacked'}
