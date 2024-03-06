@@ -473,7 +473,7 @@ namespace vars
     template<class T>
         double cosine_theta_xz(const T & particle)
         {
-            return particle.momentum[2] / std::sqrt(std::pow(particle.momentum[0], 2) + std::pow(particle.momentum[2], 2));
+            return particle.start_dir[2] / std::sqrt(std::pow(particle.start_dir[0], 2) + std::pow(particle.start_dir[2], 2));
         }
 
     /**
