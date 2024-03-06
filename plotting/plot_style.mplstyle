@@ -1,48 +1,49 @@
-
-# Figure
-figure.constrained_layout.use: True
-figure.facecolor: white
-figure.titlesize: 24
-
-# Axes
-axes.titlesize : 24
-axes.labelsize : 20
-axes.linewidth: 2
-
-# Lines
-lines.linewidth : 3
-lines.markersize : 2
-
-# Axis Ticks
-xtick.labelsize: 16
-xtick.major.size: 10
-xtick.minor.size: 5
-xtick.major.width: 2
-xtick.minor.width: 1.5
-ytick.labelsize: 16
-ytick.major.size: 10
-ytick.minor.size: 5
-ytick.major.width: 2
-ytick.minor.width: 1.5
-
-# Histograms
-patch.linewidth: 2.0
-patch.facecolor: blue
-patch.edgecolor: eeeeee
-patch.antialiased: True
-
-# Legend
-legend.fontsize: 16
-legend.frameon: True
-legend.markerscale: 2.0
-
 # Font
-font.family: sans-serif
 font.sans-serif:  Helvetica, Helvetica Neue, Nimbus Sans, Liberation Sans, Arial
 
-# Figure saving
-savefig.transparent: False
-savefig.facecolor: white
-savefig.bbox: tight
+# Figure
+figure.titlesize: 36
+figure.facecolor: white
+figure.constrained_layout.use: True
 
+# Axes
+axes.linewidth: 1.0
+axes.labelsize: xx-large
+axes.titlesize: 36
+axes.titlepad: 24
+
+# Patches
+patch.linewidth: 2.0
+
+# Ticks
+xtick.top: True
+xtick.bottom: True
+xtick.direction: in
+xtick.minor.visible: True
+xtick.major.size: 10
+xtick.minor.size: 5
+xtick.labelsize: x-large
+
+ytick.left: True
+ytick.right: True
+ytick.direction: in
+ytick.minor.visible: True
+ytick.major.size: 10
+ytick.minor.size: 5
+ytick.labelsize: x-large
+
+# Grid
+grid.color: b2b2b2
+grid.linestyle: --
+grid.linewidth: 0.5
+
+# Legend
+legend.fontsize: 12
+legend.frameon: False
+
+# Lines
+lines.linewidth: 2
+
+# Colors
 axes.prop_cycle: cycler('color', ['009E73', 'D55E00', '000000', '0072B2', 'E69F00', 'CC79A7', '56B4E9', 'F0E442',])
+image.cmap: cividis
