@@ -31,6 +31,13 @@ sys_log = '/exp/icarus/app/users/mueller/sbn_ml_cafmaker/icarus_numu_ml_selectio
 nboots = 1000
 nuniverses = 1000
 
+[sys.intnoise]
+type = 'detector'
+group = ['detector', 'total_nostat', 'total']
+sys_log = '/exp/icarus/app/users/mueller/sbn_ml_cafmaker/icarus_numu_ml_selection/output_intnoise.log'
+nboots = 1000
+nuniverses = 1000
+
 [sys.recombination]
 type = 'detector'
 group = ['detector', 'total_nostat', 'total']
