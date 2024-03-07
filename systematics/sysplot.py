@@ -97,14 +97,14 @@ def plot_histogram(desc, selected, cov):
     width = list()
     for m in desc.merge[::-1]:
         mask = np.isin(selected[desc.categorical_var], m)
-        c, e = np.histogram(selected[desc.var][mask], bins=desc.bins[0], range=desc.bins[1:])
+        c, e = np.histogram(selected[desc.var][mask], bins=int(desc.bins[0]), range=desc.bins[1:])
         contents.append(c)
         centers.append((e[1:] + e[:-1]) / 2.0)
         width.append(np.diff(e))
         labels.append(desc.categories[m[0]])
 
     colors = [f'C{i}' for i in desc.colors][::-1]
-    ax.hist(centers, weights=contents, bins=desc.bins[0], range=desc.bins[1:], label=labels, color=colors, histtype='barstacked')
+    ax.hist(centers, weights=contents, bins=int(desc.bins[0]), range=desc.bins[1:], label=labels, color=colors, histtype='barstacked')
     h, l = ax.get_legend_handles_labels()
     show_percentage = hasattr(desc, 'show_percentage') and desc.show_percentage
     if show_percentage:

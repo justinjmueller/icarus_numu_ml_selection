@@ -108,6 +108,6 @@ xlabel = 'Muon Softmax Score'
 
 [variables.leading_proton_softmax]
 var = 'leading_proton_softmax'
-bins = [25, 0, 1]
+bins = [25.0, 0.8, 1.0]
 ylim = {'1mu1p' = [0, 14000], '1muNp' = [0, 20000], '1muX' = [0, 30000]}
 xlabel = 'Proton Softmax Score'
