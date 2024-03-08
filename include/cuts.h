@@ -353,7 +353,7 @@ namespace cuts
      * @return true if the interaction is a 1muX (not 1muNp) neutrino interaction.
      */
     template<class T>
-        bool signal_1muX_not_1muNp(const T & interaction) { return !topological_1muX_cut(interaction) && !topological_1muNp_cut<T>(interaction) && neutrino(interaction); }
+        bool signal_1muX_notNp(const T & interaction) { return !topological_1muNp_cut(interaction) && topological_1muX_cut<T>(interaction) && neutrino(interaction); }
 
     /**
      * Define the true "other neutrino" interaction classification (1mu1p).

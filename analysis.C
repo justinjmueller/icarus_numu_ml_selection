@@ -23,7 +23,7 @@ void analysis()
      * 1. BNB neutrino (full flux) + out-of-time cosmics (v09_63_01).
      * 2. BNB in-time cosmics + out-of-time cosmics (v09_63_01).
     */
-    SpecContainer spectra("/pnfs/icarus/scratch/users/mueller/bnb_nucosmics_v6.flat.root", "spectra_nucosmics.root", 1.253e19, 2.5e20);
+    //SpecContainer spectra("/pnfs/icarus/scratch/users/mueller/bnb_nucosmics_v6.flat.root", "spectra_nucosmics.root", 1.253e19, 2.5e20);
     //SpecContainer spectra("/exp/icarus/data/users/mueller/mlcafs/bnb_intime.flat.root", "spectra_intime.root", 9070*2.05e14, 2.5e20);
 
     /**
@@ -43,7 +43,7 @@ void analysis()
      * 9. BNB neutrino-only (full flux)  *  Elli. Recombination * (v09_82_02_01).
      * 10. BNB neutrino-only (full flux) * Untuned Signal Shape * (v09_82_02_01).
     */
-    //SpecContainer spectra("/pnfs/icarus/scratch/users/mueller/systematics/sample_cv.flat.root", "spectra_cv.root", -1, 2.5e20);
+    SpecContainer spectra("/pnfs/icarus/scratch/users/mueller/systematics/sample_cv.flat.root", "spectra_cv.root", -1, 2.5e20);
     //SpecContainer spectra("/pnfs/icarus/scratch/users/mueller/systematics/sample_cohnoise.flat.root", "spectra_tpcnoise_coh_p1.root", -1, 2.5e20);
     //SpecContainer spectra("/pnfs/icarus/scratch/users/mueller/systematics/sample_intnoise.flat.root", "spectra_intnoise.root", -1, 2.5e20);
     //SpecContainer spectra("/pnfs/icarus/scratch/users/mueller/systematics/sample_recombination.flat.root", "spectra_recombination.root", -1, 2.5e20);
@@ -68,12 +68,20 @@ void analysis()
     spectra.add_spectrum1d("sEnergy_1muNp_Np_signal_bias", Binning::Simple(50,-1,1), kEnergy_1muNp_Np_signal_bias);
     spectra.add_spectrum1d("sEnergy_1muNp_othernu_bias", Binning::Simple(50,-1,1), kEnergy_1muNp_othernu_bias);
     spectra.add_spectrum1d("sEnergy_1muNp_cosmic_bias", Binning::Simple(50,-1,1), kEnergy_1muNp_cosmic_bias);
+    spectra.add_spectrum1d("sEnergy_1muX_1p_signal_bias", Binning::Simple(50,-1,1), kEnergy_1muX_1p_signal_bias);
+    spectra.add_spectrum1d("sEnergy_1muX_Np_signal_bias", Binning::Simple(50,-1,1), kEnergy_1muX_Np_signal_bias);
+    spectra.add_spectrum1d("sEnergy_1muX_X_bias", Binning::Simple(50,-1,1), kEnergy_1muX_X_bias);
+    spectra.add_spectrum1d("sEnergy_1muX_othernu_bias", Binning::Simple(50,-1,1), kEnergy_1muX_othernu_bias);
 
     spectra.add_spectrum1d("sNuEnergy_1mu1p_signal_bias", Binning::Simple(50,-1,1), kNuEnergy_1mu1p_signal_bias);
     spectra.add_spectrum1d("sNuEnergy_1mu1p_othernu_bias", Binning::Simple(50,-1,1), kNuEnergy_1mu1p_othernu_bias);
     spectra.add_spectrum1d("sNuEnergy_1muNp_1p_signal_bias", Binning::Simple(50,-1,1), kNuEnergy_1muNp_1p_signal_bias);
     spectra.add_spectrum1d("sNuEnergy_1muNp_Np_signal_bias", Binning::Simple(50,-1,1), kNuEnergy_1muNp_Np_signal_bias);
     spectra.add_spectrum1d("sNuEnergy_1muNp_othernu_bias", Binning::Simple(50,-1,1), kNuEnergy_1muNp_othernu_bias);
+    spectra.add_spectrum1d("sNuEnergy_1muX_1p_signal_bias", Binning::Simple(50,-1,1), kNuEnergy_1muX_1p_signal_bias);
+    spectra.add_spectrum1d("sNuEnergy_1muX_Np_signal_bias", Binning::Simple(50,-1,1), kNuEnergy_1muX_Np_signal_bias);
+    spectra.add_spectrum1d("sNuEnergy_1muX_X_bias", Binning::Simple(50,-1,1), kNuEnergy_1muX_X_bias);
+    spectra.add_spectrum1d("sNuEnergy_1muX_othernu_bias", Binning::Simple(50,-1,1), kNuEnergy_1muX_othernu_bias);
 
     /**
      * Spectra (2D) for counting selection statistics by interaction categorization (efficiency).

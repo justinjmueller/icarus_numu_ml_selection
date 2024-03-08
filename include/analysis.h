@@ -86,12 +86,20 @@ namespace ana
     VARDLP_BIAS(kEnergy_1muNp_Np_signal_bias,vars::visible_energy,vars::visible_energy,cuts::signal_1muNp_Nnot1,cuts::all_1muNp_cut);
     VARDLP_BIAS(kEnergy_1muNp_othernu_bias,vars::visible_energy,vars::visible_energy,cuts::other_nu_1muNp,cuts::all_1muNp_cut);
     VARDLP_BIAS(kEnergy_1muNp_cosmic_bias,vars::visible_energy,vars::visible_energy,cuts::cosmic,cuts::all_1muNp_cut);
+    VARDLP_BIAS(kEnergy_1muX_1p_signal_bias,vars::visible_energy,vars::visible_energy,cuts::signal_1mu1p,cuts::all_1muX_cut);
+    VARDLP_BIAS(kEnergy_1muX_Np_signal_bias,vars::visible_energy,vars::visible_energy,cuts::signal_1muNp_Nnot1,cuts::all_1muX_cut);
+    VARDLP_BIAS(kEnergy_1muX_X_bias,vars::visible_energy,vars::visible_energy,cuts::signal_1muX_notNp,cuts::all_1muX_cut);
+    VARDLP_BIAS(kEnergy_1muX_othernu_bias,vars::visible_energy,vars::visible_energy,cuts::other_nu_1muX,cuts::all_1muX_cut);
 
     VARDLP_BIAS(kNuEnergy_1mu1p_signal_bias,vars::neutrino_energy,vars::visible_energy,cuts::signal_1mu1p,cuts::all_1mu1p_cut);
     VARDLP_BIAS(kNuEnergy_1mu1p_othernu_bias,vars::neutrino_energy,vars::visible_energy,cuts::other_nu_1mu1p,cuts::all_1mu1p_cut);
     VARDLP_BIAS(kNuEnergy_1muNp_1p_signal_bias,vars::neutrino_energy,vars::visible_energy,cuts::signal_1mu1p,cuts::all_1muNp_cut);
     VARDLP_BIAS(kNuEnergy_1muNp_Np_signal_bias,vars::neutrino_energy,vars::visible_energy,cuts::signal_1muNp_Nnot1,cuts::all_1muNp_cut);
     VARDLP_BIAS(kNuEnergy_1muNp_othernu_bias,vars::neutrino_energy,vars::visible_energy,cuts::other_nu_1muNp,cuts::all_1muNp_cut);
+    VARDLP_BIAS(kNuEnergy_1muX_1p_signal_bias,vars::neutrino_energy,vars::visible_energy,cuts::signal_1mu1p,cuts::all_1muX_cut);
+    VARDLP_BIAS(kNuEnergy_1muX_Np_signal_bias,vars::neutrino_energy,vars::visible_energy,cuts::signal_1muNp_Nnot1,cuts::all_1muX_cut);
+    VARDLP_BIAS(kNuEnergy_1muX_X_bias,vars::neutrino_energy,vars::visible_energy,cuts::signal_1muX_notNp,cuts::all_1muX_cut);
+    VARDLP_BIAS(kNuEnergy_1muX_othernu_bias,vars::neutrino_energy,vars::visible_energy,cuts::other_nu_1muX,cuts::all_1muX_cut);
 
     // Variables for match validation.
     PVARDLP_TRUE(kLowXTruth,vars::lowx,cuts::no_cut,cuts::matched);

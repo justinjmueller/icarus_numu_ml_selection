@@ -1,3 +1,12 @@
+[energy_1muX_bias]
+type = 'hist1d'
+vars = ['sEnergy_1muX_1p_signal_bias', 'sEnergy_1muX_Np_signal_bias', 'sEnergy_1muX_X_bias', 'sEnergy_1muX_othernu_bias']
+labels = ['1$\mu$1p', '1$\mu$2+p', 'Other $\nu_\mu$ CC', 'Other $\nu$']
+xlabel = '($E_{reco}$ -  $E_{visible}$) / $E_{visible}$'
+ylabel = 'Entries / 2.5e20 POT'
+title = 'Selected $\nu_\mu$ CC Candidates'
+plot_kwargs = {histtype = 'barstacked'}
+
 [reco_energy_1muX]
 type = 'hist1d'
 vars = 'sVisibleEnergyPTT_All1muXCut'
