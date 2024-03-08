@@ -68,20 +68,20 @@ void analysis()
     spectra.add_spectrum1d("sEnergy_1muNp_Np_signal_bias", Binning::Simple(50,-1,1), kEnergy_1muNp_Np_signal_bias);
     spectra.add_spectrum1d("sEnergy_1muNp_othernu_bias", Binning::Simple(50,-1,1), kEnergy_1muNp_othernu_bias);
     spectra.add_spectrum1d("sEnergy_1muNp_cosmic_bias", Binning::Simple(50,-1,1), kEnergy_1muNp_cosmic_bias);
-    spectra.add_spectrum1d("sEnergy_1muX_1p_signal_bias", Binning::Simple(50,-1,1), kEnergy_1muX_1p_signal_bias);
-    spectra.add_spectrum1d("sEnergy_1muX_Np_signal_bias", Binning::Simple(50,-1,1), kEnergy_1muX_Np_signal_bias);
-    spectra.add_spectrum1d("sEnergy_1muX_X_bias", Binning::Simple(50,-1,1), kEnergy_1muX_X_bias);
-    spectra.add_spectrum1d("sEnergy_1muX_othernu_bias", Binning::Simple(50,-1,1), kEnergy_1muX_othernu_bias);
+    spectra.add_spectrum1d("sEnergy_1muX_1p_signal_bias", Binning::Simple(100,-1,1), kEnergy_1muX_1p_signal_bias);
+    spectra.add_spectrum1d("sEnergy_1muX_Np_signal_bias", Binning::Simple(100,-1,1), kEnergy_1muX_Np_signal_bias);
+    spectra.add_spectrum1d("sEnergy_1muX_X_bias", Binning::Simple(100,-1,1), kEnergy_1muX_X_bias);
+    spectra.add_spectrum1d("sEnergy_1muX_othernu_bias", Binning::Simple(100,-1,1), kEnergy_1muX_othernu_bias);
 
     spectra.add_spectrum1d("sNuEnergy_1mu1p_signal_bias", Binning::Simple(50,-1,1), kNuEnergy_1mu1p_signal_bias);
     spectra.add_spectrum1d("sNuEnergy_1mu1p_othernu_bias", Binning::Simple(50,-1,1), kNuEnergy_1mu1p_othernu_bias);
     spectra.add_spectrum1d("sNuEnergy_1muNp_1p_signal_bias", Binning::Simple(50,-1,1), kNuEnergy_1muNp_1p_signal_bias);
     spectra.add_spectrum1d("sNuEnergy_1muNp_Np_signal_bias", Binning::Simple(50,-1,1), kNuEnergy_1muNp_Np_signal_bias);
     spectra.add_spectrum1d("sNuEnergy_1muNp_othernu_bias", Binning::Simple(50,-1,1), kNuEnergy_1muNp_othernu_bias);
-    spectra.add_spectrum1d("sNuEnergy_1muX_1p_signal_bias", Binning::Simple(50,-1,1), kNuEnergy_1muX_1p_signal_bias);
-    spectra.add_spectrum1d("sNuEnergy_1muX_Np_signal_bias", Binning::Simple(50,-1,1), kNuEnergy_1muX_Np_signal_bias);
-    spectra.add_spectrum1d("sNuEnergy_1muX_X_bias", Binning::Simple(50,-1,1), kNuEnergy_1muX_X_bias);
-    spectra.add_spectrum1d("sNuEnergy_1muX_othernu_bias", Binning::Simple(50,-1,1), kNuEnergy_1muX_othernu_bias);
+    spectra.add_spectrum1d("sNuEnergy_1muX_1p_signal_bias", Binning::Simple(100,-1,1), kNuEnergy_1muX_1p_signal_bias);
+    spectra.add_spectrum1d("sNuEnergy_1muX_Np_signal_bias", Binning::Simple(100,-1,1), kNuEnergy_1muX_Np_signal_bias);
+    spectra.add_spectrum1d("sNuEnergy_1muX_X_bias", Binning::Simple(100,-1,1), kNuEnergy_1muX_X_bias);
+    spectra.add_spectrum1d("sNuEnergy_1muX_othernu_bias", Binning::Simple(100,-1,1), kNuEnergy_1muX_othernu_bias);
 
     /**
      * Spectra (2D) for counting selection statistics by interaction categorization (efficiency).
