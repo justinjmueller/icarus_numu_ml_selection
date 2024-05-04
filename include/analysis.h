@@ -19,6 +19,10 @@ namespace ana
     VARDLP_TRUE(kCountParticlesTruth,vars::count_particles,cuts::no_cut);
     VARDLP_TRUE(kCountPrimariesTruth,vars::count_primaries,cuts::no_cut);
 
+    VARDLP_RECO(kVisibleEnergy_1mu1p, vars::visible_energy, cuts::all_1mu1p_cut);
+    VARDLP_RECO(kVisibleEnergy_1muNp, vars::visible_energy, cuts::all_1muNp_cut);
+    VARDLP_RECO(kVisibleEnergy_1muX, vars::visible_energy, cuts::all_1muX_cut);
+
     // Define "variables" for binning interactions by some categorical class.
     DEFINECAT();
 

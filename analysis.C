@@ -60,6 +60,10 @@ void analysis()
     /**
      * Spectra (1D) for interactions.
     */
+    spectra.add_spectrum1d("sVisibleEnergy_1mu1p", Binning::Simple(25, 0, 3000), kVisibleEnergy_1mu1p);
+    spectra.add_spectrum1d("sVisibleEnergy_1muNp", Binning::Simple(25, 0, 3000), kVisibleEnergy_1muNp);
+    spectra.add_spectrum1d("sVisibleEnergy_1muX", Binning::Simple(25, 0, 3000), kVisibleEnergy_1muX);
+
     spectra.add_spectrum1d("sCountParticles", Binning::Simple(20, 0, 20), kCountParticles);
     spectra.add_spectrum1d("sCountPrimaries", Binning::Simple(20, 0, 20), kCountPrimaries);
     spectra.add_spectrum1d("sCountParticlesTruth", Binning::Simple(20, 0, 20), kCountParticlesTruth);
