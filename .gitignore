@@ -68,3 +68,5 @@ csv/*
 
 # Python virtual environment
 .venv
+
+systematics/cpp/*
