@@ -8,6 +8,17 @@ cv_log = '/exp/icarus/app/users/mueller/sbn_ml_cafmaker/icarus_numu_ml_selection
 
 [general.variables]
 visible_energy = [25, 0, 3000]
+interaction_pt = [25, 0, 1200]
+leading_muon_ke = [25, 0, 2000]
+leading_proton_ke = [25, 0, 600]
+leading_muon_pt = [25, 0, 750]
+leading_proton_pt = [25, 0, 750]
+leading_muon_cosine_theta_xz = [25, -1, 1]
+leading_proton_cosine_theta_xz = [25, -1, 1]
+cosine_opening_angle = [25, -1, 1]
+cosine_opening_angle_transverse = [25, -1, 1]
+leading_muon_softmax = [25, 0, 1]
+leading_proton_softmax = [25.0, 0.8, 1.0]
 
 [sys.statistical]
 type = 'stats'
@@ -38,5 +49,12 @@ nuniverses = 1000
 type = 'detector'
 group = ['detector', 'total_nostat', 'total']
 sys_log = '/exp/icarus/app/users/mueller/sbn_ml_cafmaker/icarus_numu_ml_selection/output_sigshape.log'
+nboots = 1000
+nuniverses = 1000
+
+[sys.optical]
+type = 'detector'
+group = ['detector', 'total_nostat', 'total']
+sys_log = '/exp/icarus/app/users/mueller/sbn_ml_cafmaker/icarus_numu_ml_selection/output_optical.log'
 nboots = 1000
 nuniverses = 1000
