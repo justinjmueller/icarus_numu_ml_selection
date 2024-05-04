@@ -24,6 +24,41 @@ std::ofstream output("output.log");
 #define CSV(VAL) VAL << ","
 
 /**
+ * Writes kinematic information about the leading muon and proton.
+ * @param sr is an SRSpillProxy that attaches to the StandardRecord of the
+ * current spill.
+ * @param i the truth interaction matched to by the selected interaction.
+ * @param j the selected interaction.
+ * @return None.
+*/
+void write_kinematics(const caf::SRSpillProxy* sr, const caf::SRInteractionTruthDLPProxy& i, const caf::SRInteractionDLPProxy& j)
+{
+    const auto & mi(i.particles[vars::leading_particle_index(i, 2)]);
+    const auto & pi(i.particles[vars::leading_particle_index(i, 4)]);
+    const auto & mj(j.particles[vars::leading_particle_index(j, 2)]);
+    const auto & pj(j.particles[vars::leading_particle_index(j, 4)]);
+    output  << CSV(sr->hdr.run) << CSV(sr->hdr.evt)
+            << CSV(vars::image_id(i)) << CSV(vars::id(i))
+            << CSV(vars::category(i))
+            << CSV(vars::category_topology(i))
+            << CSV(vars::category_interaction_mode(i))
+            << CSV(vars::leading_muon_ke(i))
+            << CSV(vars::leading_proton_ke(i))
+            << CSV(mi.truth_start_dir[0]) << CSV(mi.truth_start_dir[1]) << CSV(mi.truth_start_dir[2])
+            << CSV(pi.truth_start_dir[0]) << CSV(pi.truth_start_dir[1]) << CSV(pi.truth_start_dir[2])
+            << CSV(mi.truth_momentum[0]) << CSV(mi.truth_momentum[1]) << CSV(mi.truth_momentum[2])
+            << CSV(pi.truth_momentum[0]) << CSV(pi.truth_momentum[1]) << CSV(pi.truth_momentum[2])
+            << CSV(vars::leading_muon_ke(j))
+            << CSV(vars::leading_proton_ke(j))
+            << CSV(mj.start_dir[0]) << CSV(mj.start_dir[1]) << CSV(mj.start_dir[2])
+            << CSV(pj.start_dir[0]) << CSV(pj.start_dir[1]) << CSV(pj.start_dir[2])
+            << CSV(mj.momentum[0]) << CSV(mj.momentum[1]) << CSV(mj.momentum[2])
+            << CSV(pj.momentum[0]) << CSV(pj.momentum[1]) << CSV(pj.momentum[2])
+            << CSV(vars::phiT(j)) << CSV(vars::alphaT(j))
+            << std::endl;
+}
+
+/**
  * Writes information about the event to an output file.
  * @param sr is an SRSpillProxy that attaches to the StandardRecord of the
  * current spill.
@@ -211,6 +246,8 @@ const SpillMultiVar kSelected([](const caf::SRSpillProxy* sr)
                 const auto & t = sr->dlp_true[i.match[0]];
                 OUT(output,"SELECTED_1MU1P");
                 write_selected(sr, t, i);
+                OUT(output,"KINEMATICS");
+                write_kinematics(sr, t, i);
             }
             else
             {
