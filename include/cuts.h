@@ -266,6 +266,39 @@ namespace cuts
         bool all_1muX_cut(const T & interaction) { return topological_1muX_cut<T>(interaction) && fiducial_cut<T>(interaction) && flash_cut<T>(interaction) && containment_cut<T>(interaction); }
 
     /**
+     * Apply a fiducial, containment, topological (1mu1p), and flash time cut
+     * (logical "and" of each).
+     * @tparam T the type of interaction (true or reco).
+     * @param interaction to select on.
+     * @return true if the interaction passes the fiducial, containment,
+     * topological, and flash time cut.
+     */
+    template<class T>
+        bool all_1mu1p_data_cut(const T & interaction) { return topological_1mu1p_cut<T>(interaction) && fiducial_cut<T>(interaction) && flash_cut_data<T>(interaction) && containment_cut<T>(interaction); }
+
+    /**
+     * Apply a fiducial, containment, topological (1muNp), and flash time cut
+     * (logical "and" of each).
+     * @tparam T the type of interaction (true or reco).
+     * @param interaction to select on.
+     * @return true if the interaction passes the fiducial, containment,
+     * topological, and flash time cut.
+     */
+    template<class T>
+        bool all_1muNp_data_cut(const T & interaction) { return topological_1muNp_cut<T>(interaction) && fiducial_cut<T>(interaction) && flash_cut_data<T>(interaction) && containment_cut<T>(interaction); }
+    
+    /**
+     * Apply a fiducial, containment, topological (1muX), and flash time cut
+     * (logical "and" of each).
+     * @tparam T the type of interaction (true or reco).
+     * @param interaction to select on.
+     * @return true if the interaction passes the fiducial, containment,
+     * topological, and flash time cut.
+     */
+    template<class T>
+        bool all_1muX_data_cut(const T & interaction) { return topological_1muX_cut<T>(interaction) && fiducial_cut<T>(interaction) && flash_cut_data<T>(interaction) && containment_cut<T>(interaction); }
+
+    /**
      * Defined the true neutrino interaction classification.
      * @tparam T the type of interaction (true or reco).
      * @param interaction to select on.
