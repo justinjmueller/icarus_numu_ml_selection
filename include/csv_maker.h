@@ -60,6 +60,7 @@ void write_selected(const caf::SRSpillProxy* sr, const caf::SRInteractionTruthDL
 {
     output  << CSV(sr->hdr.run) << CSV(sr->hdr.subrun)
             << CSV(sr->hdr.evt) << CSV(i.nu_id)
+            << CSV(sr->hdr.triggerinfo.global_trigger_det_time)
             << CSV(vars::image_id(i)) << CSV(vars::id(i))
             << CSV(vars::category(i))
             << CSV(vars::category_topology(i))
@@ -93,7 +94,7 @@ void write_none(const caf::SRSpillProxy* sr)
             << CSV(-1) << CSV(-1) << CSV(-1)
             << CSV(-1) << CSV(-1) << CSV(-1)
             << CSV(-1) << CSV(-1) << CSV(-1)
-            << CSV(-1) << CSV(-1) << std::endl;
+            << CSV(-1) << CSV(-1) << CSV(-1) << std::endl;
 }
 
 /**
