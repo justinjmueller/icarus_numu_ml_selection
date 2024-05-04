@@ -372,4 +372,15 @@
     VARDLP_PTT(NAME ## _All1muNpCut,vars::VAR,cuts::no_cut,cuts::all_1muNp_cut);                                   \
     VARDLP_PTT(NAME ## _All1muXCut,vars::VAR,cuts::no_cut,cuts::all_1muX_cut);
 
+/**
+ * Preprocessor macro for broadcasting a variable across reco interactions
+ * passing the three main signal cuts.
+ * @param NAME (base) to assign to the variable.
+ * @param VAR to broadcast.
+*/
+#define RECO_SIGNAL_VAR(NAME,VAR)                                         \
+    VARDLP_RECO(NAME ## _1mu1p,VAR,cuts::all_1mu1p_data_cut);             \
+    VARDLP_RECO(NAME ## _1muNp,VAR,cuts::all_1muNp_data_cut);             \
+    VARDLP_RECO(NAME ## _1muX,VAR,cuts::all_1muX_data_cut);               \
+
 #endif
