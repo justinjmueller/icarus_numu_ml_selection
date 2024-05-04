@@ -43,6 +43,32 @@ namespace cuts
         bool valid_flashmatch(const T & interaction) { return !std::isnan(interaction.flash_time) && interaction.fmatched == 1; }
 
     /**
+     * Check if the particle meets final state signal requirements.
+     * Particles must be primary and have an energy above threshold.
+     * Muons must have a length of at least 50 cm (143.425 MeV), protons
+     * must have an energy above 50 MeV, and all other particles must have
+     * an energy above 25 MeV.
+     * @tparam T the type of particle (true or reco).
+     * @param particle to check.
+     * @return true if the particle is a final state signal particle.
+    */
+    template<class T>
+        bool final_state_signal(const T & p)
+        {
+            bool passes(false);
+            if(p.is_primary)
+            {
+                double energy(p.pid > 1 ? p.csda_ke : p.calo_ke);
+                if constexpr (std::is_same_v<T, caf::SRParticleTruthDLPProxy>)
+                    energy = p.energy_deposit;
+
+                if((p.pid == 2 && energy > 143.425) || (p.pid != 2 && p.pid < 4 && energy > 25) || (p.pid == 4 && energy > 50))
+                    passes = true;
+            }
+            return passes;
+        }
+
+    /**
      * Count the primaries of the interaction with cuts applied to each particle.
      * @tparam T the type of interaction (true or reco).
      * @param interaction to find the topology of.
@@ -55,16 +81,8 @@ namespace cuts
             std::vector<uint32_t> counts(5, 0);
             for(auto &p : interaction.particles)
             {
-                if(p.is_primary)
-                {
-                    double energy(p.pid > 1 ? p.csda_ke : p.calo_ke);
-                    if constexpr (std::is_same_v<T, caf::SRInteractionTruthDLPProxy>)
-                        energy = p.energy_deposit;
-                    if(p.pid == 2 && energy > 143.425) // Muon greater than 50 cm.
-                        ++counts[p.pid];
-                    else if((p.pid != 2 && p.pid < 4 && energy > 25) || (p.pid == 4 && energy > 50))
-                        ++counts[p.pid];
-                }
+                if(final_state_signal(p))
+                    ++counts[p.pid];
             }
             return counts;
         }
