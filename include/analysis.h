@@ -7,6 +7,7 @@
 #include "definitions.h"
 #include "cuts.h"
 #include "variables.h"
+#include "numu_variables.h"
 
 using namespace ana;
 
