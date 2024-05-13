@@ -175,35 +175,6 @@ namespace vars
         double count_primaries(const T & interaction) { return interaction.num_primaries; }
     
     /**
-     * Variable for total visible energy of interaction.
-     * @tparam T the type of interaction (true or reco).
-     * @param interaction to apply the variable on.
-     * @return the total visible energy of the interaction.
-    */
-    template<class T>
-        double visible_energy(const T & interaction)
-        {
-            double energy(0);
-            for(const auto & p : interaction.particles)
-            {
-                if(p.is_primary)
-                {
-                    if constexpr (std::is_same_v<T, caf::SRInteractionTruthDLPProxy>)
-                    {
-                        energy += p.energy_deposit;
-                    }
-                    else
-                    {
-                        if(p.pid < 2) energy += p.calo_ke;
-                        else energy += p.csda_ke;
-                    }
-                    if(p.pid == 2) energy += MUON_MASS;
-                    else if(p.pid == 3) energy += PION_MASS;
-                }
-            }
-            return energy;
-        }
-    /**
      * Variable for energy of the neutrino primary of the interaction.
      * @tparam T the type of interaction (true or reco).
      * @param interaction to apply the variable on.
@@ -321,30 +292,6 @@ namespace vars
         }
     
     /**
-     * Variable for particle overlap (IoU) of best match.
-     * @tparam T the type of particle (true or reco).
-     * @param particle to apply the variable on.
-     * @return the particle overlap of the best match (IoU).
-    */
-    template<class T>
-        double overlap(const T & particle) { return particle.match.size() > 0 ? (double)particle.match_overlap[0] : 0.0; }
-
-    /**
-     * Variable for the particles lowest x-coordinate.
-     * @tparam T the type of particle (true or reco)
-     * @param particle to apply the variable on.
-     * @return the lowest x-coordinate of the particle start/end points.
-    */
-    template<class T>
-        double lowx(const T & particle)
-        {
-            if(std::isnan(particle.start_point[0]) || std::isnan(particle.end_point[0]) || std::isinf(particle.start_point[0]) || std::isinf(particle.end_point[0]))
-                return -100000.;
-            else
-                return std::min(particle.start_point[0], particle.end_point[0]);
-        }
-
-    /**
      * Finds the index corresponding to the leading particle of the specifed
      * particle type.
      * @tparam T the type of intearction (true or reco).
@@ -371,97 +318,29 @@ namespace vars
             }
             return index;
         }
-    
-    /**
-     * Variable for finding the leading muon kinetic energy.
-     * @tparam T the type of interaction (true or reco).
-     * @param interaction to apply the variable on.
-     * @return the kinetic energy of the leading muon.
-    */
-    template<class T>
-        double leading_muon_ke(const T & interaction)
-        {
-            size_t i(leading_particle_index(interaction, 2));
-            double energy(csda_ke(interaction.particles[i]));
-            if constexpr (std::is_same_v<T, caf::SRInteractionTruthDLPProxy>)
-                energy = ke_init(interaction.particles[i]);
-            return energy;
-        }
-    
-    /**
-     * Variable for finding the leading proton kinetic energy.
-     * @tparam T the type of interaction (true or reco).
-     * @param interaction to apply the variable on.
-     * @return the kinetic energy of the leading muon.
-    */
-    template<class T>
-        double leading_proton_ke(const T & interaction)
-        {
-            size_t i(leading_particle_index(interaction, 4));
-            double energy(csda_ke(interaction.particles[i]));
-            if constexpr (std::is_same_v<T, caf::SRInteractionTruthDLPProxy>)
-                energy = ke_init(interaction.particles[i]);
-            return energy;
-        }
 
     /**
-     * Variable for the transverse momentum of a particle.
+     * Variable for particle overlap (IoU) of best match.
      * @tparam T the type of particle (true or reco).
      * @param particle to apply the variable on.
-     * @return the transverse momentum of the particle
+     * @return the particle overlap of the best match (IoU).
     */
     template<class T>
-        double transverse_momentum(const T & particle)
-        {
-            if constexpr (std::is_same_v<T, caf::SRParticleTruthDLPProxy>)
-                return std::sqrt(std::pow(particle.truth_momentum[0], 2) + std::pow(particle.truth_momentum[1], 2));
-            else
-                return std::sqrt(std::pow(particle.momentum[0], 2) + std::pow(particle.momentum[1], 2));
-        }
-    
-    /**
-     * Variable for the transverse momentum of the leading muon.
-     * @tparam T the type of interaction (true or reco).
-     * @param interaction to apply the variable on.
-     * @return the transverse momentum of the leading muon.
-    */
-    template<class T>
-        double leading_muon_pt(const T & interaction)
-        {
-            size_t i(leading_particle_index(interaction, 2));
-            return transverse_momentum(interaction.particles[i]);
-        }
+        double overlap(const T & particle) { return particle.match.size() > 0 ? (double)particle.match_overlap[0] : 0.0; }
 
     /**
-     * Variable for the transverse momentum of the leading proton.
-     * @tparam T the type of interaction (true or reco).
-     * @param interaction to apply the variable on.
-     * @return the transverse momentum of the leading proton.
+     * Variable for the particles lowest x-coordinate.
+     * @tparam T the type of particle (true or reco)
+     * @param particle to apply the variable on.
+     * @return the lowest x-coordinate of the particle start/end points.
     */
     template<class T>
-        double leading_proton_pt(const T & interaction)
+        double lowx(const T & particle)
         {
-            size_t i(leading_particle_index(interaction, 4));
-            return transverse_momentum(interaction.particles[i]);
-        }
-    
-    /**
-     * Variable for the transverse momentum of the interaction.
-     * @tparam T the type of interaction (true or reco).
-     * @param interaction to apply the variable on.
-     * @return the transverse momentum of the primary particles.
-    */
-    template<class T>
-        double interaction_pt(const T & interaction)
-        {
-            double px(0), py(0);
-            for(const auto & p : interaction.particles)
-                if(p.is_primary)
-                {
-                    px += p.momentum[0];
-                    py += p.momentum[1];
-                }
-            return std::sqrt(std::pow(px, 2) + std::pow(py, 2));
+            if(std::isnan(particle.start_point[0]) || std::isnan(particle.end_point[0]) || std::isinf(particle.start_point[0]) || std::isinf(particle.end_point[0]))
+                return -100000.;
+            else
+                return std::min(particle.start_point[0], particle.end_point[0]);
         }
 
     /**
