@@ -10,6 +10,7 @@
 #include "include/definitions.h"
 #include "include/cuts.h"
 #include "include/variables.h"
+#include "include/numu_variables.h"
 #include "include/container.h"
 #include "sbnana/CAFAna/Core/Binning.h"
 
@@ -21,6 +22,59 @@ using namespace ana;
 #define CSV(VAL) VAL << ","
 
 std::ofstream output("output.log");
+
+/**
+ * Writes reconstructed variables selected interactions.
+ * @param sr is an SRSpillProxy that attaches to the StandardRecord of the
+ * current spill.
+ * @param j the reco interaction (selected).
+ * @return None.
+*/
+void write_reco(const caf::SRSpillProxy* sr, const caf::SRInteractionDLPProxy& j)
+{
+    output  << CSV(sr->hdr.run) << CSV(sr->hdr.evt) << CSV(sr->hdr.subrun)
+            << CSV(vars::image_id(j)) << CSV(vars::id(j))
+            << CSV(vars::leading_muon_ke(j))
+            << CSV(vars::leading_proton_ke(j))
+            << CSV(vars::visible_energy(j))
+            << CSV(vars::leading_muon_pt(j))
+            << CSV(vars::leading_proton_pt(j))
+            << CSV(vars::muon_polar_angle(j))
+            << CSV(vars::muon_azimuthal_angle(j))
+            << CSV(vars::opening_angle(j))
+            << CSV(vars::interaction_pt(j))
+            << CSV(vars::phiT(j))
+            << CSV(vars::alphaT(j))
+            << CSV(vars::muon_softmax(j))
+            << CSV(vars::proton_softmax(j))
+            << CSV(cuts::all_1mu1p_data_cut(j))
+            << CSV(cuts::all_1muNp_data_cut(j))
+            << CSV(cuts::all_1muX_data_cut(j))
+            << std::endl;
+}
+
+/**
+ * Writes the reconstructed variables for the selected interactions.
+ * @param sr is an SRSpillProxy that attaches to the StandardRecord of the
+ * current spill.
+ * @return A dummy vector of doubles.
+*/
+const SpillMultiVar kDataInfo([](const caf::SRSpillProxy* sr)
+{
+    /**
+     * Loop over reconstructed interactions and log interaction-level
+     * information. 
+    */
+    for(auto const & i : sr->dlp)
+    {
+        if(cuts::all_1muX_data_cut(i) || cuts::all_1muNp_data_cut(i) || cuts::all_1mu1p_data_cut(i))
+        {
+            OUT(output,"DATA");
+            write_reco(sr, i);
+        }
+    }
+    return std::vector<double>{1};
+});
 
 const SpillMultiVar kHandscanInfo([](const caf::SRSpillProxy* sr)
 {
@@ -87,7 +141,8 @@ void data()
 
     VARDLP_RECO(kFlashTime, vars::flash_time, cuts::fiducial_containment_topological_1muNp_cut);
 
-    SpecContainer spectra("/pnfs/icarus/persistent/users/mueller/run9435/*.flat.root", "spectra_run9435.root", -1, -1);
+    //SpecContainer spectra("/pnfs/icarus/persistent/users/mueller/run9435/*.flat.root", "spectra_run9435.root", -1, -1);
+    SpecContainer spectra("/pnfs/icarus/scratch/users/mueller/physics_run2/flat/*.flat.root", "spectra_data.root", -1, -1);
 
     spectra.add_spectrum1d("sFlashTime", Binning::Simple(100, -10, 10), kFlashTime);
 
@@ -128,7 +183,7 @@ void data()
     spectra.add_spectrum1d("sLeadingProtonSoftmax_1muNp", Binning::Simple(25, 0.8, 1), kLeadingProtonSoftmax_1muNp);
     //spectra.add_spectrum1d("sLeadingProtonSoftmax_1muX", Binning::Simple(25, 0.8, 1), kLeadingProtonSoftmax_1muX);
 
-    spectra.add_spectrum1d("sHandscanInfo", Binning::Simple(1, 0, 2), kHandscanInfo);
+    spectra.add_spectrum1d("sDataInfo", Binning::Simple(1, 0, 2), kDataInfo);
 
     spectra.run();
 }
