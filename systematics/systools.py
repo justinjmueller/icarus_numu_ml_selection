@@ -24,7 +24,7 @@ def calc_fractional_error(cov, cv):
     norm = np.outer(cv, cv)        
     return np.divide(cov, norm, where=norm!=0)
 
-def read_log(path, tag, header):
+def read_log(path, tag, header, category_selector=None):
     """
     Reads an input log file and extracts lines with the specified tag
     into a Pandas DataFrame.
@@ -37,6 +37,8 @@ def read_log(path, tag, header):
         The identifier that tags relevant lines in the log file.
     header: list[str]
         The list of column names for the CSV file.
+    category_selector: callable
+        A function that takes a line and returns True if the line is to be included in the output DataFrame.
 
     Returns
     -------
@@ -47,11 +49,16 @@ def read_log(path, tag, header):
     lines = input_file.readlines()
     selected = [x.strip('\n').split(',')[1:] for x in lines if tag in x]
     selected = [x if x[-1] != '' else x[:-1] for x in selected]
+    #if tag == 'SIGNAL':
+    #    print([x for x in selected if len(x) != len(header)][0])
+    #    print(len(selected[0]))
     df = pd.DataFrame(selected, columns=header[:len(selected[0])])
     for k in header[:len(df.columns)]:
         df[k] = pd.to_numeric(df[k], errors='coerce', downcast='float')
         if df[k].apply(float.is_integer).all():
             df[k] = df[k].astype(int)
+    if category_selector is not None:
+        df = df[df.apply(category_selector, axis=1)]
     return df
 
 def extract_weights(path, selected, widx):
@@ -186,10 +193,13 @@ def load_detector_variation(header, sys):
     sys_selected: pandas.DataFrame
         The selected candidates for the systematic variation sample.
     """
-    cv_events = read_log(sys['cv_log'], 'EVENT', header)
-    sys_events = read_log(sys['sys_log'], 'EVENT', header)
-    cv_selected = read_log(sys['cv_log'], f'SELECTED_{sys["channel"].upper()}', header)
-    sys_selected = read_log(sys['sys_log'], f'SELECTED_{sys["channel"].upper()}', header)
+    selectors = {   '1mu1p': lambda x: x['category'] == 0,
+                    '1muNp': lambda x: x['category'] == 0 or x['category'] == 2,
+                    '1muX': lambda x: x['category'] == 0 or x['category'] == 2 or x['category'] == 4}
+    cv_events = read_log(sys['cv_log'], 'SIGNAL', header, selectors[sys['channel']])
+    sys_events = read_log(sys['sys_log'], 'SIGNAL', header, selectors[sys['channel']])
+    cv_selected = read_log(sys['cv_log'], 'SELECTED', header, lambda x : bool(x[f'selected_{sys["channel"]}']))
+    sys_selected = read_log(sys['sys_log'], 'SELECTED', header, lambda x : bool(x[f'selected_{sys["channel"]}']))
     common_events = cv_events.merge(sys_events, how='inner', on=['run', 'subrun', 'event'])
     return common_events, cv_selected, sys_selected
 
@@ -356,7 +366,7 @@ def calc_statistical_covariance(sys, header, var, bins):
     cov: numpy.array
         The statistical covariance matrix.
     """
-    selected = read_log(sys['cv_log'], f'SELECTED_{sys["channel"].upper()}', header)
+    selected = read_log(sys['cv_log'], 'SELECTED', header, lambda x : bool(x[f'selected_{sys["channel"]}']))
 
     # Calculate the bin edges and the bin index for each selected
     # interaction.

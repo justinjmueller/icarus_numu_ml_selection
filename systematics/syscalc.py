@@ -36,7 +36,7 @@ def main(configuration, caf, channel, output):
     cfg = toml.load(configuration)
     variables = cfg['general']['variables']
     log = cfg['general']['cv_log']
-    header = ['run', 'subrun', 'event', 'nu_id'] + cfg['general']['columns']
+    header = cfg['general']['columns']
     covariances = dict()
 
     # Unfold the total number of calculations
