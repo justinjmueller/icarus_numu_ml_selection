@@ -1,5 +1,5 @@
 [general]
-columns = [ 'run', 'event', 'subrun', 'nu_id', 'image_id', 'id', 'category', 'category_topology', 'category_interaction_mode',
+columns = [ 'run', 'event', 'subrun', 'nu_id', 'image_id', 'id', 'trigger', 'category', 'category_topology', 'category_interaction_mode',
             'true_muon_ke', 'reco_muon_ke', 'true_proton_ke', 'reco_proton_ke', 'true_visible_energy', 'reco_visible_energy',
             'true_muon_pt', 'reco_muon_pt', 'true_proton_pt', 'reco_proton_pt', 'true_muon_polar_angle', 'reco_muon_polar_angle',
             'true_muon_azimuthal_angle', 'reco_muon_azimuthal_angle', 'true_opening_angle', 'reco_opening_angle',
