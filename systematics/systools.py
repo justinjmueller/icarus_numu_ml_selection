@@ -304,6 +304,7 @@ def calc_detector_covariance(sys, header, var, bins):
         The covariance matrix of the bootstrapped ratio.
     """
     common, cv_selected, sys_selected = load_detector_variation(header, sys)
+    print(len(common))
 
     # Calculate the bin edges and the bin index for each interaction.
     _, bin_edges = np.histogram(cv_selected[var], bins=int(bins[0]), range=bins[1:])
