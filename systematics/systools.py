@@ -193,13 +193,13 @@ def load_detector_variation(header, sys):
     sys_selected: pandas.DataFrame
         The selected candidates for the systematic variation sample.
     """
-    selectors = {   '1mu1p': lambda x: x['category'] == 0,
-                    '1muNp': lambda x: x['category'] == 0 or x['category'] == 2,
-                    '1muX': lambda x: x['category'] == 0 or x['category'] == 2 or x['category'] == 4}
+    selectors = {   '1mu1p': lambda x: (x['category'] == 0) and (np.abs(x['trigger'] - 1500) < 10),
+                    '1muNp': lambda x: (x['category'] == 0 or x['category'] == 2) and (np.abs(x['trigger'] - 1500) < 10),
+                    '1muX': lambda x: (x['category'] == 0 or x['category'] == 2 or x['category'] == 4) and (np.abs(x['trigger'] - 1500) < 10)}
     cv_events = read_log(sys['cv_log'], 'SIGNAL', header, selectors[sys['channel']])
     sys_events = read_log(sys['sys_log'], 'SIGNAL', header, selectors[sys['channel']])
-    cv_selected = read_log(sys['cv_log'], 'SELECTED', header, lambda x : bool(x[f'selected_{sys["channel"]}']))
-    sys_selected = read_log(sys['sys_log'], 'SELECTED', header, lambda x : bool(x[f'selected_{sys["channel"]}']))
+    cv_selected = read_log(sys['cv_log'], 'SELECTED', header, lambda x : bool(x[f'selected_{sys["channel"]}'] and (np.abs(x['trigger'] - 1500) < 10) and x['crtpmt_match'] == 1))
+    sys_selected = read_log(sys['sys_log'], 'SELECTED', header, lambda x : bool(x[f'selected_{sys["channel"]}'] and (np.abs(x['trigger'] - 1500) < 10) and x['crtpmt_match'] == 1))
     common_events = cv_events.merge(sys_events, how='inner', on=['run', 'subrun', 'event'])
     return common_events, cv_selected, sys_selected
 
