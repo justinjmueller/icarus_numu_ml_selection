@@ -209,6 +209,40 @@ namespace cuts
         }
 
     /**
+     * Apply the CRT-PMT veto cut. The event must not have a CRT-PMT
+     * match for any flash in the beam gate.
+     * @param sr the spill to check for CRT-PMT matches.
+     * @return true if the event passes the CRT-PMT veto.
+    */
+    bool crtpmt_veto(const caf::SRSpillProxy * sr)
+    {
+        bool crtpmt_matched(sr->ncrtpmt_matches == 0);
+        for(auto const & c : sr->crtpmt_matches)
+        {
+            if(c.flashGateTime > 0 && c.flashGateTime < 1.6 && c.flashClassification == 0)
+                crtpmt_matched = true;
+        }
+        return crtpmt_matched;
+    }
+
+    /**
+     * Apply the CRT-PMT veto cut (data). The event must not have a CRT-PMT
+     * match for any flash in the beam gate.
+     * @param sr the spill to check for CRT-PMT matches.
+     * @return true if the event passes the CRT-PMT veto.
+    */
+    bool crtpmt_veto_data(const caf::SRSpillProxy * sr)
+    {
+        bool crtpmt_matched(sr->ncrtpmt_matches == 0);
+        for(auto const & c : sr->crtpmt_matches)
+        {
+            if(c.flashGateTime > -0.5 && c.flashGateTime < 1.4 && c.flashClassification == 0)
+                crtpmt_matched = true;
+        }
+        return crtpmt_matched;
+    }
+
+    /**
      * Apply a fiducial and containment cut (logical "and" of both).
      * @tparam T the type of interaction (true or reco).
      * @param interaction to select on.
