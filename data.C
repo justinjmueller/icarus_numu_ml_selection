@@ -21,7 +21,8 @@ using namespace ana;
 #define OUT(STREAM,TAG) STREAM << std::fixed << TAG << ","
 #define CSV(VAL) VAL << ","
 
-std::ofstream output("output.log");
+std::ofstream output("output_data_crtpmt.log");
+std::ofstream output_evt("output_evt.log");
 
 /**
  * Writes reconstructed variables selected interactions.
@@ -50,6 +51,8 @@ void write_reco(const caf::SRSpillProxy* sr, const caf::SRInteractionDLPProxy& j
             << CSV(cuts::all_1mu1p_data_cut(j))
             << CSV(cuts::all_1muNp_data_cut(j))
             << CSV(cuts::all_1muX_data_cut(j))
+            << CSV(cuts::crtpmt_veto_data(sr))
+            << CSV(j.volume_id)
             << std::endl;
 }
 
@@ -73,7 +76,91 @@ const SpillMultiVar kDataInfo([](const caf::SRSpillProxy* sr)
             write_reco(sr, i);
         }
     }
+
+    output_evt  << CSV(sr->hdr.run) << CSV(sr->hdr.evt) << CSV(sr->hdr.subrun) << std::endl;
+
     return std::vector<double>{1};
+});
+
+/**
+ * Enumerates the cut that each interaction passes.
+ * @param sr is an SRSpillProxy that attaches to the StandardRecord of the
+ * current spill.
+ * @return A vector of doubles containing the enumeration of cuts passed
+ * by each interaction.
+*/
+const SpillMultiVar kOffbeam1mu1pCut([](const caf::SRSpillProxy* sr)
+{
+    std::vector<double> cut_vector;
+    for(auto const & i : sr->dlp)
+    {
+        // No cut: 0, fiducial: 1, contained: 2, topological: 3, flash: 4
+        double cut(0);
+        if(cuts::fiducial_cut(i))
+            cut = 1;
+        if(cuts::fiducial_containment_cut(i))
+            cut = 2;
+        if(cuts::fiducial_containment_topological_1mu1p_cut(i))
+            cut = 3;
+        if(cuts::all_1mu1p_data_cut(i))
+            cut = 4;
+        cut_vector.push_back(cut);
+    }
+    return cut_vector;
+});
+
+/**
+ * Enumerates the cut that each interaction passes.
+ * @param sr is an SRSpillProxy that attaches to the StandardRecord of the
+ * current spill.
+ * @return A vector of doubles containing the enumeration of cuts passed
+ * by each interaction.
+*/
+const SpillMultiVar kOffbeam1muNpCut([](const caf::SRSpillProxy* sr)
+{
+    std::vector<double> cut_vector;
+    for(auto const & i : sr->dlp)
+    {
+        // No cut: 0, fiducial: 1, contained: 2, topological: 3, flash: 4
+        double cut(0);
+        if(cuts::fiducial_cut(i))
+            cut = 1;
+        if(cuts::fiducial_containment_cut(i))
+            cut = 2;
+        if(cuts::fiducial_containment_topological_1muNp_cut(i))
+            cut = 3;
+        if(cuts::all_1muNp_data_cut(i))
+            cut = 4;
+        cut_vector.push_back(cut);
+    }
+    return cut_vector;
+});
+
+/**
+ * Enumerates the cut that each interaction passes.
+ * @param sr is an SRSpillProxy that attaches to the StandardRecord of the
+ * current spill.
+ * @return A vector of doubles containing the enumeration of cuts passed
+ * by each interaction.
+*/
+const SpillMultiVar kOffbeam1muXCut([](const caf::SRSpillProxy* sr)
+{
+    std::vector<double> cut_vector;
+    for(auto const & i : sr->dlp)
+    {
+        // No cut: 0, fiducial: 1, contained: 2, topological: 3, flash: 4
+        double cut(0);
+        if(cuts::fiducial_cut(i))
+            cut = 1;
+        if(cuts::fiducial_containment_cut(i))
+            cut = 2;
+        if(cuts::fiducial_containment_topological_1muX_cut(i))
+            cut = 3;
+        if(cuts::all_1muX_data_cut(i))
+            cut = 4;
+        cut_vector.push_back(cut);
+    }
+    return cut_vector;
 });
 
 const SpillMultiVar kHandscanInfo([](const caf::SRSpillProxy* sr)
@@ -141,49 +228,15 @@ void data()
 
     VARDLP_RECO(kFlashTime, vars::flash_time, cuts::fiducial_containment_topological_1muNp_cut);
 
-    //SpecContainer spectra("/pnfs/icarus/persistent/users/mueller/run9435/*.flat.root", "spectra_run9435.root", -1, -1);
-    SpecContainer spectra("/pnfs/icarus/scratch/users/mueller/physics_run2/flat/*.flat.root", "spectra_data.root", -1, -1);
-
-    spectra.add_spectrum1d("sFlashTime", Binning::Simple(100, -10, 10), kFlashTime);
-
-    spectra.add_spectrum1d("sVisibleEnergy_1mu1p", Binning::Simple(25, 0, 3000), kVisibleEnergy_1mu1p);
-    spectra.add_spectrum1d("sVisibleEnergy_1muNp", Binning::Simple(25, 0, 3000), kVisibleEnergy_1muNp);
-    spectra.add_spectrum1d("sVisibleEnergy_1muX", Binning::Simple(25, 0, 3000), kVisibleEnergy_1muX);
-    spectra.add_spectrum1d("sLeadingMuonKE_1mu1p", Binning::Simple(25, 0, 2000), kLeadingMuonKE_1mu1p);
-    spectra.add_spectrum1d("sLeadingMuonKE_1muNp", Binning::Simple(25, 0, 2000), kLeadingMuonKE_1muNp);
-    spectra.add_spectrum1d("sLeadingMuonKE_1muX", Binning::Simple(25, 0, 2000), kLeadingMuonKE_1muX);
-    spectra.add_spectrum1d("sLeadingProtonKE_1mu1p", Binning::Simple(25, 0, 600), kLeadingProtonKE_1mu1p);
-    spectra.add_spectrum1d("sLeadingProtonKE_1muNp", Binning::Simple(25, 0, 600), kLeadingProtonKE_1muNp);
-    //spectra.add_spectrum1d("sLeadingProtonKE_1muX", Binning::Simple(25, 0, 600), kLeadingProtonKE_1muX);
-    spectra.add_spectrum1d("sLeadingMuonPT_1mu1p", Binning::Simple(25, 0, 750), kLeadingMuonPT_1mu1p);
-    spectra.add_spectrum1d("sLeadingMuonPT_1muNp", Binning::Simple(25, 0, 750), kLeadingMuonPT_1muNp);
-    spectra.add_spectrum1d("sLeadingMuonPT_1muX", Binning::Simple(25, 0, 750), kLeadingMuonPT_1muX);
-    spectra.add_spectrum1d("sLeadingProtonPT_1mu1p", Binning::Simple(25, 0, 750), kLeadingProtonPT_1mu1p);
-    spectra.add_spectrum1d("sLeadingProtonPT_1muNp", Binning::Simple(25, 0, 750), kLeadingProtonPT_1muNp);
-    //spectra.add_spectrum1d("sLeadingProtonPT_1muX", Binning::Simple(25, 0, 750), kLeadingProtonPT_1muX);
-    spectra.add_spectrum1d("sInteractionPT_1mu1p", Binning::Simple(25, 0, 1200), kInteractionPT_1mu1p);
-    spectra.add_spectrum1d("sInteractionPT_1muNp", Binning::Simple(25, 0, 1200), kInteractionPT_1muNp);
-    spectra.add_spectrum1d("sInteractionPT_1muX", Binning::Simple(25, 0, 1200), kInteractionPT_1muX);
-    spectra.add_spectrum1d("sLeadingMuonCosineThetaXZ_1mu1p", Binning::Simple(25, -1, 1), kLeadingMuonCosineThetaXZ_1mu1p);
-    spectra.add_spectrum1d("sLeadingMuonCosineThetaXZ_1muNp", Binning::Simple(25, -1, 1), kLeadingMuonCosineThetaXZ_1muNp);
-    spectra.add_spectrum1d("sLeadingMuonCosineThetaXZ_1muX", Binning::Simple(25, -1, 1), kLeadingMuonCosineThetaXZ_1muX);
-    spectra.add_spectrum1d("sLeadingProtonCosineThetaXZ_1mu1p", Binning::Simple(25, -1, 1), kLeadingProtonCosineThetaXZ_1mu1p);
-    spectra.add_spectrum1d("sLeadingProtonCosineThetaXZ_1muNp", Binning::Simple(25, -1, 1), kLeadingProtonCosineThetaXZ_1muNp);
-    //spectra.add_spectrum1d("sLeadingProtonCosineThetaXZ_1muX", Binning::Simple(25, -1, 1), kLeadingProtonCosineThetaXZ_1muX);
-    spectra.add_spectrum1d("sCosineOpeningAngle_1mu1p", Binning::Simple(25, -1, 1), kCosineOpeningAngle_1mu1p);
-    spectra.add_spectrum1d("sCosineOpeningAngle_1muNp", Binning::Simple(25, -1, 1), kCosineOpeningAngle_1muNp);
-    //spectra.add_spectrum1d("sCosineOpeningAngle_1muX", Binning::Simple(25, -1, 1), kCosineOpeningAngle_1muX);
-    spectra.add_spectrum1d("sCosineOpeningAngleTransverse_1mu1p", Binning::Simple(25, -1, 1), kCosineOpeningAngleTransverse_1mu1p);
-    spectra.add_spectrum1d("sCosineOpeningAngleTransverse_1muNp", Binning::Simple(25, -1, 1), kCosineOpeningAngleTransverse_1muNp);
-    //spectra.add_spectrum1d("sCosineOpeningAngleTransverse_1muX", Binning::Simple(25, -1, 1), kCosineOpeningAngleTransverse_1muX);
-    spectra.add_spectrum1d("sLeadingMuonSoftmax_1mu1p", Binning::Simple(25, 0, 1), kLeadingMuonSoftmax_1mu1p);
-    spectra.add_spectrum1d("sLeadingMuonSoftmax_1muNp", Binning::Simple(25, 0, 1), kLeadingMuonSoftmax_1muNp);
-    spectra.add_spectrum1d("sLeadingMuonSoftmax_1muX", Binning::Simple(25, 0, 1), kLeadingMuonSoftmax_1muX);
-    spectra.add_spectrum1d("sLeadingProtonSoftmax_1mu1p", Binning::Simple(25, 0.8, 1), kLeadingProtonSoftmax_1mu1p);
-    spectra.add_spectrum1d("sLeadingProtonSoftmax_1muNp", Binning::Simple(25, 0.8, 1), kLeadingProtonSoftmax_1muNp);
-    //spectra.add_spectrum1d("sLeadingProtonSoftmax_1muX", Binning::Simple(25, 0.8, 1), kLeadingProtonSoftmax_1muX);
+    //SpecContainer spectra("/pnfs/icarus/persistent/users/mueller/run9435_new_weights/*.flat.root", "spectra_run9435.root", -1, -1);
+    //SpecContainer spectra("/pnfs/icarus/scratch/users/mueller/physics_run2_actual_new_weights/offbeam/hdf5/*.flat.root", "spectra_data_offbeam.root", -1, 266267);
+    SpecContainer spectra("/pnfs/icarus/scratch/users/mueller/physics_run2_actual_new_weights/onbeam/flat/*.flat.root", "spectra_data_new_weights.root", -1, -1);
 
     spectra.add_spectrum1d("sDataInfo", Binning::Simple(1, 0, 2), kDataInfo);
+    spectra.add_spectrum1d("sOffbeam1mu1pCut", Binning::Simple(5, 0, 5), kOffbeam1mu1pCut);
+    spectra.add_spectrum1d("sOffbeam1muNpCut", Binning::Simple(5, 0, 5), kOffbeam1muNpCut);
+    spectra.add_spectrum1d("sOffbeam1muXCut", Binning::Simple(5, 0, 5), kOffbeam1muXCut);
+    //spectra.add_spectrum1d("sHandscanInfo", Binning::Simple(1, 0, 2), kHandscanInfo);
 
     spectra.run();
 }
