@@ -124,7 +124,10 @@ namespace cuts
      * @return true if the vertex is in the fiducial volume.
      */
     template<class T>
-        bool fiducial_cut(const T & interaction) { return interaction.is_fiducial; }
+        bool fiducial_cut(const T & interaction)
+        {
+            return interaction.is_fiducial && !(interaction.vertex[0] > 210.215 && interaction.vertex[1] > 60 && (interaction.vertex[2] > 290 && interaction.vertex[2] < 390));
+        }
     
     /**
      * Apply a containment volume cut. All points within the interaction must be
