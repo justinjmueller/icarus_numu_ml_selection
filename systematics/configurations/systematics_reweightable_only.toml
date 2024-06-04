@@ -1,0 +1,239 @@
+[general]
+columns = [ 'run', 'event', 'subrun', 'nu_id', 'image_id', 'id', 'trigger', 'category', 'category_topology', 'category_interaction_mode',
+            'true_muon_ke', 'reco_muon_ke', 'true_proton_ke', 'reco_proton_ke', 'true_visible_energy', 'reco_visible_energy',
+            'true_muon_pt', 'reco_muon_pt', 'true_proton_pt', 'reco_proton_pt', 'true_muon_polar_angle', 'reco_muon_polar_angle',
+            'true_muon_azimuthal_angle', 'reco_muon_azimuthal_angle', 'true_opening_angle', 'reco_opening_angle',
+            'true_delta_pT', 'reco_delta_pT', 'true_delta_phiT', 'reco_delta_phiT', 'true_delta_alphaT', 'reco_delta_alphaT',
+            'muon_softmax', 'proton_softmax', 'selected_1mu1p', 'selected_1muNp', 'selected_1muX']
+cv_log = '/exp/icarus/app/users/mueller/sbn_ml_cafmaker/icarus_numu_ml_selection/output_mc_rev3.log'
+multisim_rf = '/exp/icarus/app/users/mueller/sbn_ml_cafmaker/icarus_numu_ml_selection/systematics/cpp/build/output_1mu1p_rev2.root'
+
+[general.variables]
+reco_muon_ke = [25, 0, 2000]
+reco_proton_ke = [25, 0, 600]
+reco_visible_energy = [25, 0, 3000]
+reco_muon_pt = [25, 0, 750]
+reco_proton_pt = [25, 0, 750]
+reco_muon_polar_angle = [25.0, 0.0, 3.14159]
+reco_muon_azimuthal_angle = [25.0, 0.0, 3.14159]
+reco_opening_angle = [25.0, 0.0, 3.14159]
+reco_delta_pT = [25, 0, 1200]
+reco_delta_phiT = [25.0, 0.0, 3.14159]
+reco_delta_alphaT = [25.0, 0.0, 3.14159]
+muon_softmax = [25, 0, 1]
+proton_softmax = [25.0, 0.8, 1.0]
+
+[sys.GENIEReWeight_ICARUS_v2_multisim_ZExpAVariationResponse]
+type = 'multisim'
+group = ['genie', 'reweightable', 'total_nostat', 'total']
+index = 52
+
+[sys.GENIEReWeight_ICARUS_v2_multisim_RPA_CCQE]
+type = 'multisim'
+group = ['genie', 'reweightable', 'total_nostat', 'total']
+index = 53
+
+[sys.GENIEReWeight_ICARUS_v2_multisim_CoulombCCQE]
+type = 'multisim'
+group = ['genie', 'reweightable', 'total_nostat', 'total']
+index = 54
+
+[sys.GENIEReWeight_ICARUS_v2_multisim_NormCCMEC]
+type = 'multisim'
+group = ['genie', 'reweightable', 'total_nostat', 'total']
+index = 55
+
+[sys.GENIEReWeight_ICARUS_v2_multisim_NormNCMEC]
+type = 'multisim'
+group = ['genie', 'reweightable', 'total_nostat', 'total']
+index = 56
+
+[sys.GENIEReWeight_ICARUS_v2_multisim_NCELVariationResponse]
+type = 'multisim'
+group = ['genie', 'reweightable', 'total_nostat', 'total']
+index = 57
+
+[sys.GENIEReWeight_ICARUS_v2_multisim_CCRESVariationResponse]
+type = 'multisim'
+group = ['genie', 'reweightable', 'total_nostat', 'total']
+index = 58
+
+[sys.GENIEReWeight_ICARUS_v2_multisim_NCRESVariationResponse]
+type = 'multisim'
+group = ['genie', 'reweightable', 'total_nostat', 'total']
+index = 59
+
+[sys.GENIEReWeight_ICARUS_v2_multisim_NonRESBGvpCC1pi]
+type = 'multisim'
+group = ['genie', 'reweightable', 'total_nostat', 'total']
+index = 60
+
+[sys.GENIEReWeight_ICARUS_v2_multisim_NonRESBGvpCC2pi]
+type = 'multisim'
+group = ['genie', 'reweightable', 'total_nostat', 'total']
+index = 61
+
+[sys.GENIEReWeight_ICARUS_v2_multisim_NonRESBGvpNC1pi]
+type = 'multisim'
+group = ['genie', 'reweightable', 'total_nostat', 'total']
+index = 62
+
+[sys.GENIEReWeight_ICARUS_v2_multisim_NonRESBGvpNC2pi]
+type = 'multisim'
+group = ['genie', 'reweightable', 'total_nostat', 'total']
+index = 63
+
+[sys.GENIEReWeight_ICARUS_v2_multisim_NonRESBGvnCC1pi]
+type = 'multisim'
+group = ['genie', 'reweightable', 'total_nostat', 'total']
+index = 64
+
+[sys.GENIEReWeight_ICARUS_v2_multisim_NonRESBGvnCC2pi]
+type = 'multisim'
+group = ['genie', 'reweightable', 'total_nostat', 'total']
+index = 65
+
+[sys.GENIEReWeight_ICARUS_v2_multisim_NonRESBGvnNC1pi]
+type = 'multisim'
+group = ['genie', 'reweightable', 'total_nostat', 'total']
+index = 66
+
+[sys.GENIEReWeight_ICARUS_v2_multisim_NonRESBGvnNC2pi]
+type = 'multisim'
+group = ['genie', 'reweightable', 'total_nostat', 'total']
+index = 67
+
+[sys.GENIEReWeight_ICARUS_v2_multisim_NonRESBGvbarpCC1pi]
+type = 'multisim'
+group = ['genie', 'reweightable', 'total_nostat', 'total']
+index = 68
+
+[sys.GENIEReWeight_ICARUS_v2_multisim_NonRESBGvbarpCC2pi]
+type = 'multisim'
+group = ['genie', 'reweightable', 'total_nostat', 'total']
+index = 69
+
+[sys.GENIEReWeight_ICARUS_v2_multisim_NonRESBGvbarpNC1pi]
+type = 'multisim'
+group = ['genie', 'reweightable', 'total_nostat', 'total']
+index = 70
+
+[sys.GENIEReWeight_ICARUS_v2_multisim_NonRESBGvbarpNC2pi]
+type = 'multisim'
+group = ['genie', 'reweightable', 'total_nostat', 'total']
+index = 71
+
+[sys.GENIEReWeight_ICARUS_v2_multisim_NonRESBGvbarnCC1pi]
+type = 'multisim'
+group = ['genie', 'reweightable', 'total_nostat', 'total']
+index = 72
+
+[sys.GENIEReWeight_ICARUS_v2_multisim_NonRESBGvbarnCC2pi]
+type = 'multisim'
+group = ['genie', 'reweightable', 'total_nostat', 'total']
+index = 73
+
+[sys.GENIEReWeight_ICARUS_v2_multisim_NonRESBGvbarnNC1pi]
+type = 'multisim'
+group = ['genie', 'reweightable', 'total_nostat', 'total']
+index = 74
+
+[sys.GENIEReWeight_ICARUS_v2_multisim_NonRESBGvbarnNC2pi]
+type = 'multisim'
+group = ['genie', 'reweightable', 'total_nostat', 'total']
+index = 75
+
+[sys.GENIEReWeight_ICARUS_v2_multisim_RDecBR1gamma]
+type = 'multisim'
+group = ['genie', 'reweightable', 'total_nostat', 'total']
+index = 76
+
+[sys.GENIEReWeight_ICARUS_v2_multisim_RDecBR1eta]
+type = 'multisim'
+group = ['genie', 'reweightable', 'total_nostat', 'total']
+index = 77
+
+[sys.GENIEReWeight_ICARUS_v2_multisim_COHVariationResponse]
+type = 'multisim'
+group = ['genie', 'reweightable', 'total_nostat', 'total']
+index = 78
+
+[sys.GENIEReWeight_ICARUS_v2_multisim_DISBYVariationResponse]
+type = 'multisim'
+group = ['genie', 'reweightable', 'total_nostat', 'total']
+index = 79
+
+[sys.GENIEReWeight_ICARUS_v2_multisim_FSI_pi_VariationResponse]
+type = 'multisim'
+group = ['genie', 'reweightable', 'total_nostat', 'total']
+index = 80
+
+[sys.GENIEReWeight_ICARUS_v2_multisim_FSI_N_VariationResponse]
+type = 'multisim'
+group = ['genie', 'reweightable', 'total_nostat', 'total']
+index = 81
+
+[sys.expskin_Flux]
+type = 'multisim'
+group = ['flux', 'reweightable', 'total_nostat', 'total']
+index = 115
+
+[sys.horncurrent_Flux]
+type = 'multisim'
+group = ['flux', 'reweightable', 'total_nostat', 'total']
+index = 116
+
+[sys.kminus_Flux]
+type = 'multisim'
+group = ['flux', 'reweightable', 'total_nostat', 'total']
+index = 117
+
+[sys.kplus_Flux]
+type = 'multisim'
+group = ['flux', 'reweightable', 'total_nostat', 'total']
+index = 118
+
+[sys.kzero_Flux]
+type = 'multisim'
+group = ['flux', 'reweightable', 'total_nostat', 'total']
+index = 119
+
+[sys.nucleoninexsec_Flux]
+type = 'multisim'
+group = ['flux', 'reweightable', 'total_nostat', 'total']
+index = 120
+
+[sys.nucleonqexsec_Flux]
+type = 'multisim'
+group = ['flux', 'reweightable', 'total_nostat', 'total']
+index = 121
+
+[sys.nucleontotxsec_Flux]
+type = 'multisim'
+group = ['flux', 'reweightable', 'total_nostat', 'total']
+index = 122
+
+[sys.piminus_Flux]
+type = 'multisim'
+group = ['flux', 'reweightable', 'total_nostat', 'total']
+index = 123
+
+[sys.pioninexsec_Flux]
+type = 'multisim'
+group = ['flux', 'reweightable', 'total_nostat', 'total']
+index = 124
+
+[sys.pionqexsec_Flux]
+type = 'multisim'
+group = ['flux', 'reweightable', 'total_nostat', 'total']
+index = 125
+
+[sys.piontotxsec_Flux]
+type = 'multisim'
+group = ['flux', 'reweightable', 'total_nostat', 'total']
+index = 126
+
+[sys.piplus_Flux]
+type = 'multisim'
+group = ['flux', 'reweightable', 'total_nostat', 'total']
+index = 127
