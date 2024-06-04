@@ -1,10 +1,10 @@
 import numpy as np
 import pandas as pd
 import awkward as ak
-import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt # type: ignore
 import argparse
 import uproot
-import toml
+import toml # type: ignore
 from tqdm import tqdm
 from systools import read_log, calc_fractional_error, calc_multisim_covariance, calc_detector_covariance, calc_statistical_covariance
 
@@ -38,6 +38,9 @@ def main(configuration, caf, channel, output):
     log = cfg['general']['cv_log']
     header = cfg['general']['columns']
     covariances = dict()
+    multisim_rf_path = cfg['general'].get('multisim_rf', None)
+    if multisim_rf_path is not None:
+        multisim_rf = uproot.open(multisim_rf_path)
 
     # Unfold the total number of calculations
     # (#calculations) = (#systematic parameters) * (#reconstructed variables)
@@ -52,8 +55,7 @@ def main(configuration, caf, channel, output):
         syscfg['cv_log'] = log
         syscfg['channel'] = channel
         if syscfg['type'] == 'multisim':
-            covariances[f'{sysname}_{sysvar}'], cv = calc_multisim_covariance(syscfg, caf, header, sysvar, variables[sysvar])
-            covariances[f'fractional_{sysname}_{sysvar}'] = calc_fractional_error(covariances[f'{sysname}_{sysvar}'], cv)
+            covariances[f'{sysname}_{sysvar}'] = np.cov(multisim_rf[f'{sysname}_{sysvar}'].to_numpy()[0])
         elif syscfg['type'] == 'detector':
             c, v, r, d, rcv, rcov = calc_detector_covariance(syscfg, header, sysvar, variables[sysvar])
             covariances[f'{sysname}_{sysvar}'] = d
@@ -71,7 +73,6 @@ def main(configuration, caf, channel, output):
         for g in syscfg['group']:
             gname = f'{g}_{sysvar}'
             covariances[gname] = covariances.get(gname, np.zeros((int(variables[sysvar][0]), int(variables[sysvar][0])))) + covariances[f'{sysname}_{sysvar}']
-            covariances[f'fractional_{gname}'] = covariances.get(f'fractional_{gname}', np.zeros((int(variables[sysvar][0]), int(variables[sysvar][0])))) + covariances[f'fractional_{sysname}_{sysvar}']
         
         # Save the covariance matrices (checkpoint).
         np.savez(f'{output}covariances_{channel}.npz', **covariances)
