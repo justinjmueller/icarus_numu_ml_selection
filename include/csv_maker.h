@@ -18,11 +18,27 @@
 #include "sbnana/CAFAna/Core/MultiVar.h"
 #include "sbnanaobj/StandardRecord/Proxy/SRProxy.h"
 
-std::ofstream output("output.log");
+std::ofstream output("output_mc_crtpmt.log");
+//std::ofstream output("output_tpcuntunedsigshape.log");
 
 #define GUARD(VAL) std::isinf(VAL) ? -9999 : VAL
 #define OUT(STREAM,TAG) STREAM << std::fixed << TAG << ","
 #define CSV(VAL) VAL << ","
+
+/**
+ * Writes information about a failed containment cut.
+ * @param sr is an SRSpillProxy that attaches to the StandardRecord of the
+ * current spill.
+ * @param i the truth interaction (signal)
+ * @return None.
+*/
+void write_file_info(const caf::SRSpillProxy* sr, const caf::SRInteractionTruthDLPProxy& i)
+{
+    output  << CSV(sr->hdr.run) << CSV(sr->hdr.evt) << CSV(sr->hdr.subrun)
+            << CSV(i.nu_id) << CSV(vars::image_id(i)) << CSV(vars::id(i))
+            << CSV(std::string(sr->hdr.sourceName))
+            << std::endl;
+}
 
 /**
  * Writes reconstructed variables (truth and reco) for selected/signal
@@ -36,7 +52,9 @@ std::ofstream output("output.log");
 void write_pair(const caf::SRSpillProxy* sr, const caf::SRInteractionTruthDLPProxy& i, const caf::SRInteractionDLPProxy& j)
 {
     output  << CSV(sr->hdr.run) << CSV(sr->hdr.evt) << CSV(sr->hdr.subrun)
+            //<< CSV(i.nu_energy_init + i.nu_position[2]) << CSV(sr->hdr.evt) << CSV(sr->hdr.subrun)
             << CSV(i.nu_id) << CSV(vars::image_id(i)) << CSV(vars::id(i))
+            << CSV(sr->hdr.triggerinfo.global_trigger_det_time)
             << CSV(vars::category(i))
             << CSV(vars::category_topology(i))
             << CSV(vars::category_interaction_mode(i))
@@ -64,6 +82,8 @@ void write_pair(const caf::SRSpillProxy* sr, const caf::SRInteractionTruthDLPPro
             << CSV(cuts::all_1mu1p_cut(j))
             << CSV(cuts::all_1muNp_cut(j))
             << CSV(cuts::all_1muX_cut(j))
+            << CSV(cuts::crtpmt_veto(sr))
+            << CSV(j.volume_id)
             << std::endl;
 }
 
@@ -85,6 +105,12 @@ const SpillMultiVar kInfoVar([](const caf::SRSpillProxy* sr)
                     OUT(output, "SIGNAL");
                     const auto & r = sr->dlp[i.match[0]];
                     write_pair(sr, i, r);
+
+                    if(cuts::fiducial_cut(r) && !cuts::containment_cut(r))
+                    {
+                        OUT(output, "CONTAINMENT");
+                        write_file_info(sr, i);
+                    }
                 }
             }
         }
