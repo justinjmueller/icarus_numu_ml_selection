@@ -4,7 +4,7 @@ columns = [ 'run', 'event', 'subrun', 'nu_id', 'image_id', 'id', 'trigger', 'cat
             'true_muon_pt', 'reco_muon_pt', 'true_proton_pt', 'reco_proton_pt', 'true_muon_polar_angle', 'reco_muon_polar_angle',
             'true_muon_azimuthal_angle', 'reco_muon_azimuthal_angle', 'true_opening_angle', 'reco_opening_angle',
             'true_delta_pT', 'reco_delta_pT', 'true_delta_phiT', 'reco_delta_phiT', 'true_delta_alphaT', 'reco_delta_alphaT',
-            'muon_softmax', 'proton_softmax', 'selected_1mu1p', 'selected_1muNp', 'selected_1muX']
+            'muon_softmax', 'proton_softmax', 'selected_1mu1p', 'selected_1muNp', 'selected_1muX', 'crtpmt_match', 'cryostat']
 cv_log = '/exp/icarus/app/users/mueller/sbn_ml_cafmaker/icarus_numu_ml_selection/output_cv.log'
 
 [general.variables]
@@ -22,48 +22,51 @@ reco_delta_alphaT = [25.0, 0.0, 3.14159]
 muon_softmax = [25, 0, 1]
 proton_softmax = [25.0, 0.8, 1.0]
 
-[sys.statistical]
-type = 'stats'
-group = ['total',]
+[sys.tpcintnoisep1sigma]
+type = 'detector'
+group = ['detector', 'total_nostat', 'total']
+sys_log = 'sysfiles/output_tpcintnoisep1sigma_rev3.log'
+nboots = 1000
+nuniverses = 1000
 
 [sys.tpcuntunedsigshape]
 type = 'detector'
 group = ['detector', 'total_nostat', 'total']
-sys_log = '/exp/icarus/app/users/mueller/sbn_ml_cafmaker/icarus_numu_ml_selection/output_tpcuntunedsigshape.log'
+sys_log = 'sysfiles/output_tpcuntunedsigshape_rev3.log'
 nboots = 1000
 nuniverses = 1000
 
-#[sys.intnoise]
-#type = 'detector'
-#group = ['detector', 'total_nostat', 'total']
-#sys_log = '/exp/icarus/app/users/mueller/sbn_ml_cafmaker/icarus_numu_ml_selection/output_intnoise.log'
-#nboots = 1000
-#nuniverses = 1000
+[sys.tpcind1increasegain]
+type = 'detector'
+group = ['detector', 'total_nostat', 'total']
+sys_log = 'sysfiles/output_tpcind1increasegain_rev3.log'
+nboots = 1000
+nuniverses = 1000
 
-#[sys.cohnoise]
-#type = 'detector'
-#group = ['detector', 'total_nostat', 'total']
-#sys_log = '/exp/icarus/app/users/mueller/sbn_ml_cafmaker/icarus_numu_ml_selection/output_cohnoise.log'
-#nboots = 1000
-#nuniverses = 1000
+[sys.tpcind1decreasegain]
+type = 'detector'
+group = ['detector', 'total_nostat', 'total']
+sys_log = 'sysfiles/output_tpcind1decreasegain_rev3.log'
+nboots = 1000
+nuniverses = 1000
 
-#[sys.recombination]
-#type = 'detector'
-#group = ['detector', 'total_nostat', 'total']
-#sys_log = '/exp/icarus/app/users/mueller/sbn_ml_cafmaker/icarus_numu_ml_selection/output_recombination.log'
-#nboots = 1000
-#nuniverses = 1000
+[sys.pmtdecreasedqe]
+type = 'detector'
+group = ['detector', 'total_nostat', 'total']
+sys_log = 'sysfiles/output_pmtdecreasedqe2_rev3.log'
+nboots = 1000
+nuniverses = 1000
 
-#[sys.signal_shape]
-#type = 'detector'
-#group = ['detector', 'total_nostat', 'total']
-#sys_log = '/exp/icarus/app/users/mueller/sbn_ml_cafmaker/icarus_numu_ml_selection/output_sigshape.log'
-#nboots = 1000
-#nuniverses = 1000
+[sys.ellipsoidarecomb]
+type = 'detector'
+group = ['detector', 'total_nostat', 'total']
+sys_log = 'sysfiles/output_ellipsoidalrecomb_rev3.log'
+nboots = 1000
+nuniverses = 1000
 
-#[sys.optical]
-#type = 'detector'
-#group = ['detector', 'total_nostat', 'total']
-#sys_log = '/exp/icarus/app/users/mueller/sbn_ml_cafmaker/icarus_numu_ml_selection/output_optical.log'
-#nboots = 1000
-#nuniverses = 1000
+[sys.tpccohnoisep1sigma]
+type = 'detector'
+group = ['detector', 'total_nostat', 'total']
+sys_log = 'sysfiles/output_tpccohnoisep1sigma_rev3.log'
+nboots = 1000
+nuniverses = 1000
